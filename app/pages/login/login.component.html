@@ -1,0 +1,15 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Welcome"></Label>
+</ActionBar>
+
+<StackLayout class="page">
+
+  <TextField hint="Email Address" keyboardType="email" [(ngModel)]="user.email"
+    autocorrect="false" autocapitalizationType="none"></TextField>
+  <TextField hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
+
+  <Button text="Login" (tap)="login(user)"></Button>  
+
+<!-- <Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>  -->
+
+</StackLayout>

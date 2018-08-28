@@ -1,0 +1,28 @@
+<ActionBar class="action-bar">
+  <!-- <android>
+    <NavigationButton icon="res://ic_menu" tap="showSideDrawer"></NavigationButton>
+  </android>
+  <ios>
+    <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer"></ActionItem>
+  </ios> -->
+  <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+<StackLayout orientation="vertical" class="page itemsBlock">
+  <Label class="labelBlock" text="Your uploaded items"></Label>
+
+  <StackLayout orientation="horizontal">
+
+    <StackLayout *ngFor="let garment of garments" class="list-group-item" orientation="vertical">
+      <StackLayout row="0" class="layoutBackgroundImageURL" orientation="horizontal"></StackLayout>
+      <Label row="1" class="boldText" [text]="garment.name"></Label>
+      <Label row="2" [text]="garment.brand"></Label>
+      <Label row="3" [text]="garment.size"></Label>
+    </StackLayout>
+  </StackLayout>
+  <Label text="&#xA;"></Label>
+  <Button text="Add new garment" (tap)="navigateToAddUser()"></Button>
+  <Label text="&#xA;"></Label>
+  <Label class="labelBlock" text="Received swap requests"></Label>
+
+</StackLayout>

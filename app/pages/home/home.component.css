@@ -1,0 +1,31 @@
+.layoutBackgroundImageURL{
+    background-image: url("https://hanslodge.com/image_gallery/n1706755.png");
+    background-repeat: no-repeat;
+    height: 120;
+    margin: 15;
+}
+
+.list-group-item {
+  font-family: "Times New Roman", Times, serif;
+  margin-right: 15px;
+}
+
+.itemsBlock {
+  background-color: #e6e6e6;
+}
+
+.labelBlock {
+  background-color: #001a4d;
+  color: white;
+  font-size: 20px;
+}
+
+Button {
+  font-size: 16px;
+  background-color: #003399;
+  color: white;
+}
+
+/* .labelsBlock {
+  .background-color: #f0f8ff;
+} */
