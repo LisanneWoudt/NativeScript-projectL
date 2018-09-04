@@ -13,6 +13,12 @@ export class DataService {
     return this.user;
   }
 
+  getMockUser() {
+    this.user = new User();
+    this.user.id = 1;
+    return this.user;
+  }
+
   setUser(user: User) {
     this.user = user;
   }

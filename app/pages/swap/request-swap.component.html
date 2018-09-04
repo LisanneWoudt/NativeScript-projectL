@@ -1,0 +1,19 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Swap request"></Label>
+</ActionBar>
+
+
+<StackLayout class="content">
+  <StackLayout class="page-section" orientation="vertical">
+    <StackLayout row="0" class="layoutBackgroundImageURL" orientation="horizontal"></StackLayout>
+    <Label row="1" class="boldText" [text]="garment.name"></Label>
+    <Label row="2" [text]="garment.brand"></Label>
+    <Label row="3" [text]="garment.size"></Label>
+  </StackLayout>
+
+  <StackLayout class="page-section">
+     <Label text="Enter personal message:" class="label"></Label>
+    <TextField autocorrect="false" class="input input-border" [(ngModel="swapRequest.message")]></TextField>
+  </StackLayout>
+  <Button class="btn" text="Send swap request" (tap)="sendSwapRequest(swapRequest)"></Button>
+</StackLayout>

@@ -10,12 +10,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent} from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
-import { AddGarmentComponent } from "./pages/garments/add-garment.component";
+import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
+import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
+import { RequestSwapComponent } from "./pages/swap/request-swap.component";
 
 //Services
 import {LoginService} from "./shared/services/login.service";
 import {DataService} from "./shared/services/data.service";
 import {GarmentService} from "./shared/services/garment.service";
+import {SwapService} from "./shared/services/swap.service";
 
 @NgModule({
     bootstrap: [
@@ -31,13 +34,16 @@ import {GarmentService} from "./shared/services/garment.service";
     providers: [
       LoginService,
       DataService,
-      GarmentService
+      GarmentService,
+      SwapService
     ],
     declarations: [
         AppComponent,
         HomeComponent,
         LoginComponent,
-        AddGarmentComponent
+        AllGarmentsComponent,
+        AddGarmentComponent,
+        RequestSwapComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

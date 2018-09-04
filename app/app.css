@@ -16,9 +16,39 @@ For example, the following CSS rule changes the font size of all UI
 components that have the btn class name.
 */
 .btn {
-    font-size: 18;
+    font-size: 14;
+    background-color: #003351;
+    color: white;
+    size: auto;
 }
 
 .boldText {
   font-weight:bold;
+}
+
+.action-bar {
+  background-color: #353a3d;
+  color: white;
+}
+
+.content {
+  background-color: #edf3fc;
+  color: black;
+}
+
+.page-section {
+  background-color: #d0e5f2;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.label-section {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.list-group-item {
+  margin-left: 10px;
+  font-family: "Times New Roman", Times, serif;
+  margin-right: 15px;
 }
