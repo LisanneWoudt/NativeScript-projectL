@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 
 import { AppRoutingModule } from "./app-routing.module";
+import { DropDownModule } from "nativescript-drop-down/angular";
 
 //Components
 import { AppComponent } from "./app.component";
@@ -13,6 +14,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
 import { RequestSwapComponent } from "./pages/swap/request-swap.component";
+import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment-success.component";
 
 //Services
 import {LoginService} from "./shared/services/login.service";
@@ -29,7 +31,8 @@ import {SwapService} from "./shared/services/swap.service";
         AppRoutingModule,
   //      RouterModule.forRoot(appRoutes, {enableTracing: false}),
         HttpClientModule,
-        NativeScriptFormsModule
+        NativeScriptFormsModule,
+        DropDownModule
     ],
     providers: [
       LoginService,
@@ -43,7 +46,8 @@ import {SwapService} from "./shared/services/swap.service";
         LoginComponent,
         AllGarmentsComponent,
         AddGarmentComponent,
-        RequestSwapComponent
+        RequestSwapComponent,
+        AddGarmentSuccessComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

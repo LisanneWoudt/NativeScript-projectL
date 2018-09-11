@@ -3,7 +3,7 @@ import { Garment } from '../../dto/garment';
 import { User } from '../../dto/user';
 import { DataService } from '../../shared/services/data.service';
 import { GarmentService} from '../../shared/services/garment.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "app-home",
@@ -13,18 +13,24 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+    private sub: any;
     garments: Garment[];
     currentUser: User = new User();
     garment1: Garment = new Garment();
     garment2: Garment = new Garment();
     icon: any;
+    success: number = 0;
 
-    constructor(private dataService: DataService, private router: Router,
+    constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
       private garmentService: GarmentService) {
     }
 
     ngOnInit() {
-    this.icon = String.fromCharCode(f2b6);
+
+    this.sub = this.route.params.subscribe(params => {
+       this.success = +params['success']; // (+) converts string 'id' to a number
+     });
+
     this.garments = new Array;
     console.log("in home component ngOnInit");
     this.currentUser = this.dataService.getMockUser();

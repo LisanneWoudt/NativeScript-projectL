@@ -3,6 +3,9 @@
 </ActionBar>
 
 <StackLayout orientation="vertical" class="content">
+
+  <app-add-garment-success *ngIf="success == 1"></app-add-garment-success>
+
   <StackLayout class="page-section">
     <Label class="label-section" text="Your uploaded items"></Label>
 
