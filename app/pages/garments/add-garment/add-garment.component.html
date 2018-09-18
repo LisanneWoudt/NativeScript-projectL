@@ -7,23 +7,22 @@
     <GridLayout rows="*,*,*,*,*,*,*,*"
                 columns="*">
 
-      <DropDown #dd
-                backroundColor="red"
+      <DropDown class="dropdown"
+                #dd
                 [items]="categories"
                 [(ngModel)]="selectedIndex"
                 (selectedIndexChanged)="onchange($event)"
-                (opened)="onopen()"
-                (closed)="onclose()"
                 row="0">
        </DropDown>
-       <Label *ngIf="!categorySelected" text="Category:" fontSize="18"></Label>
+       <Label class="dropdown" *ngIf="!categorySelected" text="Type:"></Label>
        <TextField row="1" hint="Name" [(ngModel)]="garment.name"
          autocorrect="false" autocapitalizationType="none"></TextField>
        <TextField row="2" hint="Brand" [(ngModel)]="garment.brand"></TextField>
        <TextField *ngIf="pantSelected" row="3" hint="Waist size" [(ngModel)]="pant.waistSize"></TextField>
        <TextField *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="pant.waistLength"></TextField>
-       <TextField *ngIf="shirtSelected" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="garment.size"></TextField>
-       <Button row="6" class="btn" text="Add garment" (tap)="addGarment(garment)"></Button>
+       <TextField *ngIf="shirtSelected" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="shirt.size"></TextField>
+       <Button row="6" class="btn" text="Add garment" (tap)="addGarment(garment, pant, shirt)"></Button>
     </GridLayout>
   </StackLayout>
 </StackLayout>
+<!-- could be added to DropDown element: (opened)="onopen()" (closed)="onclose()" -->

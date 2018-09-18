@@ -19,6 +19,10 @@ export class DataService {
     return this.user;
   }
 
+  getMockUserId() {
+    return 1;
+  }
+
   setUser(user: User) {
     this.user = user;
   }

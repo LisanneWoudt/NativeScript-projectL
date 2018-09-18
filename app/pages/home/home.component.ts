@@ -61,11 +61,13 @@ export class HomeComponent implements OnInit {
     }
 
     navigateToAddGarment() {
+      this.success = 0;
       console.log("navigate to add garments");
       this.router.navigate(['/garments/add']);
     }
 
     navigateToGarments() {
+      this.success = 0;
       console.log("navigate to garments overview");
       this.router.navigate(['/garments/all']);
     }
