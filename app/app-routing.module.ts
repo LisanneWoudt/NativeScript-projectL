@@ -9,7 +9,7 @@ import { AllGarmentsComponent } from "./pages/garments/all-garments/all-garments
 import { RequestSwapComponent } from "./pages/swap/request-swap.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "/garments/add", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "home/:success", component: HomeComponent },
     { path: "login", component: LoginComponent },

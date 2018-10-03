@@ -21,7 +21,9 @@
        <TextField *ngIf="pantSelected" row="3" hint="Waist size" [(ngModel)]="pant.waistSize"></TextField>
        <TextField *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="pant.waistLength"></TextField>
        <TextField *ngIf="shirtSelected" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="shirt.size"></TextField>
-       <Button row="6" class="btn" text="Add garment" (tap)="addGarment(garment, pant, shirt)"></Button>
+       <Image row="5" [src]="imageSrc" *ngIf="isSingleMode" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+       <Button row="6" class="btn upload" text="Upload image" (tap)="getImage()"></Button>
+       <Button row="7" class="btn" text="Add garment" (tap)="addGarment(garment, pant, shirt)"></Button>
     </GridLayout>
   </StackLayout>
 </StackLayout>

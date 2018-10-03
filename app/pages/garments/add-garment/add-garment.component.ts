@@ -7,7 +7,11 @@ import {GarmentService} from '../../../shared/services/garment.service';
 import {DataService} from '../../../shared/services/data.service';
 import {Router} from '@angular/router';
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
+import * as camera from "nativescript-camera";
+import * as imagepicker from "nativescript-imagepicker";
+var fs = require("file-system");
 
+//let imagepicker = require("nativescript-imagepicker")
 @Component({
     selector: "app-add-garment",
     moduleId: module.id,
@@ -26,6 +30,14 @@ export class AddGarmentComponent implements OnInit {
  pantSelected: Boolean = false;
  shirtSelected: Boolean = false;
  result: number;
+ uploadedImage: any;
+
+ imageAssets = [];
+ imageSrc: any;
+ isSingleMode: boolean = true;
+ thumbSize: number = 80;
+ previewSize: number = 300;
+ imageString: string;
 
  @ViewChild('dd') dropDown: ElementRef;
 
@@ -34,6 +46,54 @@ export class AddGarmentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getMockPant();
+  }
+
+  getMockPant() {
+    this.categorySelected = true;
+    this.pantSelected = true;
+    this.selectedIndex = 0;
+    this.garment.name = "nieuwe broek";
+    this.garment.brand ="Vero Moda";
+    this.garment.userId = 1;
+    this.pant.waistSize = 27;
+    this.pant.waistLength = 34;
+  }
+  getImage() {
+    this.isSingleMode = true;
+    var milliseconds = (new Date).getTime();
+    var that = this;
+    let context = imagepicker.create({
+      mode: "single"
+    });
+    this.startSelection(context);
+  }
+
+  private startSelection(context) {
+      let that = this;
+
+      context
+      .authorize()
+      .then(() => {
+          that.imageAssets = [];
+          that.imageSrc = null;
+          return context.present();
+      })
+      .then((selection) => {
+          console.log("Selection done: " + JSON.stringify(selection));
+          this.imageString = selection[0]._android;
+          that.imageSrc = that.isSingleMode && selection.length > 0 ? selection[0] : null;
+
+          // set the images to be loaded from the assets with optimal sizes (optimize memory usage)
+          selection.forEach(function (element) {
+              element.options.width = that.isSingleMode ? that.previewSize : that.thumbSize;
+              element.options.height = that.isSingleMode ? that.previewSize : that.thumbSize;
+          });
+
+          that.imageAssets = selection;
+      }).catch(function (e) {
+          console.log(e);
+      });
   }
 
   public onchange(args: SelectedIndexChangedEventData) {
@@ -75,34 +135,27 @@ export class AddGarmentComponent implements OnInit {
       this.pant.waistSize = pant.waistSize;
       this.pant.waistLength = pant.waistLength;
       console.log(this.pant);
+    }
+    else if (this.shirtSelected) {
+        this.shirt.name = garment.name;
+        this.shirt.brand = garment.brand;
+        this.shirt.userId = this.currentUser.id;
+        this.shirt.size = shirt.size;
+        console.log(this.shirt);
+    }
 
-        this.garmentService.addPant(this.pant).subscribe(data => {
-          this.responseSuccess();
-        }, errorResponse => {
+    this.garmentService.saveGarment(this.pant, this.shirt)
+      .subscribe(data => {
+        console.log(data);
+        this.garmentService.multipartUpload(data.toString(), this.imageString);
+      }, errorResponse => {
           this.responseError();
         })
-    }
 
-    else if (this.shirtSelected) {
-      this.shirt.name = garment.name;
-      this.shirt.brand = garment.brand;
-      this.shirt.userId = this.currentUser.id;
-      this.shirt.size = shirt.size;
-      console.log(this.shirt);
-
-      this.garmentService.addShirt(this.shirt).subscribe(data => {
-        this.responseSuccess();
-      }, errorResponse => {
-         this.responseError();
-      })
     }
-  }
 
   checkFormFilled(garment: Garment, pant: Pant, shirt: Shirt) {
-    console.log(garment);
-    console.log(pant);
-    console.log(shirt);
-    if (!garment.name || !garment.brand) {
+    if (!garment.name || !garment.brand || !this.imageString) {
       return false;
     }
     if (this.shirtSelected) {
@@ -127,4 +180,5 @@ export class AddGarmentComponent implements OnInit {
   responseError() {
     console.log('Something went wrong');
   }
+
 }

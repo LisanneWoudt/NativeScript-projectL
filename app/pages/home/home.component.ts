@@ -35,20 +35,20 @@ export class HomeComponent implements OnInit {
     console.log("in home component ngOnInit");
     this.currentUser = this.dataService.getMockUser();
     console.log(this.currentUser);
-//    this.garments = this.currentUser.garments;
-    this.getGarments();
+    this.getAllGarments();
+  //  this.getGarments();
     }
 
-    // getAllGarments() {
-    //   this.garmentService.getAllGarments().subscribe(data => {
-    //     this.garments = data;
-    //   }, errorResponse => {
-    //     console.error(errorResponse);
-    //     this.router.navigate(['/error']);
-    //   });
-    // }
+    getAllGarments() {
+      this.garmentService.getAllGarments().subscribe(data => {
+        this.garments = data;
+      }, errorResponse => {
+        console.error(errorResponse);
+        this.router.navigate(['/error']);
+      });
+    }
 
-    getGarments() {
+    getMockGarments() {
       console.log("getting garments");
      this.garment1.name = 'GARMENT1';
      this.garment1.brand = 'H&M';
