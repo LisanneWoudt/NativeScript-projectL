@@ -10,6 +10,7 @@ import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import * as camera from "nativescript-camera";
 import * as imagepicker from "nativescript-imagepicker";
 var fs = require("file-system");
+import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
 
 //let imagepicker = require("nativescript-imagepicker")
 @Component({
@@ -45,6 +46,7 @@ export class AddGarmentComponent implements OnInit {
     private router: Router) {
   }
 
+
   ngOnInit() {
     this.getMockPant();
   }
@@ -59,6 +61,7 @@ export class AddGarmentComponent implements OnInit {
     this.pant.waistSize = 27;
     this.pant.waistLength = 34;
   }
+  
   getImage() {
     this.isSingleMode = true;
     var milliseconds = (new Date).getTime();

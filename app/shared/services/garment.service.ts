@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Observable, forkJoin} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { ResponseContentType } from '@angular/http';
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Garment} from '../../dto/garment';
 import {Pant} from '../../dto/pant';
 import {Shirt} from '../../dto/shirt';
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
+import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
 
 @Injectable()
 export class GarmentService {
@@ -33,7 +35,7 @@ export class GarmentService {
 
     multipartUpload(filename: string, file: string) {
       var request = {
-          url: this.baseUrl + 'upload',
+          url: this.baseUrl + 'images/upload',
           method: "POST",
           headers: {
               "Content-Type": "application/octet-stream",
@@ -51,4 +53,18 @@ export class GarmentService {
       task = session.multipartUpload(params, request);
     }
 
+    downloadImage(name: string) {
+
+      const httpModule = require("http");
+      console.log('so far so good');
+      // normal http.get with {responseType: 'blob'} doesn't work for http module.
+      return httpModule.getImage("http://192.168.178.18:8080/images/download/" + name);
+      // return this.http.get("http://192.168.178.18:8080/images/download/" + name, { headers: new HttpHeaders({
+      // 'Content-Type': 'application/octet-stream',
+      // }), responseType: 'blob'})
+
+      // const httpModule = require("http");
+      //
+
+    }
 }

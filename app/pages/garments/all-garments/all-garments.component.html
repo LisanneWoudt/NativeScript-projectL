@@ -7,7 +7,8 @@
     <Label class="label-section" text="All items"></Label>
     <StackLayout orientation="horizontal">
       <StackLayout *ngFor="let garment of garments" class="list-group-item" orientation="vertical">
-        <StackLayout row="0" class="layoutBackgroundImageURL" orientation="horizontal"></StackLayout>
+        <Image row="5" [src]="garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+        <!-- <StackLayout row="0" class="layoutBackgroundImageURL" orientation="horizontal"></StackLayout> -->
         <Label  row="1" class="boldText" [text]="garment.name"></Label>
         <Label row="2" [text]="garment.brand"></Label>
         <Label row="3" [text]="garment.size"></Label>
