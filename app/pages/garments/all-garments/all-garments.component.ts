@@ -17,6 +17,7 @@ export class AllGarmentsComponent implements OnInit {
  imageSrc: any;
  previewSize: number = 100;
  count: number;
+ isBusy: boolean = true;
 
   constructor(private garmentService: GarmentService, private router: Router) { }
 
@@ -34,17 +35,17 @@ export class AllGarmentsComponent implements OnInit {
         this.count = +int;
         console.log(this.count);
         console.log(this.count + 1);
-        this.search(this.garments[this.count].id, this.count);
+        this.search(this.garments[this.count].id, this.count, this.garments.length);
       }
-
+      this.isBusy = false;
     }, errorResponse => {
       console.error(errorResponse);
-      this.router.navigate(['/error']);
+    //  this.router.navigate(['/error']);
     });
   }
 
 
-  search(garmentId: number, int: number) {
+  search(garmentId: number, int: number, length: number) {
     console.log("searching with garmentID = " + garmentId);
     const httpModule = require("http");
     httpModule.getImage("http://192.168.178.18:8080/images/download/" + garmentId).then(
@@ -52,6 +53,10 @@ export class AllGarmentsComponent implements OnInit {
          console.log('success');
         this.garments[int].image = res;
         this.imageSrc = res;
+
+         if (int == length) {
+           this.isBusy = false;
+         }
          return res;
         },
         msg => { // Error

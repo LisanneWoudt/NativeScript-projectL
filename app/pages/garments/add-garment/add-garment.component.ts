@@ -5,6 +5,7 @@ import { User } from '../../../dto/user';
 import { Shirt } from '../../../dto/shirt';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {DataService} from '../../../shared/services/data.service';
+import {ImageService} from '../../../shared/services/image.service';
 import {Router} from '@angular/router';
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import * as camera from "nativescript-camera";
@@ -43,7 +44,7 @@ export class AddGarmentComponent implements OnInit {
  @ViewChild('dd') dropDown: ElementRef;
 
   constructor(private garmentService: GarmentService, private dataService: DataService,
-    private router: Router) {
+    private imageService: ImageService, private router: Router) {
   }
 
 
@@ -61,7 +62,7 @@ export class AddGarmentComponent implements OnInit {
     this.pant.waistSize = 27;
     this.pant.waistLength = 34;
   }
-  
+
   getImage() {
     this.isSingleMode = true;
     var milliseconds = (new Date).getTime();
@@ -83,7 +84,6 @@ export class AddGarmentComponent implements OnInit {
           return context.present();
       })
       .then((selection) => {
-          console.log("Selection done: " + JSON.stringify(selection));
           this.imageString = selection[0]._android;
           that.imageSrc = that.isSingleMode && selection.length > 0 ? selection[0] : null;
 
@@ -149,8 +149,10 @@ export class AddGarmentComponent implements OnInit {
 
     this.garmentService.saveGarment(this.pant, this.shirt)
       .subscribe(data => {
+        console.log('data saved');
         console.log(data);
-        this.garmentService.multipartUpload(data.toString(), this.imageString);
+        this.imageService.multipartUpload(data.toString(), this.imageString);
+    //    this.router.navigate(['/home']);
       }, errorResponse => {
           this.responseError();
         })

@@ -65,3 +65,8 @@ components that have the btn class name.
   color: #078435;
   font-size: 20px;
 }
+
+.gridItem {
+  text-align: center;
+  font-size: 14px;
+}

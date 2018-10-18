@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
     garment2: Garment = new Garment();
     icon: any;
     success: number = 0;
+    count: number;
+    imageSrc: any;
+    thumbSize: number = 120;
+    previewSize: number = 120;
 
     constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
       private garmentService: GarmentService) {
@@ -32,21 +36,41 @@ export class HomeComponent implements OnInit {
      });
 
     this.garments = new Array;
-    console.log("in home component ngOnInit");
     this.currentUser = this.dataService.getMockUser();
     console.log(this.currentUser);
     this.getAllGarments();
-  //  this.getGarments();
     }
 
     getAllGarments() {
       this.garmentService.getAllGarments().subscribe(data => {
         this.garments = data;
+
+        for (let int in this.garments) {
+          this.count = +int;
+          this.search(this.garments[this.count].id, this.count);
+        }
+
       }, errorResponse => {
         console.error(errorResponse);
-        this.router.navigate(['/error']);
+     //   this.router.navigate(['/error']);
       });
     }
+
+    search(garmentId: number, int: number) {
+      console.log("searching with garmentID = " + garmentId);
+      const httpModule = require("http");
+      httpModule.getImage("http://192.168.178.18:8080/images/download/" + garmentId).then(
+          res => { // Success
+           console.log('success');
+          this.garments[int].image = res;
+          this.imageSrc = res;
+           return res;
+          },
+          msg => { // Error
+           console.log("error!")
+          }
+        )
+     }
 
     getMockGarments() {
       console.log("getting garments");

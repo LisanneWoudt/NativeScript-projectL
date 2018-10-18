@@ -20,6 +20,7 @@ import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment
 import {LoginService} from "./shared/services/login.service";
 import {DataService} from "./shared/services/data.service";
 import {GarmentService} from "./shared/services/garment.service";
+import {ImageService} from "./shared/services/image.service";
 import {SwapService} from "./shared/services/swap.service";
 
 @NgModule({
@@ -38,6 +39,7 @@ import {SwapService} from "./shared/services/swap.service";
       LoginService,
       DataService,
       GarmentService,
+      ImageService,
       SwapService
     ],
     declarations: [

@@ -7,25 +7,26 @@
   <app-add-garment-success *ngIf="success == 1"></app-add-garment-success>
 
   <StackLayout class="page-section">
-    <Label class="label-section" text="Your uploaded items"></Label>
 
-    <StackLayout orientation="horizontal">
+    <ScrollView>
+      <StackLayout>
+      <Label class="label-section" text="Your uploaded items"></Label>
+      <Button class="btn" text="Add new garment" (tap)="navigateToAddGarment()"></Button>
+      <Label text="&#xA;"></Label>
 
-      <StackLayout *ngFor="let garment of garments" class="list-group-item" orientation="vertical">
-        <StackLayout row="0" class="layoutBackgroundImageURL" orientation="horizontal"></StackLayout>
-        <Label row="1" class="boldText" [text]="garment.name"></Label>
-        <Label row="2" [text]="garment.brand"></Label>
-        <Label row="3" [text]="garment.size"></Label>
+       <StackLayout width="100%" *ngFor="let item of garments">
+           <CardView class="studentCard" margin="2" elevation="10" radius="1">
+              <GridLayout rows="*,*,*,*,*" columns="*">
+                 <Image [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
+                  <Label class="gridItem boldText" [text]="item.brand" textWrap="true" row="2" ></Label>
+                  <Label class="gridItem" [text]="item.name" textWrap="true" row="3"></Label>
+                  <Label text="&#xA;" row="4"></Label>
+              </GridLayout>
+           </CardView>
+       </StackLayout>
+
       </StackLayout>
-    </StackLayout>
-    <Label text="&#xA;"></Label>
-  </StackLayout>
-
-  <Button class="btn" text="Add new garment" (tap)="navigateToAddGarment()"></Button>
-  <Button class="btn" text="Start Swapping" (tap)="navigateToGarments()"></Button>
-  <Label text="&#xA;"></Label>
-
-  <StackLayout class="page-section">
-    <!-- <Label class="label-section" text="Received swap requests"></Label> -->
+    </ScrollView>
+   <!-- <Label class="label-section" text="Received swap requests"></Label> -->
   </StackLayout>
 </StackLayout>
