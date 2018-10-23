@@ -12,6 +12,8 @@ import * as camera from "nativescript-camera";
 import * as imagepicker from "nativescript-imagepicker";
 var fs = require("file-system");
 import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
+import * as bghttp from "nativescript-background-http";
+var session = bghttp.session("image-upload");
 
 //let imagepicker = require("nativescript-imagepicker")
 @Component({
@@ -40,6 +42,8 @@ export class AddGarmentComponent implements OnInit {
  thumbSize: number = 80;
  previewSize: number = 300;
  imageString: string;
+ busy: boolean = true;
+ processing: boolean = false;
 
  @ViewChild('dd') dropDown: ElementRef;
 
@@ -147,17 +151,26 @@ export class AddGarmentComponent implements OnInit {
         console.log(this.shirt);
     }
 
+    this.processing = true;
+
     this.garmentService.saveGarment(this.pant, this.shirt)
       .subscribe(data => {
-        console.log('data saved');
-        console.log(data);
-        this.imageService.multipartUpload(data.toString(), this.imageString);
-    //    this.router.navigate(['/home']);
-      }, errorResponse => {
-          this.responseError();
-        })
 
-    }
+        let task: bghttp.Task;
+        task = this.imageService.multipartUpload(data.toString(), this.imageString);
+        task.on("complete", data => {
+          this.processing = false;
+          console.log("rEADY YA");
+          console.log(data);
+          this.responseSuccess();
+        });
+        task.on("error", data => {
+         this.processing = false;
+         this.responseError();
+       });
+
+    });
+  }
 
   checkFormFilled(garment: Garment, pant: Pant, shirt: Shirt) {
     if (!garment.name || !garment.brand || !this.imageString) {

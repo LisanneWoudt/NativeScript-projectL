@@ -3,6 +3,7 @@ import { Garment } from '../../dto/garment';
 import { User } from '../../dto/user';
 import { DataService } from '../../shared/services/data.service';
 import { GarmentService} from '../../shared/services/garment.service';
+import { ImageService} from '../../shared/services/image.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -14,7 +15,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
     private sub: any;
-    garments: Garment[];
+    garments: Garment[] = new Array();
+    promises: Array<any> = new Array();
     currentUser: User = new User();
     garment1: Garment = new Garment();
     garment2: Garment = new Garment();
@@ -24,9 +26,10 @@ export class HomeComponent implements OnInit {
     imageSrc: any;
     thumbSize: number = 120;
     previewSize: number = 120;
+    processing: boolean;
 
     constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute,
-      private garmentService: GarmentService) {
+      private garmentService: GarmentService, private imageService: ImageService) {
     }
 
     ngOnInit() {
@@ -35,45 +38,51 @@ export class HomeComponent implements OnInit {
        this.success = +params['success']; // (+) converts string 'id' to a number
      });
 
-    this.garments = new Array;
     this.currentUser = this.dataService.getMockUser();
-    console.log(this.currentUser);
     this.getAllGarments();
     }
 
     getAllGarments() {
+      this.processing = true;
       this.garmentService.getAllGarments().subscribe(data => {
         this.garments = data;
 
+        // Get image of garment one by one
         for (let int in this.garments) {
           this.count = +int;
-          this.search(this.garments[this.count].id, this.count);
+          this.promises.push(this.search(this.garments[this.count].id, this.count));
         }
+
+        Promise.all(this.promises)
+        .then(res => {
+          console.log('All promises returned');
+        //  this.processing = false;
+        }, error => {
+        console.log('Error')
+        })
 
       }, errorResponse => {
         console.error(errorResponse);
-     //   this.router.navigate(['/error']);
       });
     }
 
     search(garmentId: number, int: number) {
       console.log("searching with garmentID = " + garmentId);
-      const httpModule = require("http");
-      httpModule.getImage("http://192.168.178.18:8080/images/download/" + garmentId).then(
-          res => { // Success
-           console.log('success');
+
+      this.imageService.downloadImage(garmentId).then(
+          res => {
+          console.log('success');
           this.garments[int].image = res;
           this.imageSrc = res;
-           return res;
+          return res;
           },
-          msg => { // Error
+          msg => {
            console.log("error!")
           }
         )
      }
 
     getMockGarments() {
-      console.log("getting garments");
      this.garment1.name = 'GARMENT1';
      this.garment1.brand = 'H&M';
      this.garment1.size = 'XS';
@@ -86,13 +95,11 @@ export class HomeComponent implements OnInit {
 
     navigateToAddGarment() {
       this.success = 0;
-      console.log("navigate to add garments");
       this.router.navigate(['/garments/add']);
     }
 
     navigateToGarments() {
       this.success = 0;
-      console.log("navigate to garments overview");
       this.router.navigate(['/garments/all']);
     }
 }

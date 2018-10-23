@@ -2,21 +2,15 @@
   <Label class="action-bar-title" text="All items"></Label>
 </ActionBar>
 
-<StackLayout class="content">
-  <ActivityIndicator row="1" #activityIndicator busy="true" (busyChange)="onBusyChanged($event)"
-  width="100" height="100" class="activity-indicator"></ActivityIndicator>
-  <StackLayout orientation="vertical" class="page-section">
-    <Label class="label-section" text="All items"></Label>
-    <StackLayout orientation="horizontal">
-      <StackLayout *ngFor="let garment of garments" class="list-group-item" orientation="vertical">
-        <Image row="0" [src]="garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
-        <!-- <StackLayout row="0" class="layoutBackgroundImageURL" orientation="horizontal"></StackLayout> -->
-        <Label  row="1" class="boldText" [text]="garment.name"></Label>
-        <Label row="2" [text]="garment.brand"></Label>
-        <Label row="3" [text]="garment.size"></Label>
-        <Button class="btn" text="I want this" (tap)="navigateToSendSwap(garment.id)"></Button>
+<StackLayout orientation="vertical" class="content">
+  <StackLayout class="page-section">
+    <ScrollView>
+      <StackLayout>
+      <Label text="&#xA;"></Label>
+
+      <app-garment-overview></app-garment-overview>
+
       </StackLayout>
-    </StackLayout>
-    <Label text="&#xA;"></Label>
+    </ScrollView>
   </StackLayout>
 </StackLayout>

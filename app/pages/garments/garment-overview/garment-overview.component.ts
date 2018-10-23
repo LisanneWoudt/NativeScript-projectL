@@ -2,32 +2,29 @@ import { Component, OnInit } from '@angular/core';
 import {Garment} from '../../../dto/garment';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
-import {Router} from '@angular/router';
 
 @Component({
-    selector: "app-all-garments",
+    selector: "app-garment-overview",
     moduleId: module.id,
-    templateUrl: "./all-garments.component.html",
+    templateUrl: "./garment-overview.component.html",
     styleUrls: ["../../home/home.component.css"]
 })
 
-export class AllGarmentsComponent implements OnInit {
+export class GarmentOverviewComponent implements OnInit {
 
- garments: Garment[] = new Array;
- promises: Array<any> = new Array;
+  garments: Garment[] = new Array;
+  promises: Array<any> = new Array;
 
- imageSrc: any;
- // Thumbsize/previewSize magically makes spinner on item stop when loaded
- thumbSize: number = 120;
- previewSize: number = 120;
- count: number;
- processing: boolean;
+  imageSrc: any;
+  thumbSize: number = 120;
+  previewSize: number = 120;
+  count: number;
+  processing: boolean;
 
-  constructor(private garmentService: GarmentService, private router: Router,
-    private imageService: ImageService) { }
+  constructor(private garmentService: GarmentService, private imageService: ImageService) { }
 
   ngOnInit() {
-  // this.getAllGarments();
+   this.getAllGarments();
   }
 
   getAllGarments() {
@@ -70,11 +67,4 @@ export class AllGarmentsComponent implements OnInit {
         }
       )
    }
-
-
-  navigateToSendSwap(garmentId: number) {
-    console.log('garmentId = ' + garmentId);
-    this.router.navigate(['/swap-request', garmentId])
-  }
-
 }

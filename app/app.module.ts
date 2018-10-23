@@ -15,6 +15,7 @@ import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
 import { RequestSwapComponent } from "./pages/swap/request-swap.component";
 import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment-success.component";
+import { GarmentOverviewComponent } from "./pages/garments/garment-overview/garment-overview.component";
 
 //Services
 import {LoginService} from "./shared/services/login.service";
@@ -49,7 +50,8 @@ import {SwapService} from "./shared/services/swap.service";
         AllGarmentsComponent,
         AddGarmentComponent,
         RequestSwapComponent,
-        AddGarmentSuccessComponent
+        AddGarmentSuccessComponent,
+        GarmentOverviewComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

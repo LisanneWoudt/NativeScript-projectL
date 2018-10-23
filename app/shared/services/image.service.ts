@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
@@ -11,7 +12,7 @@ export class ImageService {
     constructor(private http: HttpClient) {}
 
 
-  multipartUpload(filename: string, file: string) {
+  multipartUpload(filename: string, file: string): bghttp.Task {
     var request = {
         url: this.baseUrl + 'upload',
         method: "POST",
@@ -29,5 +30,11 @@ export class ImageService {
 
     let task: bghttp.Task;
     task = session.multipartUpload(params, request);
+    return task;
+  }
+
+  downloadImage(garmentId: number) {
+    const httpModule = require("http");
+    return httpModule.getImage("http://192.168.178.18:8080/images/download/" + garmentId);
   }
 }
