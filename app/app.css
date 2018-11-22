@@ -30,6 +30,10 @@ components that have the btn class name.
   font-weight:bold;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .action-bar {
   background-color: #353a3d;
   color: white;

@@ -10,22 +10,12 @@
 
     <ScrollView>
       <StackLayout>
+
       <Label class="label-section" text="Your uploaded items"></Label>
       <Button class="btn" text="Add new garment" (tap)="navigateToAddGarment()"></Button>
       <Label text="&#xA;"></Label>
 
-       <StackLayout width="100%" *ngFor="let item of garments">
-           <CardView margin="2" elevation="10" radius="1">
-              <GridLayout rows="*,*,*,*,*" columns="*">
-                 <ActivityIndicator row="0" [busy]="processing" width="100" height="100" class="activity-indicator"></ActivityIndicator>
-                 <Image [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-                  <Label class="gridItem boldText" [text]="item.brand" textWrap="true" row="2" ></Label>
-                  <Label class="gridItem" [text]="item.name" textWrap="true" row="3"></Label>
-                  <Label text="&#xA;" row="4"></Label>
-              </GridLayout>
-           </CardView>
-       </StackLayout>
-
+      <app-garment-overview></app-garment-overview>
 
       </StackLayout>
     </ScrollView>

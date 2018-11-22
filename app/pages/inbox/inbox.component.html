@@ -1,0 +1,21 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Swap request"></Label>
+</ActionBar>
+
+
+<StackLayout class="content">
+  <Label class="label-section" text="Your messages"></Label>
+  <StackLayout class="page-section" orientation="vertical">
+
+    <ListView [items]="requests" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
+    <ng-template let-request="item" let-i="index" let-odd="odd" let-even="even">
+        <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+        <StackLayout class="list-group-item">
+            <Label [class]="request.received ? 'underline' : 'boldText underline'" text="New swap request" ></Label>
+            <Label [class]="request.received ? 'none' : 'boldText'" [text]="request.message"></Label>
+        </StackLayout>
+    </ng-template>
+    </ListView>
+
+  </StackLayout>
+</StackLayout>

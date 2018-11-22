@@ -7,15 +7,19 @@ import { LoginComponent } from "./pages/login/login.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
 import { AllGarmentsComponent } from "./pages/garments/all-garments/all-garments.component";
 import { RequestSwapComponent } from "./pages/swap/request-swap.component";
+import { GarmentDetailComponent} from "./pages/garments/garment-detail/garment-detail.component";
+import { InboxComponent } from "./pages/inbox/inbox.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/garments/all", pathMatch: "full" },
+    { path: "", redirectTo: "/inbox", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "home/:success", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "garments/add", component: AddGarmentComponent},
     { path: "garments/all", component: AllGarmentsComponent},
-    { path: "swap-request/:id", component: RequestSwapComponent}
+    { path: "swap-request/:id", component: RequestSwapComponent},
+    { path: "garment/:id", component: GarmentDetailComponent},
+    { path: "inbox", component: InboxComponent}
 ];
 
 @NgModule({

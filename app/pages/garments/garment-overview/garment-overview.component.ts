@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Garment} from '../../../dto/garment';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: "app-garment-overview",
@@ -16,12 +17,14 @@ export class GarmentOverviewComponent implements OnInit {
   promises: Array<any> = new Array;
 
   imageSrc: any;
+  //Thumbsize/previewSize magically makes spinner on item stop when loaded
   thumbSize: number = 120;
   previewSize: number = 120;
   count: number;
   processing: boolean;
 
-  constructor(private garmentService: GarmentService, private imageService: ImageService) { }
+  constructor(private garmentService: GarmentService, private imageService: ImageService,
+    private router: Router) { }
 
   ngOnInit() {
    this.getAllGarments();
@@ -66,5 +69,9 @@ export class GarmentOverviewComponent implements OnInit {
          console.log("error!")
         }
       )
+   }
+
+   toGarmentDetail(garmentId: number) {
+     this.router.navigate(['/garment/', garmentId])
    }
 }

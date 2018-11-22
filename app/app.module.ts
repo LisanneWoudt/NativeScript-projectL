@@ -16,6 +16,8 @@ import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.co
 import { RequestSwapComponent } from "./pages/swap/request-swap.component";
 import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment-success.component";
 import { GarmentOverviewComponent } from "./pages/garments/garment-overview/garment-overview.component";
+import { GarmentDetailComponent } from "./pages/garments/garment-detail/garment-detail.component";
+import { InboxComponent} from "./pages/inbox/inbox.component";
 
 //Services
 import {LoginService} from "./shared/services/login.service";
@@ -23,6 +25,7 @@ import {DataService} from "./shared/services/data.service";
 import {GarmentService} from "./shared/services/garment.service";
 import {ImageService} from "./shared/services/image.service";
 import {SwapService} from "./shared/services/swap.service";
+import {UserService} from "./shared/services/user.service";
 
 @NgModule({
     bootstrap: [
@@ -41,7 +44,8 @@ import {SwapService} from "./shared/services/swap.service";
       DataService,
       GarmentService,
       ImageService,
-      SwapService
+      SwapService,
+      UserService
     ],
     declarations: [
         AppComponent,
@@ -51,7 +55,9 @@ import {SwapService} from "./shared/services/swap.service";
         AddGarmentComponent,
         RequestSwapComponent,
         AddGarmentSuccessComponent,
-        GarmentOverviewComponent
+        GarmentOverviewComponent,
+        GarmentDetailComponent,
+        InboxComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -1,0 +1,17 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Add garment"></Label>
+</ActionBar>
+
+<StackLayout class="content">
+  <StackLayout class="page-section">
+    <Button class="btn" text="I want to swap!" (tap)="toSwapRequest(garment.id)"></Button>
+    <Button text="Return to homescreen" (tap)="returnToHome"></Button>
+      <CardView>
+          <ActivityIndicator row="0" [busy]="processing" width="100" height="100" class="activity-indicator"></ActivityIndicator>
+          <Image [src]="garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
+           <Label class="gridItem boldText" [text]="garment.brand" textWrap="true" row="1" ></Label>
+           <Label class="gridItem" [text]="garment.name" textWrap="true" row="2"></Label>
+           <Label text="&#xA;" row="3"></Label>
+      </CardView>
+  </StackLayout>
+</StackLayout>

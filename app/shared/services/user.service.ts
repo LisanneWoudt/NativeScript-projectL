@@ -4,14 +4,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SwapRequest} from '../../dto/swap-request';
 
 @Injectable()
-export class SwapService {
+export class UserService {
 
-    baseUrl: string = 'http://192.168.178.18:8080/swaprequest/';
+    baseUrl: string = 'http://192.168.178.18:8080/user/';
 
     constructor(private http: HttpClient) {}
 
-    sendSwapRequest(swapRequest: SwapRequest): Observable<any> {
-      return this.http.post(this.baseUrl + 'send', swapRequest);
+    getUser(userId: number): Observable<any> {
+      return this.http.get(this.baseUrl + userId);
     }
 
 }

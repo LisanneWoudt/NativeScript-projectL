@@ -3,4 +3,5 @@ export class SwapRequest {
   garmentId: number;
   message: string;
   userId: number;
+  received: boolean;
 }

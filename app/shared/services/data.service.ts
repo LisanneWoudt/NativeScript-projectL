@@ -16,6 +16,7 @@ export class DataService {
   getMockUser() {
     this.user = new User();
     this.user.id = 1;
+
     return this.user;
   }
 
