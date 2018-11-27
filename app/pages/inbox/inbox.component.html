@@ -1,21 +1,93 @@
-<ActionBar class="action-bar">
-  <Label class="action-bar-title" text="Swap request"></Label>
-</ActionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:sd="nativescript-ui-sidedrawer" loaded="pageLoaded">
+
+  <ActionBar class="action-bar">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <StackLayout orientation="horizontal" ios:horizontalAlignment="center" android:horizontalAlignment="left">
+      <!-- <Image src="res://menu_icon" class="action-image"></Image> -->
+      <Label class="action-bar-title" text="Inbox"></Label>
+    </StackLayout>
+  </ActionBar>
 
 
-<StackLayout class="content">
-  <Label class="label-section" text="Your messages"></Label>
-  <StackLayout class="page-section" orientation="vertical">
 
-    <ListView [items]="requests" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
-    <ng-template let-request="item" let-i="index" let-odd="odd" let-even="even">
-        <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-        <StackLayout class="list-group-item">
-            <Label [class]="request.received ? 'underline' : 'boldText underline'" text="New swap request" ></Label>
-            <Label [class]="request.received ? 'none' : 'boldText'" [text]="request.message"></Label>
-        </StackLayout>
-    </ng-template>
-    </ListView>
+  <StackLayout class="content">
+    <RadSideDrawer [drawerTransition]="sideDrawerTransition">
+        <GridLayout tkDrawerContent rows="auto, *" class="sidedrawer sidedrawer-left">
+            <StackLayout class="sideTitleStackLayout">
+                <Label text="Navigation Menu"></Label>
+            </StackLayout>
 
+
+
+            <ScrollView row="1">
+                <StackLayout>
+                    <GridLayout columns="auto, *" class="sideStackLayout" (tap)="onNavItemTap('/home')">
+                        <Label col="1" text="Home" class="sideLabel"></Label>
+                    </GridLayout>
+
+                    <GridLayout columns="auto, *" class="sideStackLayout" (tap)="onNavItemTap('/browse')">
+                        <Label col="1" text="Browse" class="sideLabel"></Label>
+                    </GridLayout>
+
+                    <GridLayout columns="auto, *" class="sideStackLayout" (tap)="onNavItemTap('/search')">
+                        <Label col="1" text="Search" class="sideLabel"></Label>
+                    </GridLayout>
+
+                    <GridLayout columns="auto, *" class="sideStackLayout" (tap)="onNavItemTap('/featured')">
+                        <Label col="1" text="Featured" class="sideLabel"></Label>
+                    </GridLayout>
+
+                    <StackLayout class="hr-light"></StackLayout>
+
+                    <GridLayout columns="auto, *" class="sideStackLayout" (tap)="onNavItemTap('/settings')">
+                        <Label col="1" text="Settings" class="sideLabel"></Label>
+                    </GridLayout>
+                </StackLayout>
+
+            </ScrollView>
+        </GridLayout>
+
+
+    </RadSideDrawer>
+    <!-- <sd:RadSideDrawer id="sideDrawer">
+
+
+       <sd:RadSideDrawer.drawerContent>
+           <StackLayout class="sidedrawer-left">
+               <StackLayout class="sidedrawer-header">
+                   <Label text="Hello RadSideDrawer!" class="sidedrawer-header-brand" />
+               </StackLayout>
+               <StackLayout class="sidedrawer-content">
+                   <Label text="Inbox" class="sidedrawer-list-item-text" />
+                   <Label text="Send" class="sidedrawer-list-item-text" />
+                   <Label text="Deleted" class="sidedrawer-list-item-text" />
+                   <Label text="Help" class="sidedrawer-list-item-text" />
+                   <Label text="Advanced" class="sidedrawer-list-item-text" />
+               </StackLayout>
+           </StackLayout>
+       </sd:RadSideDrawer.drawerContent>
+
+       <sd:RadSideDrawer.mainContent>
+           <StackLayout>
+               <Button text="Toggle Drawer" class="btn btn-primary" tap="toggleDrawer" />
+           </StackLayout>
+       </sd:RadSideDrawer.mainContent>
+
+   </sd:RadSideDrawer> -->
+
+    <Label class="label-section" text="Your messages"></Label>
+    <StackLayout class="page-section" orientation="vertical">
+
+      <ListView [items]="requests" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
+      <ng-template let-request="item" let-i="index" let-odd="odd" let-even="even">
+          <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+          <StackLayout class="list-group-item">
+              <Label [class]="request.received ? 'underline' : 'boldText underline'" text="New swap request" ></Label>
+              <Label [class]="request.received ? 'none' : 'boldText'" [text]="request.message"></Label>
+          </StackLayout>
+      </ng-template>
+      </ListView>
+
+    </StackLayout>
   </StackLayout>
-</StackLayout>
+</Page>

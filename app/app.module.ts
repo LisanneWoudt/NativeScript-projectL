@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { DropDownModule } from "nativescript-drop-down/angular";
+import { NativeScriptUISideDrawerModule } from 'nativescript-pro-ui/sidedrawer/angular'
 
 //Components
 import { AppComponent } from "./app.component";
@@ -37,7 +38,8 @@ import {UserService} from "./shared/services/user.service";
   //      RouterModule.forRoot(appRoutes, {enableTracing: false}),
         HttpClientModule,
         NativeScriptFormsModule,
-        DropDownModule
+        DropDownModule,
+        NativeScriptUISideDrawerModule
     ],
     providers: [
       LoginService,
