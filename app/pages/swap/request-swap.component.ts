@@ -79,4 +79,8 @@ export class RequestSwapComponent implements OnInit {
      this.router.navigate(['/inbox']);
   }
 
+  navigateBack() {
+     this.router.navigate(['/garment', this.garmentId]);
+  }
+
 }

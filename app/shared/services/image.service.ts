@@ -35,6 +35,6 @@ export class ImageService {
 
   downloadImage(garmentId: number) {
     const httpModule = require("http");
-    return httpModule.getImage("http://192.168.178.18:8080/images/download/" + garmentId);
+    return httpModule.getImage(this.baseUrl + "download/compressed/" + garmentId);
   }
 }

@@ -6,7 +6,7 @@ import {RouterModule} from '@angular/router';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { DropDownModule } from "nativescript-drop-down/angular";
-import { NativeScriptUISideDrawerModule } from 'nativescript-pro-ui/sidedrawer/angular'
+import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular'
 
 //Components
 import { AppComponent } from "./app.component";
@@ -27,6 +27,8 @@ import {GarmentService} from "./shared/services/garment.service";
 import {ImageService} from "./shared/services/image.service";
 import {SwapService} from "./shared/services/swap.service";
 import {UserService} from "./shared/services/user.service";
+
+
 
 @NgModule({
     bootstrap: [
@@ -59,7 +61,7 @@ import {UserService} from "./shared/services/user.service";
         AddGarmentSuccessComponent,
         GarmentOverviewComponent,
         GarmentDetailComponent,
-        InboxComponent
+        InboxComponent,
     ],
     schemas: [
         NO_ERRORS_SCHEMA

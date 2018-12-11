@@ -1,13 +1,14 @@
 <ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
   <Label class="action-bar-title" text="Add garment"></Label>
 </ActionBar>
 
-<StackLayout class="content">
-  <StackLayout class="page-section">
-    <GridLayout rows="*,*,*,*,*,*,*,*,*" columns="*">
+
+  <StackLayout class="page">
+    <GridLayout class="form" rows="*,*,*,*,*,*,*,*,*" columns="*">
       <ActivityIndicator row="1" [busy]="processing" width="100" height="100" class="activity-indicator"></ActivityIndicator>
       <DropDown [isEnabled]="!processing"
-                class="dropdown"
+                class="input-field h3"
                 #dd
                 [items]="categories"
                 [(ngModel)]="selectedIndex"
@@ -15,18 +16,18 @@
                 row="0">
        </DropDown>
        <Label class="dropdown" *ngIf="!categorySelected" text="Type:"></Label>
-       <TextField [isEnabled]="!processing" row="1" hint="Name" [(ngModel)]="garment.name"
+       <TextField class="input-field" [isEnabled]="!processing" row="1" hint="Name" [(ngModel)]="garment.name"
          autocorrect="false" autocapitalizationType="none"></TextField>
-       <TextField [isEnabled]="!processing" row="2" hint="Brand" [(ngModel)]="garment.brand"></TextField>
-       <TextField [isEnabled]="!processing" *ngIf="pantSelected" row="3" hint="Waist size" [(ngModel)]="pant.waistSize"></TextField>
-       <TextField [isEnabled]="!processing" *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="pant.waistLength"></TextField>
-       <TextField [isEnabled]="!processing" *ngIf="shirtSelected" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="shirt.size"></TextField>
+       <TextField class="input-field" [isEnabled]="!processing" row="2" hint="Brand" [(ngModel)]="garment.brand"></TextField>
+       <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="3" hint="Waist size" [(ngModel)]="pant.waistSize"></TextField>
+       <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="pant.waistLength"></TextField>
+       <TextField class="input-field" [isEnabled]="!processing" *ngIf="shirtSelected" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="shirt.size"></TextField>
        <Image [isEnabled]="!processing" row="5" [src]="imageSrc" *ngIf="isSingleMode" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
-       <Button [isEnabled]="!processing" row="6" class="btn upload" text="Upload image" (tap)="getImage()"></Button>
-       <Button [isEnabled]="!processing" row="7" class="btn" text="Add garment" *ngIf="busy" (tap)="addGarment(garment, pant, shirt)"></Button>
+       <Button [isEnabled]="!processing" row="6" class="btn btn-outline btn-rounded-lg btn-active" text="Upload image" (tap)="getImage()"></Button>
+       <Button [isEnabled]="!processing" row="7" class="btn btn-primary btn-rounded-lg btn-active" text="Add garment" *ngIf="busy" (tap)="addGarment(garment, pant, shirt)"></Button>
 
     </GridLayout>
 
   </StackLayout>
-</StackLayout>
+
 <!-- could be added to DropDown element: (opened)="onopen()" (closed)="onclose()" -->

@@ -1,24 +1,43 @@
 <ActionBar class="action-bar">
-  <Label class="action-bar-title" text="Home"></Label>
+  <StackLayout orientation="horizontal" ios:horizontalAlignment="center" android:horizontalAlignment="left">
+    <Label class="action-bar-title" text="Home"></Label>
+  </StackLayout>
+  <ActionItem text="Menu" android.systemIcon="ic_menu_btn_add" (tap)="toggleDrawer()"></ActionItem>
 </ActionBar>
 
-<StackLayout orientation="vertical" class="content">
+<StackLayout orientation="vertical" class="page">
 
-  <app-add-garment-success *ngIf="success == 1"></app-add-garment-success>
+  <RadSideDrawer tkExampleTitle tkToggleNavButton>
 
-  <StackLayout class="page-section">
+    <StackLayout tkDrawerContent class="sidedrawer-left">
+        <StackLayout class="sideTitleStackLayout">
+            <Label text="Navigation Menu" class="sideLabel sideLightGrayLabel"></Label>
+        </StackLayout>
+        <StackLayout>
+            <Label text="Swap requests" class="sideLabel sideLightGrayLabel"></Label>
+            <Label text="Account" class="sideLabel sideLightGrayLabel"></Label>
+        </StackLayout>
+    </StackLayout>
 
-    <ScrollView>
-      <StackLayout>
+      <StackLayout tkMainContent>
 
-      <Label class="label-section" text="Your uploaded items"></Label>
-      <Button class="btn" text="Add new garment" (tap)="navigateToAddGarment()"></Button>
-      <Label text="&#xA;"></Label>
+        <app-add-garment-success *ngIf="success == 1"></app-add-garment-success>
 
-      <app-garment-overview></app-garment-overview>
+        <StackLayout>
+          <ScrollView>
+            <StackLayout>
 
+            <Label class="h2 text-center" text="Your uploaded items"></Label>
+            <Button class="btn btn-primary btn-rounded-lg btn-active" text="Add new garment" (tap)="navigateToAddGarment()"></Button>
+            <Label text="&#xA;"></Label>
+
+            <app-garment-overview></app-garment-overview>
+
+            </StackLayout>
+          </ScrollView>
+        </StackLayout>
       </StackLayout>
-    </ScrollView>
-   <!-- <Label class="label-section" text="Received swap requests"></Label> -->
-  </StackLayout>
+  </RadSideDrawer>
+
+
 </StackLayout>

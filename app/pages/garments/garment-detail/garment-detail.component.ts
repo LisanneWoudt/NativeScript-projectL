@@ -52,7 +52,7 @@ export class GarmentDetailComponent implements OnInit {
     this.router.navigate(['/swap-request/', garmentId]);
   }
 
-  returnToHome() {
+  navigateBack() {
     this.router.navigate(['/home']);
   }
 

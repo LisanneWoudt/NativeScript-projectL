@@ -1,21 +1,23 @@
 <ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
   <Label class="action-bar-title" text="Swap request"></Label>
 </ActionBar>
 
 
-<StackLayout class="content">
-  <StackLayout class="page-section" orientation="vertical">
+<StackLayout class="page">
+  <StackLayout class="form" orientation="vertical">
     <StackLayout orientation="horizontal"></StackLayout>
     <Image row="0" [src]="garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
       (tap)="toGarmentDetail(item.id)"></Image>
-    <Label row="1" class="boldText" [text]="garment.name"></Label>
-    <Label row="2" [text]="garment.brand"></Label>
-    <Label row="3" [text]="garment.size"></Label>
+    <Label row="1" class="text-center font-weight-bold" [text]="garment.name"></Label>
+    <Label row="2" class="text-center" [text]="garment.brand"></Label>
+    <Label row="3" class="text-center" [text]="garment.size"></Label>
   </StackLayout>
 
-  <StackLayout class="page-section">
-     <Label text="Enter personal message:" class="label"></Label>
-    <TextField autocorrect="false" class="input input-border" [(ngModel)]="swapRequest.message"></TextField>
-  </StackLayout>
-  <Button class="btn" text="Send swap request" (tap)="sendSwapRequest(swapRequest)"></Button>
+  <StackLayout class="hr-dark m-10"></StackLayout>
+  <StackLayout class="form">
+    <Label text="Enter personal message:" class="text-center"></Label>
+    <TextField autocorrect="false" class="input input-rounded m-t-10" [(ngModel)]="swapRequest.message"></TextField>
+    <Button class="btn btn-primary btn-rounded-lg btn-active" text="Send swap request" (tap)="sendSwapRequest(swapRequest)"></Button>
+   </StackLayout>
 </StackLayout>

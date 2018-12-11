@@ -198,5 +198,9 @@ export class AddGarmentComponent implements OnInit {
   responseError() {
     console.log('Something went wrong');
   }
+  
+  navigateBack() {
+    this.router.navigate(['/home']);
+  }
 
 }

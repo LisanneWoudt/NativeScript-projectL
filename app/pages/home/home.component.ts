@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ViewChild, OnInit, AfterViewInit  } from "@angular/core";
 import { Garment } from '../../dto/garment';
 import { User } from '../../dto/user';
 import { DataService } from '../../shared/services/data.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
+import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 
 @Component({
     selector: "app-home",
@@ -22,6 +24,9 @@ export class HomeComponent implements OnInit {
     constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute) {
     }
 
+    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+      private drawer: RadSideDrawer;
+
     ngOnInit() {
 
     this.sub = this.route.params.subscribe(params => {
@@ -31,6 +36,13 @@ export class HomeComponent implements OnInit {
     this.currentUser = this.dataService.getMockUser();
     }
 
+    ngAfterViewInit() {
+        this.drawer = this.drawerComponent.sideDrawer;
+    }
+
+    public toggleDrawer() {
+      this.drawer.toggleDrawerState();
+    }
 
     getMockGarments() {
      this.garment1.name = 'GARMENT1';

@@ -11,7 +11,7 @@ import { GarmentDetailComponent} from "./pages/garments/garment-detail/garment-d
 import { InboxComponent } from "./pages/inbox/inbox.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/inbox", pathMatch: "full" },
+    { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "home/:success", component: HomeComponent },
     { path: "login", component: LoginComponent },
