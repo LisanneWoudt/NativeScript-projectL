@@ -1,4 +1,5 @@
 <ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
   <Label class="action-bar-title" text="All items"></Label>
 </ActionBar>
 
@@ -6,9 +7,11 @@
   <StackLayout>
     <ScrollView>
       <StackLayout>
-      <Label text="&#xA;"></Label>
 
-      <app-garment-overview></app-garment-overview>
+      <Label text="&#xA;"></Label>
+      <Label class="h3 text-center" text="Click & swap"></Label>
+
+      <app-garment-overview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
 
       </StackLayout>
     </ScrollView>

@@ -46,8 +46,10 @@ components that have the btn class name.
 }
 
 .success {
-  color: #078435;
   font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .gridItem {
@@ -84,4 +86,12 @@ components that have the btn class name.
     padding: 10;
     text-align: center;
     vertical-align: center;
+}
+
+.border {
+  border-style: solid;
+  border-color: black;
+  border-width: 0.5;
+  border-radius: 15px;
+  margin: 10px;
 }

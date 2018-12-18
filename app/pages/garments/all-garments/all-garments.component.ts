@@ -5,19 +5,19 @@ import {Router} from '@angular/router';
 @Component({
     selector: "app-all-garments",
     moduleId: module.id,
-    templateUrl: "./all-garments.component.html",
-    styleUrls: ["../../home/home.component.css"]
+    templateUrl: "./all-garments.component.html"
 })
 
 export class AllGarmentsComponent implements OnInit {
 
+  garmentsUrl: string = 'all/';
+
   constructor(private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit(){}
 
-  navigateToSendSwap(garmentId: number) {
-    console.log('garmentId = ' + garmentId);
-    this.router.navigate(['/swap-request', garmentId])
+  navigateBack() {
+    this.router.navigate(['/home']);
   }
 
 }

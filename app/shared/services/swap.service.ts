@@ -6,12 +6,16 @@ import {SwapRequest} from '../../dto/swap-request';
 @Injectable()
 export class SwapService {
 
-    baseUrl: string = 'http://192.168.178.18:8080/swaprequest/';
+    baseUrl: string = 'http://192.168.178.18:8080/swaprequests/';
 
     constructor(private http: HttpClient) {}
 
     sendSwapRequest(swapRequest: SwapRequest): Observable<any> {
       return this.http.post(this.baseUrl + 'send', swapRequest);
+    }
+
+    getUserSwapRequests(userId: number): Observable<any> {
+      return this.http.get(this.baseUrl + 'user/'+ userId);
     }
 
 }

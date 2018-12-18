@@ -7,8 +7,7 @@ import {ImageService} from '../../../shared/services/image.service';
 @Component({
     selector: "app-garment-detail",
     moduleId: module.id,
-    templateUrl: "./garment-detail.component.html",
-    styleUrls: ["../../home/home.component.css"]
+    templateUrl: "./garment-detail.component.html"
 })
 
 export class GarmentDetailComponent implements OnInit {

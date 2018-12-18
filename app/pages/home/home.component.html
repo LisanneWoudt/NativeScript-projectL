@@ -10,12 +10,9 @@
   <RadSideDrawer tkExampleTitle tkToggleNavButton>
 
     <StackLayout tkDrawerContent class="sidedrawer-left">
-        <StackLayout class="sideTitleStackLayout">
-            <Label text="Navigation Menu" class="sideLabel sideLightGrayLabel"></Label>
-        </StackLayout>
         <StackLayout>
-            <Label text="Swap requests" class="sideLabel sideLightGrayLabel"></Label>
-            <Label text="Account" class="sideLabel sideLightGrayLabel"></Label>
+            <Label text="Inbox" class="sideLabel sideLightGrayLabel"  (tap)="navigateToInbox()"></Label>
+            <Label text="Settings" class="sideLabel sideLightGrayLabel"></Label>
         </StackLayout>
     </StackLayout>
 
@@ -27,11 +24,19 @@
           <ScrollView>
             <StackLayout>
 
-            <Label class="h2 text-center" text="Your uploaded items"></Label>
-            <Button class="btn btn-primary btn-rounded-lg btn-active" text="Add new garment" (tap)="navigateToAddGarment()"></Button>
-            <Label text="&#xA;"></Label>
+              <StackLayout orientation="horizontal">
 
-            <app-garment-overview></app-garment-overview>
+                <Button class="btn btn-primary btn-lg btn-active" text="Start swapping" (tap)="navigateToAllGarments()"></Button>
+                <Button class="btn btn-primary btn-lg btn-active" text="Add garment" (tap)="navigateToAddGarment()"></Button>
+
+               </StackLayout>
+
+            <Label text="&#xA;"></Label>
+            <Label class="h3 text-center" text="My garments"></Label>
+
+
+            <app-garment-overview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
+
 
             </StackLayout>
           </ScrollView>

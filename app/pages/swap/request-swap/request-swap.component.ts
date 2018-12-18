@@ -1,18 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
-import { Garment } from '../../dto/garment';
-import { SwapRequest } from '../../dto/swap-request';
-import { User } from '../../dto/user';
-import { GarmentService } from '../../shared/services/garment.service';
-import { DataService } from '../../shared/services/data.service';
-import { SwapService } from '../../shared/services/swap.service';
-import { ImageService } from '../../shared/services/image.service';
+import { Garment } from '../../../dto/garment';
+import { SwapRequest } from '../../../dto/swap-request';
+import { User } from '../../../dto/user';
+import { GarmentService } from '../../../shared/services/garment.service';
+import { DataService } from '../../../shared/services/data.service';
+import { SwapService } from '../../../shared/services/swap.service';
+import { ImageService } from '../../../shared/services/image.service';
 
 @Component({
     selector: "app-request-swap",
     moduleId: module.id,
-    templateUrl: "./request-swap.component.html",
-    styleUrls: ["../home/home.component.css"]
+    templateUrl: "./request-swap.component.html"
 })
 
 export class RequestSwapComponent implements OnInit {
@@ -64,8 +63,10 @@ export class RequestSwapComponent implements OnInit {
       this.swapRequest = swapRequest;
       this.swapRequest.garmentId = this.garmentId;
       this.currentUser = this.dataService.getMockUser();
-      this.swapRequest.userId = this.currentUser.id;
       this.swapRequest.received = false;
+      this.swapRequest.receivedFromId = this.currentUser.id;
+
+      console.log(this.swapRequest);
       this.swapService.sendSwapRequest(this.swapRequest).subscribe(data => {
         console.log(data);
         this.navigateToInbox();

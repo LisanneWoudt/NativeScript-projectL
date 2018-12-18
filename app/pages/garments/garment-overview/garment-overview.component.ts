@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Garment} from '../../../dto/garment';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
@@ -7,8 +7,7 @@ import {Router} from '@angular/router';
 @Component({
     selector: "app-garment-overview",
     moduleId: module.id,
-    templateUrl: "./garment-overview.component.html",
-    styleUrls: ["../../home/home.component.css"]
+    templateUrl: "./garment-overview.component.html"
 })
 
 export class GarmentOverviewComponent implements OnInit {
@@ -22,17 +21,22 @@ export class GarmentOverviewComponent implements OnInit {
   previewSize: number = 120;
   count: number;
   processing: boolean;
+  userId: number;
+
+  @Input('garmentsUrl') garmentsUrl: string;
 
   constructor(private garmentService: GarmentService, private imageService: ImageService,
     private router: Router) { }
 
   ngOnInit() {
+   console.log('garmentsUrl = ' + this.garmentsUrl);
+   this.userId = 1;
    this.getAllGarments();
   }
 
   getAllGarments() {
     this.processing = true;
-    this.garmentService.getAllGarments().subscribe(data => {
+    this.garmentService.getAllGarments(this.garmentsUrl, this.userId).subscribe(data => {
       console.log(data);
       this.garments = data;
 
@@ -74,4 +78,6 @@ export class GarmentOverviewComponent implements OnInit {
    toGarmentDetail(garmentId: number) {
      this.router.navigate(['/garment/', garmentId])
    }
+
+
 }

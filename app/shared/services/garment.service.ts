@@ -12,8 +12,8 @@ export class GarmentService {
 
     constructor(private http: HttpClient) {}
 
-    getAllGarments(): Observable<any> {
-      return this.http.get(this.baseUrl + 'all');
+    getAllGarments(urlpart: string, userId: number): Observable<any> {
+      return this.http.get(this.baseUrl + urlpart + userId);
     }
 
     getGarment(id: number): Observable<any> {

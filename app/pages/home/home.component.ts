@@ -9,8 +9,7 @@ import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 @Component({
     selector: "app-home",
     moduleId: module.id,
-    templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.css"]
+    templateUrl: "./home.component.html"
 })
 export class HomeComponent implements OnInit {
 
@@ -20,6 +19,7 @@ export class HomeComponent implements OnInit {
     garment1: Garment = new Garment();
     garment2: Garment = new Garment();
     success: number = 0;
+    garmentsUrl: string = 'all/user/';
 
     constructor(private dataService: DataService, private router: Router, private route: ActivatedRoute) {
     }
@@ -60,8 +60,12 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/garments/add']);
     }
 
-    navigateToGarments() {
-      this.success = 0;
-      this.router.navigate(['/garments/all']);
+    navigateToAllGarments() {
+      this.router.navigate(['/garments/all'])
     }
+
+    navigateToInbox() {
+      this.router.navigate(['/inbox'])
+    }
+
 }

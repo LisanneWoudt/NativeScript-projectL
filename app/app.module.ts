@@ -14,11 +14,12 @@ import { LoginComponent} from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
-import { RequestSwapComponent } from "./pages/swap/request-swap.component";
+import { RequestSwapComponent } from "./pages/swap/request-swap/request-swap.component";
 import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment-success.component";
 import { GarmentOverviewComponent } from "./pages/garments/garment-overview/garment-overview.component";
 import { GarmentDetailComponent } from "./pages/garments/garment-detail/garment-detail.component";
 import { InboxComponent} from "./pages/inbox/inbox.component";
+import { ReceivedRequestsComponent } from "./pages/swap/received-requests/received-requests.component"
 
 //Services
 import {LoginService} from "./shared/services/login.service";
@@ -62,6 +63,7 @@ import {UserService} from "./shared/services/user.service";
         GarmentOverviewComponent,
         GarmentDetailComponent,
         InboxComponent,
+        ReceivedRequestsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
