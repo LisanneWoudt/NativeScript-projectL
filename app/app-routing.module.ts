@@ -10,9 +10,10 @@ import { RequestSwapComponent } from "./pages/swap/request-swap/request-swap.com
 import { GarmentDetailComponent} from "./pages/garments/garment-detail/garment-detail.component";
 import { InboxComponent } from "./pages/inbox/inbox.component";
 import { ReceivedRequestsComponent } from "./pages/swap/received-requests/received-requests.component";
+import { SendRequestsComponent } from "./pages/swap/send-requests/send-requests.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/swap-requests/received/1", pathMatch: "full" },
+    { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "home/:success", component: HomeComponent },
     { path: "login", component: LoginComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: "garments/all", component: AllGarmentsComponent},
     { path: "swap-request/:id", component: RequestSwapComponent},
     { path: "swap-requests/received/:userid", component: ReceivedRequestsComponent},
+    { path: "swap-requests/send/:userid", component: SendRequestsComponent},
     { path: "garment/:id", component: GarmentDetailComponent},
     { path: "inbox", component: InboxComponent}
 ];

@@ -95,3 +95,18 @@ components that have the btn class name.
   border-radius: 15px;
   margin: 10px;
 }
+
+.border.gray {
+  background-color: #e8e8e8;
+}
+
+.border.green {
+  background-color: #cbeddf
+}
+
+.verticalLine {
+  width: 1px;
+  background-color: black;
+  height: 100px;
+  float: left;
+}

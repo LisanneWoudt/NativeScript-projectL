@@ -19,7 +19,9 @@ import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment
 import { GarmentOverviewComponent } from "./pages/garments/garment-overview/garment-overview.component";
 import { GarmentDetailComponent } from "./pages/garments/garment-detail/garment-detail.component";
 import { InboxComponent} from "./pages/inbox/inbox.component";
-import { ReceivedRequestsComponent } from "./pages/swap/received-requests/received-requests.component"
+import { ReceivedRequestsComponent } from "./pages/swap/received-requests/received-requests.component";
+import { SendRequestsComponent } from "./pages/swap/send-requests/send-requests.component";
+import { RequestsComponent } from "./pages/swap/requests/requests.component";
 
 //Services
 import {LoginService} from "./shared/services/login.service";
@@ -63,7 +65,9 @@ import {UserService} from "./shared/services/user.service";
         GarmentOverviewComponent,
         GarmentDetailComponent,
         InboxComponent,
-        ReceivedRequestsComponent
+        ReceivedRequestsComponent,
+        SendRequestsComponent,
+        RequestsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

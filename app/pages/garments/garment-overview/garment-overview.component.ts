@@ -29,7 +29,6 @@ export class GarmentOverviewComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-   console.log('garmentsUrl = ' + this.garmentsUrl);
    this.userId = 1;
    this.getAllGarments();
   }
@@ -47,7 +46,6 @@ export class GarmentOverviewComponent implements OnInit {
 
       Promise.all(this.promises)
       .then(res => {
-        console.log('All promises returned');
       //  this.processing = false;
       }, error => {
       console.log('Error')
@@ -60,8 +58,6 @@ export class GarmentOverviewComponent implements OnInit {
   }
 
   search(garmentId: number, int: number) {
-    console.log("searching with garmentID = " + garmentId);
-
     this.imageService.downloadImage(garmentId).then(
         res => {
         console.log('success');

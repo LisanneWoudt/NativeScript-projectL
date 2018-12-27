@@ -11,11 +11,10 @@ export class SwapService {
     constructor(private http: HttpClient) {}
 
     sendSwapRequest(swapRequest: SwapRequest): Observable<any> {
-      return this.http.post(this.baseUrl + 'send', swapRequest);
+      return this.http.post(this.baseUrl + 'save', swapRequest);
     }
 
-    getUserSwapRequests(userId: number): Observable<any> {
-      return this.http.get(this.baseUrl + 'user/'+ userId);
+    getUserSwapRequests(swapUrl: string, userId: number): Observable<any> {
+      return this.http.get(this.baseUrl + 'user/' + swapUrl + userId);
     }
-
 }

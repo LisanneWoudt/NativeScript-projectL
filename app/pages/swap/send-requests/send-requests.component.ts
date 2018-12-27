@@ -2,14 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: "app-received-request",
+    selector: "app-send-requests",
     moduleId: module.id,
-    templateUrl: "./received-requests.component.html"
+    templateUrl: "./send-requests.component.html"
 })
 
-export class ReceivedRequestsComponent implements OnInit {
+export class SendRequestsComponent implements OnInit {
 
-  sendOrReceived: string = 'received';
+  sendOrReceived: string = 'send';
 
   constructor(private router: Router) { }
 

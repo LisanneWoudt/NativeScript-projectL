@@ -68,4 +68,11 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/inbox'])
     }
 
+    navigateToReceivedRequests() {
+      this.router.navigate(['//swap-requests/received/', this.currentUser.id])
+    }
+
+    navigateToSendRequests() {
+      this.router.navigate(['/swap-requests/send/', this.currentUser.id])
+    }
 }
