@@ -6,4 +6,6 @@ export class Garment {
   userId: number;
   size: string;
   image: any;
+  pantWaist: string;
+  pantLength: string;
 }

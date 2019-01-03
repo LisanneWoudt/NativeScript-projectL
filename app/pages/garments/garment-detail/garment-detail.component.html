@@ -8,9 +8,10 @@
     <CardView class="body">
         <ActivityIndicator row="0" [busy]="processing" width="100" height="100" class="activity-indicator"></ActivityIndicator>
         <Image [src]="garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-         <Label class="text-center font-weight-bold" [text]="garment.brand" textWrap="true" row="1" ></Label>
-         <Label class="text-center" [text]="garment.name" textWrap="true" row="2"></Label>
-         <Label text="&#xA;" row="3"></Label>
+         <Label class="text-center font-weight-bold" text="{{ garment.brand }}" textWrap="true" row="1" ></Label>
+         <Label class="text-center" text="{{ garment.name }}" textWrap="true" row="2"></Label>
+         <Label class="text-center" text="{{ garment.size }}" textWrap="true" row="3"></Label>
+         <Label text="&#xA;" row="4"></Label>
     </CardView>
 
   <Button class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!" (tap)="toSwapRequest(garment.id)"></Button>

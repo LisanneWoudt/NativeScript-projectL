@@ -5,8 +5,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 
 import { AppRoutingModule } from "./app-routing.module";
+//Plugins
 import { DropDownModule } from "nativescript-drop-down/angular";
-import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular'
+import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular';
+import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
 //Components
 import { AppComponent } from "./app.component";
@@ -31,6 +33,8 @@ import {ImageService} from "./shared/services/image.service";
 import {SwapService} from "./shared/services/swap.service";
 import {UserService} from "./shared/services/user.service";
 
+//Pipes
+import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
 
 
 @NgModule({
@@ -40,11 +44,11 @@ import {UserService} from "./shared/services/user.service";
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-  //      RouterModule.forRoot(appRoutes, {enableTracing: false}),
         HttpClientModule,
         NativeScriptFormsModule,
         DropDownModule,
-        NativeScriptUISideDrawerModule
+        NativeScriptUISideDrawerModule,
+        TNSCheckBoxModule
     ],
     providers: [
       LoginService,
@@ -67,7 +71,8 @@ import {UserService} from "./shared/services/user.service";
         InboxComponent,
         ReceivedRequestsComponent,
         SendRequestsComponent,
-        RequestsComponent
+        RequestsComponent,
+        GarmentFilterPipe
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import {Garment} from '../../../dto/garment';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
 import {Router} from '@angular/router';
+import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
 @Component({
     selector: "app-garment-overview",
@@ -14,6 +15,7 @@ export class GarmentOverviewComponent implements OnInit {
 
   garments: Garment[] = new Array;
   promises: Array<any> = new Array;
+  sizes: String[] = new Array;
 
   imageSrc: any;
   //Thumbsize/previewSize magically makes spinner on item stop when loaded
@@ -22,6 +24,7 @@ export class GarmentOverviewComponent implements OnInit {
   count: number;
   processing: boolean;
   userId: number;
+  garmentFilter: any = {};
 
   @Input('garmentsUrl') garmentsUrl: string;
 
@@ -30,6 +33,7 @@ export class GarmentOverviewComponent implements OnInit {
 
   ngOnInit() {
    this.userId = 1;
+   this.sizes = ["XS", "S"];
    this.getAllGarments();
   }
 
@@ -55,6 +59,16 @@ export class GarmentOverviewComponent implements OnInit {
       console.error(errorResponse);
     //  this.router.navigate(['/error']);
     });
+  }
+
+  filterGarmentsOnSize(size: string) {
+    if (!size || size == this.garmentFilter["size"]) {
+      this.garmentFilter = {}
+    }
+    else {
+      this.garmentFilter = {size: size};
+    }
+
   }
 
   search(garmentId: number, int: number) {

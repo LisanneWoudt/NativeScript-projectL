@@ -18,6 +18,9 @@ export class RequestsComponent implements OnInit {
   sub: any;
   userId: number;
   receivedRequests: ReceivedRequest[] = new Array;
+  receivedRequestsNew: ReceivedRequest[] = new Array;
+  receivedRequestsProcessing: ReceivedRequest[] = new Array;
+  receivedRequestsDone: ReceivedRequest[] = new Array;
   previewSize: number = 60;
   swapUrl: string;
 
@@ -42,8 +45,21 @@ export class RequestsComponent implements OnInit {
       })
   }
 
+  getSwapRequestsByStatus(receivedRequest: ReceivedRequest) {
+     if (receivedRequest.status == 'NEW') {
+       this.receivedRequestsNew.push(receivedRequest);
+     }
+     else if (receivedRequest.status == 'PROCESSING') {
+       this.receivedRequestsProcessing.push(receivedRequest);
+     }
+     else if (receivedRequest.status == 'DONE') {
+       this.receivedRequestsDone.push(receivedRequest);
+     }
+  }
+
   getExtraRequestData() {
     this.receivedRequests.forEach((item, index) => {
+
     this.userService.getUser(item.receivedFromId).subscribe(data => {
       item.receivedFromUser = data.name;
 
@@ -68,6 +84,7 @@ export class RequestsComponent implements OnInit {
        }
 
     })
+    this.getSwapRequestsByStatus(item);
   });
   }
 

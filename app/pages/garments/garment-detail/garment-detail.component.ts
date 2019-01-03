@@ -32,6 +32,7 @@ export class GarmentDetailComponent implements OnInit {
      this.garmentService.getGarment(this.garmentId).subscribe(data => {
        console.log(data);
        this.garment = data;
+       this.checkSize();
 
        this.imageService.downloadImage(this.garmentId).then(
            res => {
@@ -45,6 +46,17 @@ export class GarmentDetailComponent implements OnInit {
            }
          )
      })
+  }
+
+  checkSize() {
+    if (!this.garment.size) {
+      if(this.garment.pantLength) {
+        this.garment.size = this.garment.pantWaist + '-' + this.garment.pantLength;
+      }
+      else {
+        this.garment.size = this.garment.pantWaist;
+      }
+    }
   }
 
   toSwapRequest(garmentId: number) {

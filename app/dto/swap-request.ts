@@ -5,4 +5,5 @@ export class SwapRequest {
   userId: number;
   received: boolean;
   receivedFromId: number;
+  status: string;
 }

@@ -150,7 +150,6 @@ export class AddGarmentComponent implements OnInit {
         this.shirt.size = shirt.size;
         console.log(this.shirt);
     }
-
     this.processing = true;
 
     this.garmentService.saveGarment(this.pant, this.shirt)
@@ -198,7 +197,7 @@ export class AddGarmentComponent implements OnInit {
   responseError() {
     console.log('Something went wrong');
   }
-  
+
   navigateBack() {
     this.router.navigate(['/home']);
   }
