@@ -12,6 +12,7 @@ import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
 //Components
 import { AppComponent } from "./app.component";
+import { ErrorComponent } from "./pages/error/error.component";
 import { LoginComponent} from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
@@ -60,6 +61,7 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
     ],
     declarations: [
         AppComponent,
+        ErrorComponent,
         HomeComponent,
         LoginComponent,
         AllGarmentsComponent,

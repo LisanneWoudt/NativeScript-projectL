@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
         this.drawer = this.drawerComponent.sideDrawer;
     }
 
-    public toggleDrawer() {
+    toggleDrawer() {
       this.drawer.toggleDrawerState();
     }
 

@@ -15,7 +15,7 @@ export class GarmentOverviewComponent implements OnInit {
 
   garments: Garment[] = new Array;
   promises: Array<any> = new Array;
-  sizes: String[] = new Array;
+  selectedSizes: String[] = new Array;
 
   imageSrc: any;
   //Thumbsize/previewSize magically makes spinner on item stop when loaded
@@ -33,7 +33,6 @@ export class GarmentOverviewComponent implements OnInit {
 
   ngOnInit() {
    this.userId = 1;
-   this.sizes = ["XS", "S"];
    this.getAllGarments();
   }
 
@@ -50,37 +49,42 @@ export class GarmentOverviewComponent implements OnInit {
 
       Promise.all(this.promises)
       .then(res => {
-      //  this.processing = false;
       }, error => {
-      console.log('Error')
+        console.log('Error:' + error);
+        this.router.navigate(['/error']);
       })
-
     }, errorResponse => {
-      console.error(errorResponse);
-    //  this.router.navigate(['/error']);
+      console.log('Error:' + errorResponse);
+      this.router.navigate(['/error']);
     });
   }
 
   filterGarmentsOnSize(size: string) {
-    if (!size || size == this.garmentFilter["size"]) {
-      this.garmentFilter = {}
+    if (!size || this.selectedSizes.includes(size)) {
+      this.selectedSizes = this.selectedSizes.filter(obj => obj !== size);
+      if (this.selectedSizes.length == 0) {
+        this.garmentFilter = {};
+      }
+      else {
+       this.garmentFilter = {size: this.selectedSizes};
+      }
     }
     else {
-      this.garmentFilter = {size: size};
+      this.selectedSizes.push(size);
+      this.garmentFilter = {size: this.selectedSizes};
     }
-
   }
 
   search(garmentId: number, int: number) {
     this.imageService.downloadImage(garmentId).then(
         res => {
-        console.log('success');
-        this.garments[int].image = res;
-        this.imageSrc = res;
-        return res;
+          this.garments[int].image = res;
+          this.imageSrc = res;
+          return res;
         },
         msg => {
-         console.log("error!")
+         console.log('Error:' + msg);
+         this.router.navigate(['/error']);
         }
       )
    }
@@ -88,6 +92,5 @@ export class GarmentOverviewComponent implements OnInit {
    toGarmentDetail(garmentId: number) {
      this.router.navigate(['/garment/', garmentId])
    }
-
 
 }

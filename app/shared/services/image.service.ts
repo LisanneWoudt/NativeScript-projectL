@@ -7,7 +7,7 @@ var session = bghttp.session("image-upload");
 @Injectable()
 export class ImageService {
 
-    baseUrl: string = 'http://192.168.178.18:8080/images/';
+    baseUrl: string = 'http://192.168.178.19:8080/images/';
 
     constructor(private http: HttpClient) {}
 

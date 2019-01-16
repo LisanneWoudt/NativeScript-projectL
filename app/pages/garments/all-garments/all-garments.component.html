@@ -4,16 +4,36 @@
 </ActionBar>
 
 <StackLayout orientation="vertical" class="page">
-  <StackLayout>
-    <ScrollView>
-      <StackLayout>
+  <RadSideDrawer tkExampleTitle tkToggleNavButton>
+    <StackLayout tkDrawerContent class="sidedrawer-left">
 
       <Label text="&#xA;"></Label>
-      <Label class="h3 text-center" text="Click & swap"></Label>
-
-      <app-garment-overview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
-
+      <Label class="filterdrawer-header" text="Gender"></Label>
+      <StackLayout *ngFor="let gender of genders">
+          <CheckBox text="{{ gender }}" checked="false" (tap)=child.filterGarmentsOnSize(gender) fillColor="#006968"></CheckBox>
       </StackLayout>
-    </ScrollView>
-  </StackLayout>
+
+      <Label text="&#xA;"></Label>
+      <Label class="filterdrawer-header" text="Size"></Label>
+      <StackLayout *ngFor="let size of sizes">
+          <CheckBox text="{{ size }}" checked="false" (tap)=child.filterGarmentsOnSize(size) fillColor="#006968"></CheckBox>
+      </StackLayout>
+
+    </StackLayout>
+
+    <StackLayout tkMainContent>
+      <StackLayout>
+        <ScrollView>
+          <StackLayout>
+
+          <Label text="&#xA;"></Label>
+          <Button class="btn btn-outline m-l-30" text="Apply filter" (tap)="toggleDrawer()"></Button>
+
+          <app-garment-overview #garmentOverview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
+
+          </StackLayout>
+        </ScrollView>
+      </StackLayout>
+    </StackLayout>
+  </RadSideDrawer>
 </StackLayout>

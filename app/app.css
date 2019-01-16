@@ -96,6 +96,10 @@ components that have the btn class name.
   margin: 10px;
 }
 
+.page-border {
+  min-height: 1000px;
+}
+
 .border.gray {
   background-color: #e8e8e8;
 }
@@ -109,4 +113,15 @@ components that have the btn class name.
   background-color: black;
   height: 100px;
   float: left;
+}
+
+.filterdrawer-header {
+  font-weight: bold;
+  font-size:18px;
+  padding-left: 5px;
+  color: #006968;
+}
+
+.sidedrawer-left {
+  width: 400px;
 }

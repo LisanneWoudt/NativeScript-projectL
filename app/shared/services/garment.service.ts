@@ -8,7 +8,7 @@ import {Shirt} from '../../dto/shirt';
 @Injectable()
 export class GarmentService {
 
-    baseUrl: string = 'http://192.168.178.18:8080/garments/';
+    baseUrl: string = 'http://192.168.178.19:8080/garments/';
 
     constructor(private http: HttpClient) {}
 
