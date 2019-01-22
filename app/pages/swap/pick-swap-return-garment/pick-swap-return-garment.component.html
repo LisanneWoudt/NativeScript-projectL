@@ -1,0 +1,40 @@
+<ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
+  <Label class="action-bar-title" text="Choose item"></Label>
+  <ActionItem text="Menu" android.systemIcon="ic_menu_btn_add" (tap)="toggleDrawer()"></ActionItem>
+</ActionBar>
+
+<StackLayout orientation="vertical" class="page">
+  <RadSideDrawer tkExampleTitle tkToggleNavButton>
+    <StackLayout tkDrawerContent class="sidedrawer-left">
+
+      <Label text="&#xA;"></Label>
+      <Label class="filterdrawer-header" text="Gender"></Label>
+      <StackLayout *ngFor="let gender of genders">
+          <CheckBox text="{{ gender }}" checked="false" (tap)=child.filterGarmentsOnSize(gender) fillColor="#006968"></CheckBox>
+      </StackLayout>
+
+      <Label text="&#xA;"></Label>
+      <Label class="filterdrawer-header" text="Size"></Label>
+      <StackLayout *ngFor="let size of sizes">
+          <CheckBox text="{{ size }}" checked="false" (tap)=child.filterGarmentsOnSize(size) fillColor="#006968"></CheckBox>
+      </StackLayout>
+
+    </StackLayout>
+
+    <StackLayout tkMainContent>
+      <StackLayout>
+        <ScrollView>
+          <StackLayout>
+
+          <Label text="&#xA;"></Label>
+          <Label class="text-center" text="Choose the item you want to swap in return"></Label>
+
+          <app-garment-overview #garmentOverview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
+
+          </StackLayout>
+        </ScrollView>
+      </StackLayout>
+    </StackLayout>
+  </RadSideDrawer>
+</StackLayout>

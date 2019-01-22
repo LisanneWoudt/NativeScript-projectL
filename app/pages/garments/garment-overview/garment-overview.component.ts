@@ -75,6 +75,11 @@ export class GarmentOverviewComponent implements OnInit {
     }
   }
 
+  filterGarmentsOnUser(userId: number) {
+    console.log("filter garments on userid " + userId);
+    this.garmentFilter = {userId: [userId]};
+  }
+
   search(garmentId: number, int: number) {
     this.imageService.downloadImage(garmentId).then(
         res => {

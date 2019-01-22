@@ -15,7 +15,7 @@
               <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
             </StackLayout>
             <Button *ngIf="sendOrReceived == 'received'" class="btn btn-primary btn-rounded-lg btn-active"
-              (tap)="navigateToAllGarments()" text="Check it out"></Button>
+              (tap)="pickSwapReturnGarment(request.receivedFromId)" text="Check it out"></Button>
 
           </StackLayout>
       </ng-template>

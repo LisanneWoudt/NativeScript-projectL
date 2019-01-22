@@ -98,8 +98,8 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  navigateToAllGarments() {
-    this.router.navigate(['/garments/all']);
+  pickSwapReturnGarment(receivedFromId: number) {
+    this.router.navigate(['/swap-requests/return-garment/' + receivedFromId]);
   }
 
 }
