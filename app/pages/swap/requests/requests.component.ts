@@ -98,8 +98,8 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  pickSwapReturnGarment(receivedFromId: number) {
-    this.router.navigate(['/swap-requests/return-garment/' + receivedFromId]);
+  pickSwapReturnGarment(receivedFromId: number, garmentId: number) {
+    this.router.navigate(['/swap-requests/return-garment/' + receivedFromId + garmentId]);
   }
 
 }

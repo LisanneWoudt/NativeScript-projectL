@@ -1,6 +1,6 @@
 <ActionBar class="action-bar">
   <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
-  <Label class="action-bar-title" text="Add garment"></Label>
+  <Label class="action-bar-title" text="Garment detail"></Label>
 </ActionBar>
 
 <StackLayout class="page">
@@ -14,6 +14,8 @@
          <Label text="&#xA;" row="4"></Label>
     </CardView>
 
-  <Button class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!" (tap)="toSwapRequest(garment.id)"></Button>
-
+  <Button *ngIf="garmentSwapId == 0" class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!"
+    (tap)="toSwapRequest(garment.id)"></Button>
+  <Button *ngIf="garmentSwapId != 0" class="btn btn-primary btn-rounded-lg btn-active" text="Select this item"
+    (tap)="toSwapReturnRequest(garment.id)"></Button>
 </StackLayout>

@@ -27,6 +27,7 @@ export class GarmentOverviewComponent implements OnInit {
   garmentFilter: any = {};
 
   @Input('garmentsUrl') garmentsUrl: string;
+  @Input('garmentId') swapGarmentId: number = 0;
 
   constructor(private garmentService: GarmentService, private imageService: ImageService,
     private router: Router) { }
@@ -95,7 +96,7 @@ export class GarmentOverviewComponent implements OnInit {
    }
 
    toGarmentDetail(garmentId: number) {
-     this.router.navigate(['/garment/', garmentId])
+     this.router.navigate(['/garment/', garmentId, this.swapGarmentId])
    }
 
 }

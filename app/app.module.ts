@@ -26,7 +26,7 @@ import { ReceivedRequestsComponent } from "./pages/swap/received-requests/receiv
 import { SendRequestsComponent } from "./pages/swap/send-requests/send-requests.component";
 import { RequestsComponent } from "./pages/swap/requests/requests.component";
 import { PickSwapReturnGarmentComponent } from "./pages/swap/pick-swap-return-garment/pick-swap-return-garment.component";
-
+import { RequestReturnSwapComponent } from "./pages/swap/request-return-swap/request-return-swap.component";
 //Services
 import {LoginService} from "./shared/services/login.service";
 import {DataService} from "./shared/services/data.service";
@@ -76,6 +76,7 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
         SendRequestsComponent,
         RequestsComponent,
         PickSwapReturnGarmentComponent,
+        RequestReturnSwapComponent,
         GarmentFilterPipe
     ],
     schemas: [

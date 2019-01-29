@@ -35,6 +35,10 @@ components that have the btn class name.
   margin-left: 20px;
   margin-right: 20px;
 }
+.page {
+  margin-top:40px;
+}
+
 .label-section {
   margin-left: 10px;
   font-size: 20px;
@@ -102,10 +106,14 @@ components that have the btn class name.
 
 .border.gray {
   background-color: #e8e8e8;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .border.green {
-  background-color: #cbeddf
+  background-color: #cbeddf;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .verticalLine {

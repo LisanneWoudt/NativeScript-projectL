@@ -1,0 +1,27 @@
+<ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
+  <Label class="action-bar-title" text="Swap return request"></Label>
+</ActionBar>
+
+<StackLayout class="page">
+
+  <StackLayout class="border gray">
+    <Image class="image-padding" [src]="garment.image" [width]="thumbSize" [height]="thumbSize"
+     stretch="aspectFit" row="0"></Image>
+     <Label class="text-center" text="Your garment"></Label>
+  </StackLayout>
+  <Label class="verticalLine"></Label>
+  <StackLayout class="border green">
+    <Image class="image-padding" [src]="garmentInReturn.image" [width]="previewSize" [height]="previewSize"
+    stretch="aspectFit" row="0"></Image>
+    <Label row="1" class="text-center font-weight-bold" [text]="garmentInReturn.name"></Label>
+    <Label row="2" class="text-center" [text]="garmentInReturn.brand"></Label>
+    <Label row="3" class="text-center" [text]="garmentInReturn.size"></Label>
+  </StackLayout>
+
+  <StackLayout class="form">
+    <Label text="Enter personal message:" class="text-center"></Label>
+    <TextField autocorrect="false" class="input input-rounded m-t-10" [(ngModel)]="swapRequest.message"></TextField>
+    <Button class="btn btn-primary btn-rounded-lg btn-active" text="Send swap return request" (tap)="sendSwapRequest(swapRequest)"></Button>
+   </StackLayout>
+</StackLayout>

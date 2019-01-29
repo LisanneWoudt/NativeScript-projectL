@@ -21,13 +21,14 @@ export class PickSwapReturnGarmentComponent implements OnInit {
   sizes = ["XS", "S", "M", "L", "XL"];
   genders = ["Woman", "Man"];
   receivedFromId: number;
+  garmentId: number;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(){
     this.sub = this.route.params.subscribe(params => {
        this.receivedFromId = +params['userid']; // (+) converts string 'userId' to a number
-       console.log("received from: " + this.receivedFromId);
+       this.garmentId = +params['garmentId'];
      });
      this.child.filterGarmentsOnUser(this.receivedFromId);
   }
