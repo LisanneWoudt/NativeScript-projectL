@@ -20,10 +20,7 @@ export class RequestReturnSwapComponent implements OnInit {
     private garmentService: GarmentService, private dataService: DataService,
     private swapService: SwapService, private imageService: ImageService) { }
 
-  garmentId: number;
-  garmentInReturnId: number;
   currentUser: User;
-  private sub: any;
   garment: Garment = new Garment();
   garmentInReturn: Garment = new Garment();
   swapRequest: SwapRequest = new SwapRequest();
@@ -31,12 +28,9 @@ export class RequestReturnSwapComponent implements OnInit {
   previewSize: number = 80;
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-       this.garmentId = +params['garmentId']; // (+) converts string 'id' to a number
-       this.garmentInReturnId = +params['garmentInReturnId']
-       this.getSelectedGarment(this.garmentId, 'garment');
-       this.getSelectedGarment(this.garmentInReturnId, 'garmentInReturn');
-    });
+    this.swapRequest = this.dataService.getSwapRequest();
+    this.getSelectedGarment(this.swapRequest.garmentId, 'garment');
+    this.getSelectedGarment(this.swapRequest.garmentInReturnId, 'garmentInReturn');
   }
 
   getSelectedGarment(id: number, type: string) {
@@ -67,20 +61,21 @@ export class RequestReturnSwapComponent implements OnInit {
       })
   }
 
-  sendSwapRequest(swapRequest: SwapRequest){
-      this.swapRequest = swapRequest;
-      this.swapRequest.garmentId = this.garmentId;
-      this.swapRequest.garmentInReturnId = this.garmentInReturnId;
-
-      this.swapService.sendSwapRequest(this.swapRequest).subscribe(data => {
-        console.log(data);
+  sendSwapRequest(){
+      this.swapRequest.status = "PROCESSING";
+      this.swapService.updateSwapRequest(this.swapRequest).subscribe(data => {
+        this.navigateToReceivedRequests();
       }, error => {
         console.log(error);
       })
   }
 
   navigateBack() {
-     this.router.navigate(['/garment', this.garmentId]);
+     this.router.navigate(['/garment', this.swapRequest.garmentId]);
+  }
+
+  navigateToReceivedRequests() {
+    this.router.navigate(['/swap-requests/received', this.swapRequest.userId])
   }
 
 }

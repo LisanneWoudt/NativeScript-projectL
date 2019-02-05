@@ -21,7 +21,7 @@
 
   <StackLayout class="form">
     <Label text="Enter personal message:" class="text-center"></Label>
-    <TextField autocorrect="false" class="input input-rounded m-t-10" [(ngModel)]="swapRequest.message"></TextField>
-    <Button class="btn btn-primary btn-rounded-lg btn-active" text="Send swap return request" (tap)="sendSwapRequest(swapRequest)"></Button>
+    <TextField autocorrect="false" class="input input-rounded m-t-10" [(ngModel)]="swapRequest.messageInReturn"></TextField>
+    <Button class="btn btn-primary btn-rounded-lg btn-active" text="Send swap return request" (tap)="sendSwapRequest()"></Button>
    </StackLayout>
 </StackLayout>

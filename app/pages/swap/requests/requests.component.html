@@ -2,7 +2,6 @@
     <StackLayout *tabItem="{title: 'New'}">
       <ListView [items]="receivedRequestsNew" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
       <ng-template let-request="item" let-i="index">
-          <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
           <StackLayout class="list-group-item">
 
             <Label *ngIf="sendOrReceived == 'received'" class="text-center font-weight-bold"
@@ -15,7 +14,7 @@
               <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
             </StackLayout>
             <Button *ngIf="sendOrReceived == 'received'" class="btn btn-primary btn-rounded-lg btn-active"
-              (tap)="pickSwapReturnGarment(request.receivedFromId, request.garmentId)" text="Check it out"></Button>
+              (tap)="pickSwapReturnGarment(request)" text="Check it out"></Button>
 
           </StackLayout>
       </ng-template>
@@ -30,15 +29,24 @@
       <ng-template let-request="item" let-i="index">
           <StackLayout class="list-group-item">
 
-            <Label class="text-center font-weight-bold" text="Awaiting confirmation from user"></Label>
-            <StackLayout class="border gray">
+            <Label *ngIf="userId == request.receivedFromId" class="text-center font-weight-bold"
+             text="Swap updated - accept or deny swap"></Label>
+            <StackLayout class="{{userId == request.receivedFromId ? 'border green' : 'border gray' }}">
               <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
+              <Label class="text-center" text="{{userId == request.receivedFromId ? 'Garment selected by you' : 'Own garment'}}"></Label>
             </StackLayout>
             <Label class="verticalLine"></Label>
-            <StackLayout class="border green">
+            <StackLayout class="{{userId == request.receivedFromId ? 'border gray' : 'border green' }}">
               <Image [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
+              <Label class="text-center" text="{{userId == request.receivedFromId ? 'Own garment' : 'Your selected return garment'}}"></Label>
             </StackLayout>
-
+            <StackLayout>
+            <Button *ngIf="userId == request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
+              (tap)="acceptRequest(request)" text="Agree on Swap"></Button>
+            <Button *ngIf="userId == request.receivedFromId" class="btn btn-cancel btn-primary btn-rounded-lg"
+                (tap)="rejectRequest(request)" text="Reject request"></Button>
+            </StackLayout>
+             <Label *ngIf="userId != request.receivedFromId" class="text-center font-weight-bold" text="Awaiting confirmation from user"></Label>
           </StackLayout>
       </ng-template>
       </ListView>

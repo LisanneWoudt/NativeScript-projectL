@@ -15,7 +15,6 @@ export class GarmentDetailComponent implements OnInit {
   private sub: any;
   garment: Garment;
   garmentId: number;
-  garmentSwapId: number;
 
   imageSrc: any;
   //Thumbsize/previewSize magically makes spinner on item stop when loaded
@@ -29,8 +28,6 @@ export class GarmentDetailComponent implements OnInit {
 
     this.sub = this.route.params.subscribe(params => {
        this.garmentId = +params['garmentId']; // (+) converts string 'id' to a number
-       this.garmentSwapId = +params['garmentSwapId']
-       console.log('garmentId = ' + this.garmentId + ' and garmentSwapId = ' + this.garmentSwapId);
      });
 
      this.garmentService.getGarment(this.garmentId).subscribe(data => {
@@ -68,7 +65,7 @@ export class GarmentDetailComponent implements OnInit {
   }
 
   toSwapReturnRequest(garmentId: number) {
-    this.router.navigate(['/swap-return-request', this.garmentSwapId, garmentId])
+    this.router.navigate(['/swap-return-request'])
   }
 
   navigateBack() {

@@ -7,4 +7,5 @@ export class SwapRequest {
   receivedFromId: number;
   status: string;
   garmentInReturnId: number;
+  messageInReturn: string;
 }

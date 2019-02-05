@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import {Garment} from '../../../dto/garment';
+import { SwapRequest } from '../../../dto/swap-request'
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
+import { DataService } from '../../../shared/services/data.service';
 import {Router} from '@angular/router';
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 
@@ -25,12 +27,13 @@ export class GarmentOverviewComponent implements OnInit {
   processing: boolean;
   userId: number;
   garmentFilter: any = {};
+  swapRequest: SwapRequest;
 
   @Input('garmentsUrl') garmentsUrl: string;
   @Input('garmentId') swapGarmentId: number = 0;
 
   constructor(private garmentService: GarmentService, private imageService: ImageService,
-    private router: Router) { }
+    private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
    this.userId = 1;
@@ -96,7 +99,10 @@ export class GarmentOverviewComponent implements OnInit {
    }
 
    toGarmentDetail(garmentId: number) {
-     this.router.navigate(['/garment/', garmentId, this.swapGarmentId])
+     this.swapRequest = this.dataService.getSwapRequest();
+     this.swapRequest.garmentInReturnId = garmentId;
+     this.dataService.setSwapRequest(this.swapRequest);
+     this.router.navigate(['/garment/', garmentId])
    }
 
 }

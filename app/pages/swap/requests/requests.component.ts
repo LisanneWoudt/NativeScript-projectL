@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReceivedRequest } from '../../../dto/received-request';
+import { SwapRequest } from '../../../dto/swap-request';
 import { SwapService } from '../../../shared/services/swap.service';
 import { UserService } from '../../../shared/services/user.service';
 import { ImageService } from '../../../shared/services/image.service';
+import { DataService } from '../../../shared/services/data.service';
 
 @Component({
     selector: "app-requests",
@@ -25,7 +27,8 @@ export class RequestsComponent implements OnInit {
   swapUrl: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private swapService: SwapService,
-    private userService: UserService, private imageService: ImageService) { }
+    private userService: UserService, private imageService: ImageService,
+    private dataService: DataService) { }
 
 
   ngOnInit() {
@@ -98,8 +101,9 @@ export class RequestsComponent implements OnInit {
     }
   }
 
-  pickSwapReturnGarment(receivedFromId: number, garmentId: number) {
-    this.router.navigate(['/swap-requests/return-garment/' + receivedFromId + garmentId]);
+  pickSwapReturnGarment(swapRequest: SwapRequest) {
+    this.dataService.setSwapRequest(swapRequest);
+    this.router.navigate(['/swap-requests/return-garment/' + this.userId]);
   }
 
 }

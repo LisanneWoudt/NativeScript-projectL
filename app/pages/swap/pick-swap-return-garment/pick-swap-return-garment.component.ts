@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Garment } from '../../../dto/garment';
-import { Router, ActivatedRoute } from '@angular/router';
+import { SwapRequest } from '../../../dto/swap-request';
+import { Router } from '@angular/router';
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import { DataService } from '../../../shared/services/data.service';
 
 @Component({
     selector: "app-pick-swap-return-garment",
@@ -16,21 +18,16 @@ export class PickSwapReturnGarmentComponent implements OnInit {
   @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
 
   drawer: RadSideDrawer;
-  sub: any;
   garmentsUrl: string = 'all/';
   sizes = ["XS", "S", "M", "L", "XL"];
   genders = ["Woman", "Man"];
-  receivedFromId: number;
-  garmentId: number;
+  swapRequest: SwapRequest;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit(){
-    this.sub = this.route.params.subscribe(params => {
-       this.receivedFromId = +params['userid']; // (+) converts string 'userId' to a number
-       this.garmentId = +params['garmentId'];
-     });
-     this.child.filterGarmentsOnUser(this.receivedFromId);
+      this.swapRequest = this.dataService.getSwapRequest();
+      this.child.filterGarmentsOnUser(this.swapRequest.receivedFromId);
   }
 
   ngAfterViewInit() {

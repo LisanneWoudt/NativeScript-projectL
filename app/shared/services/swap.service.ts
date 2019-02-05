@@ -17,4 +17,8 @@ export class SwapService {
     getUserSwapRequests(swapUrl: string, userId: number): Observable<any> {
       return this.http.get(this.baseUrl + 'user/' + swapUrl + userId);
     }
+
+    updateSwapRequest(swapRequest: SwapRequest): Observable<any> {
+      return this.http.post(this.baseUrl + 'update', swapRequest);
+    }
 }

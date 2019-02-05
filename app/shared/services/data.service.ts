@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import {User} from '../../dto/user';
+import { Injectable } from '@angular/core';
+import { User } from '../../dto/user';
+import { SwapRequest } from '../../dto/swap-request';
 
 @Injectable()
 export class DataService {
 
   user: User;
+  swapRequest: SwapRequest;
 
   constructor() {
   }
@@ -27,4 +29,13 @@ export class DataService {
   setUser(user: User) {
     this.user = user;
   }
+
+  getSwapRequest() {
+    return this.swapRequest;
+  }
+
+  setSwapRequest(swapRequest: SwapRequest) {
+    this.swapRequest = swapRequest;
+  }
+
 }
