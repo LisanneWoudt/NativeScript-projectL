@@ -6,6 +6,7 @@ import { SwapService } from '../../../shared/services/swap.service';
 import { UserService } from '../../../shared/services/user.service';
 import { ImageService } from '../../../shared/services/image.service';
 import { DataService } from '../../../shared/services/data.service';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-requests",
@@ -15,16 +16,13 @@ import { DataService } from '../../../shared/services/data.service';
 
 export class RequestsComponent implements OnInit {
 
-  @Input('sendOrReceived') sendOrReceived: string;
-
   sub: any;
   userId: number;
-  receivedRequests: ReceivedRequest[] = new Array;
-  receivedRequestsNew: ReceivedRequest[] = new Array;
-  receivedRequestsProcessing: ReceivedRequest[] = new Array;
-  receivedRequestsDone: ReceivedRequest[] = new Array;
+  swapRequests: ReceivedRequest[] = new Array;
+  requestsNewAndUpdated: ReceivedRequest[] = new Array;
+  requestsProcessing: ReceivedRequest[] = new Array;
+  requestsDone: ReceivedRequest[] = new Array;
   previewSize: number = 60;
-  swapUrl: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private swapService: SwapService,
     private userService: UserService, private imageService: ImageService,
@@ -34,14 +32,13 @@ export class RequestsComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.userId = +params['userid']; // (+) converts string 'id' to a number
-       this.setSwapUrl();
        this.getSwapRequests();
     });
   }
 
   getSwapRequests() {
-    this.swapService.getUserSwapRequests(this.swapUrl, this.userId).subscribe(data => {
-      this.receivedRequests = data;
+    this.swapService.getUserSwapRequests(this.userId).subscribe(data => {
+      this.swapRequests = data;
       this.getExtraRequestData();
     }, errorResponse => {
       console.log("ERROR");
@@ -49,56 +46,46 @@ export class RequestsComponent implements OnInit {
   }
 
   getSwapRequestsByStatus(receivedRequest: ReceivedRequest) {
-     if (receivedRequest.status == 'NEW') {
-       this.receivedRequestsNew.push(receivedRequest);
+     if (receivedRequest.status == 'NEW' || (receivedRequest.status == 'PROCESSING' && this.userId == receivedRequest.receivedFromId)) {
+       this.requestsNewAndUpdated.push(receivedRequest);
      }
-     else if (receivedRequest.status == 'PROCESSING') {
-       this.receivedRequestsProcessing.push(receivedRequest);
+     else if (receivedRequest.status == 'PROCESSING' && this.userId != receivedRequest.receivedFromId) {
+       this.requestsProcessing.push(receivedRequest);
      }
      else if (receivedRequest.status == 'DONE') {
-       this.receivedRequestsDone.push(receivedRequest);
+       this.requestsDone.push(receivedRequest);
      }
   }
 
   getExtraRequestData() {
-    this.receivedRequests.forEach((item, index) => {
+    this.swapRequests.forEach((item, index) => {
 
     this.userService.getUser(item.receivedFromId).subscribe(data => {
       item.receivedFromUser = data.name;
 
       this.imageService.downloadImage(item.garmentId).then(
-          res => {
+        res => {
           item.garmentImage = res;
           return res;
-          },
-          msg => {
-           console.log("error!")
-          })
+        },
+        msg => {
+         console.log("error!")
+        })
 
      if (item.garmentInReturnId != null) {
        this.imageService.downloadImage(item.garmentInReturnId).then(
-           res => {
+         res => {
            item.garmentInReturnImage = res;
            return res;
-           },
-           msg => {
-            console.log("error!")
-           })
+         },
+         msg => {
+          console.log("error!")
+         })
        }
-
     })
+
     this.getSwapRequestsByStatus(item);
   });
-  }
-
-
-  setSwapUrl() {
-    if (this.sendOrReceived == 'send') {
-      this.swapUrl = 'send/';
-    }
-    else {
-      this.swapUrl = 'received/';
-    }
   }
 
   pickSwapReturnGarment(swapRequest: SwapRequest) {
@@ -106,4 +93,50 @@ export class RequestsComponent implements OnInit {
     this.router.navigate(['/swap-requests/return-garment/' + this.userId]);
   }
 
+  acceptRequest(swapRequest: SwapRequest) {
+    swapRequest.status = 'DONE';
+
+    this.swapService.updateSwapRequest(swapRequest).subscribe(response => {
+
+      dialogs.alert({
+          title: "Swap swap swap",
+          message: "You reached a swap agreement!",
+          okButtonText: "OK"
+      }).then(() => {
+          this.router.navigate(['home']);
+      });
+
+    }, errorResponse => {
+        console.log("ERROR");
+        this.router.navigate(['/error']);
+    })
+  }
+
+  rejectRequest(swapRequest: SwapRequest) {
+    swapRequest.status = 'NEW';
+    swapRequest.messageInReturn = '';
+    swapRequest.garmentInReturnId = null;
+    this.swapService.updateSwapRequest(swapRequest).subscribe(response => {
+
+      dialogs.alert({
+          title: "No swap",
+          message: "You have declined the swap request",
+          okButtonText: "OK"
+      }).then(() => {
+        this.router.navigate(['home']);
+      });
+
+    }, error => {
+      console.log("ERROR");
+      this.router.navigate(['/error']);
+    });
+  }
+
+  checkUserDetails(userId: number) {
+    console.log(userId);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
 }

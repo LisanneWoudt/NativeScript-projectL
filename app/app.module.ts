@@ -18,12 +18,9 @@ import { HomeComponent } from "./pages/home/home.component";
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
 import { RequestSwapComponent } from "./pages/swap/request-swap/request-swap.component";
-import { AddGarmentSuccessComponent } from "./pages/garments/success/add-garment-success.component";
 import { GarmentOverviewComponent } from "./pages/garments/garment-overview/garment-overview.component";
 import { GarmentDetailComponent } from "./pages/garments/garment-detail/garment-detail.component";
 import { InboxComponent} from "./pages/inbox/inbox.component";
-import { ReceivedRequestsComponent } from "./pages/swap/received-requests/received-requests.component";
-import { SendRequestsComponent } from "./pages/swap/send-requests/send-requests.component";
 import { RequestsComponent } from "./pages/swap/requests/requests.component";
 import { PickSwapReturnGarmentComponent } from "./pages/swap/pick-swap-return-garment/pick-swap-return-garment.component";
 import { RequestReturnSwapComponent } from "./pages/swap/request-return-swap/request-return-swap.component";
@@ -68,12 +65,9 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
         AllGarmentsComponent,
         AddGarmentComponent,
         RequestSwapComponent,
-        AddGarmentSuccessComponent,
         GarmentOverviewComponent,
         GarmentDetailComponent,
         InboxComponent,
-        ReceivedRequestsComponent,
-        SendRequestsComponent,
         RequestsComponent,
         PickSwapReturnGarmentComponent,
         RequestReturnSwapComponent,

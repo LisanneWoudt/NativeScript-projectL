@@ -14,6 +14,7 @@ var fs = require("file-system");
 import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 //let imagepicker = require("nativescript-imagepicker")
 @Component({
@@ -190,12 +191,18 @@ export class AddGarmentComponent implements OnInit {
   }
 
   responseSuccess() {
-    this.result = 1;
-    this.router.navigate(['/home/' + this.result]);
+    dialogs.alert({
+        title: "Garment added",
+        message: "You have successfully added a garment to your collection!",
+        okButtonText: "OK"
+    }).then(() => {
+         this.router.navigate(['/home/']);
+    });
   }
 
   responseError() {
     console.log('Something went wrong');
+    this.router.navigate(['/error']);
   }
 
   navigateBack() {

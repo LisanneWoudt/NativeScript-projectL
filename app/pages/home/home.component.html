@@ -12,15 +12,12 @@
     <StackLayout tkDrawerContent class="sidedrawer-left">
         <StackLayout>
             <Label text="Inbox" class="sideLabel sideLightGrayLabel"  (tap)="navigateToInbox()"></Label>
-            <Label text="Received requests" class="sideLabel sideLightGrayLabel" (tap)="navigateToReceivedRequests()"></Label>
-            <Label text="Send requests" class="sideLabel sideLightGrayLabel" (tap)="navigateToSendRequests()"></Label>
+            <Label text="Swap requests" class="sideLabel sideLightGrayLabel" (tap)="navigateToSwapRequests()"></Label>
             <Label text="Settings" class="sideLabel sideLightGrayLabel"></Label>
         </StackLayout>
     </StackLayout>
 
       <StackLayout tkMainContent>
-
-        <app-add-garment-success *ngIf="success == 1"></app-add-garment-success>
 
         <StackLayout>
           <ScrollView>

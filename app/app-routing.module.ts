@@ -10,23 +10,20 @@ import { AllGarmentsComponent } from "./pages/garments/all-garments/all-garments
 import { RequestSwapComponent } from "./pages/swap/request-swap/request-swap.component";
 import { GarmentDetailComponent} from "./pages/garments/garment-detail/garment-detail.component";
 import { InboxComponent } from "./pages/inbox/inbox.component";
-import { ReceivedRequestsComponent } from "./pages/swap/received-requests/received-requests.component";
-import { SendRequestsComponent } from "./pages/swap/send-requests/send-requests.component";
+import { RequestsComponent } from "./pages/swap/requests/requests.component";
 import { PickSwapReturnGarmentComponent } from "./pages/swap/pick-swap-return-garment/pick-swap-return-garment.component";
 import { RequestReturnSwapComponent } from "./pages/swap/request-return-swap/request-return-swap.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/swap-requests/send/2", pathMatch: "full" },
+    { path: "", redirectTo: "/swap-requests/1", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
-    { path: "home/:success", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "garments/add", component: AddGarmentComponent},
     { path: "garments/all", component: AllGarmentsComponent},
     { path: "swap-request/:id", component: RequestSwapComponent},
     { path: "swap-return-request", component: RequestReturnSwapComponent},
-    { path: "swap-requests/received/:userid", component: ReceivedRequestsComponent},
-    { path: "swap-requests/send/:userid", component: SendRequestsComponent},
+    { path: "swap-requests/:userid", component: RequestsComponent},
     { path: "swap-requests/return-garment/:userid", component: PickSwapReturnGarmentComponent},
     { path: "garment/:garmentId", component: GarmentDetailComponent},
     { path: "inbox", component: InboxComponent}
