@@ -20,17 +20,17 @@ export class RequestReturnSwapComponent implements OnInit {
     private garmentService: GarmentService, private dataService: DataService,
     private swapService: SwapService, private imageService: ImageService) { }
 
-  currentUser: User;
+  currentUser: User = new User();
   garment: Garment = new Garment();
   garmentInReturn: Garment = new Garment();
   swapRequest: SwapRequest = new SwapRequest();
-  thumbSize: number = 40;
   previewSize: number = 80;
 
   ngOnInit() {
     this.swapRequest = this.dataService.getSwapRequest();
     this.getSelectedGarment(this.swapRequest.garmentId, 'garment');
     this.getSelectedGarment(this.swapRequest.garmentInReturnId, 'garmentInReturn');
+    this.currentUser = this.dataService.getMockUser();
   }
 
   getSelectedGarment(id: number, type: string) {
@@ -64,7 +64,7 @@ export class RequestReturnSwapComponent implements OnInit {
   sendSwapRequest(){
       this.swapRequest.status = "PROCESSING";
       this.swapService.updateSwapRequest(this.swapRequest).subscribe(data => {
-        this.navigateToReceivedRequests();
+        this.navigateToOpenRequests();
       }, error => {
         console.log(error);
       })
@@ -74,8 +74,9 @@ export class RequestReturnSwapComponent implements OnInit {
      this.router.navigate(['/garment', this.swapRequest.garmentId]);
   }
 
-  navigateToReceivedRequests() {
-    this.router.navigate(['/swap-requests/received', this.swapRequest.userId])
+  navigateToOpenRequests() {
+    console.log(this.currentUser);
+    this.router.navigate(['/swap-requests/open/', this.currentUser.id]);
   }
 
 }

@@ -1,0 +1,9 @@
+<ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateToHome()"></NavigationButton>
+  <Label class="action-bar-title" text="Swap request history"></Label>
+</ActionBar>
+
+<StackLayout class="page">
+  <Button class="btn btn-outline m-l-30" text="See open requests" (tap)="navigateToOpenRequests()"></Button>
+  <app-requests [(showHistory)]="showHistory"></app-requests>
+</StackLayout>

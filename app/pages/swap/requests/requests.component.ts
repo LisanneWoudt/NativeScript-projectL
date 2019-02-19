@@ -16,13 +16,17 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 
 export class RequestsComponent implements OnInit {
 
+  @Input('showHistory') showHistory: boolean;
+
   sub: any;
   userId: number;
   swapRequests: ReceivedRequest[] = new Array;
-  requestsNewAndUpdated: ReceivedRequest[] = new Array;
+  requestsNew: ReceivedRequest[] = new Array;
+  requestsSend: ReceivedRequest[] = new Array;
   requestsProcessing: ReceivedRequest[] = new Array;
   requestsDone: ReceivedRequest[] = new Array;
   previewSize: number = 60;
+  history: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private swapService: SwapService,
     private userService: UserService, private imageService: ImageService,
@@ -46,10 +50,13 @@ export class RequestsComponent implements OnInit {
   }
 
   getSwapRequestsByStatus(receivedRequest: ReceivedRequest) {
-     if (receivedRequest.status == 'NEW' || (receivedRequest.status == 'PROCESSING' && this.userId == receivedRequest.receivedFromId)) {
-       this.requestsNewAndUpdated.push(receivedRequest);
+     if (receivedRequest.status == 'NEW' && this.userId != receivedRequest.receivedFromId) {
+       this.requestsNew.push(receivedRequest);
      }
-     else if (receivedRequest.status == 'PROCESSING' && this.userId != receivedRequest.receivedFromId) {
+     else if (receivedRequest.status == 'NEW' && this.userId == receivedRequest.receivedFromId) {
+       this.requestsSend.push(receivedRequest);
+     }
+     else if (receivedRequest.status == 'PROCESSING') {
        this.requestsProcessing.push(receivedRequest);
      }
      else if (receivedRequest.status == 'DONE') {
@@ -103,7 +110,7 @@ export class RequestsComponent implements OnInit {
           message: "You reached a swap agreement!",
           okButtonText: "OK"
       }).then(() => {
-          this.router.navigate(['home']);
+          this.router.navigate(['/swap-requests/history/' + this.userId]);
       });
 
     }, errorResponse => {
@@ -123,7 +130,7 @@ export class RequestsComponent implements OnInit {
           message: "You have declined the swap request",
           okButtonText: "OK"
       }).then(() => {
-        this.router.navigate(['home']);
+        this.router.navigate(['/home']);
       });
 
     }, error => {

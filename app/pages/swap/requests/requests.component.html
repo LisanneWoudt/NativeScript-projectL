@@ -1,116 +1,120 @@
-<ActionBar class="action-bar">
-  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateToHome()"></NavigationButton>
-  <Label class="action-bar-title" text="All swap requests"></Label>
-</ActionBar>
+<TabView *ngIf="!showHistory">
+  <StackLayout *tabItem="{title: 'New'}">
+    <ListView [items]="requestsNew" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
+    <ng-template let-request="item" let-i="index">
+        <StackLayout class="list-group-item">
 
-<StackLayout class="page">
-  <TabView>
-    <StackLayout *tabItem="{title: 'New'}">
-      <ListView [items]="requestsNewAndUpdated" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
-      <ng-template let-request="item" let-i="index">
-          <StackLayout class="list-group-item">
+            <Label *ngIf="userId != request.receivedFromId" class="text-center font-weight-bold"
+              text="Swap request from {{ request.receivedFromUser }}:"></Label>
+            <Label *ngIf="userId == request.receivedFromId" class="text-center font-weight-bold"
+                text="Request send: "></Label>
 
-            <StackLayout *ngIf="request.status == 'NEW'">
-              <Label *ngIf="userId != request.receivedFromId" class="text-center font-weight-bold"
-                text="Swap request from {{ request.receivedFromUser }}:"></Label>
-              <Label *ngIf="userId == request.receivedFromId" class="text-center font-weight-bold"
-                  text="Request send: "></Label>
-
-              <Label class="text-center" text="{{ request.message }}" textWrap="true"></Label>
-              <StackLayout class="border gray">
-                <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-              </StackLayout>
-              <Button *ngIf="userId != request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
-                (tap)="pickSwapReturnGarment(request)" text="Check it out">
-              </Button>
-            </StackLayout>
-
-            <StackLayout *ngIf="request.status == 'PROCESSING'">
-              <Label *ngIf="userId == request.receivedFromId" class="text-center font-weight-bold"
-               text="Swap updated:"></Label>
-               <Label *ngIf="userId == request.receivedFromId" class="text-center"
-                [text]="request.messageInReturn" textWrap="true"></Label>
-
-              <StackLayout class="border green">
-                <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-                <Label class="text-center" text="{{userId == request.receivedFromId ? 'Garment selected by you' : 'Own garment'}}"></Label>
-              </StackLayout>
-              <Label class="verticalLine"></Label>
-              <StackLayout class="border gray">
-                <Image [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-                <Label class="text-center" text="Own garment'"></Label>
-              </StackLayout>
-
-              <Button class="btn btn-primary btn-rounded-lg btn-active"
-                (tap)="acceptRequest(request)" text="Agree on Swap">
-              </Button>
-              <Button class="btn btn-cancel btn-primary btn-rounded-lg"
-                (tap)="rejectRequest(request)" text="Reject request">
-              </Button>
-
-            </StackLayout>
-          </StackLayout>
-      </ng-template>
-      </ListView>
-      <StackLayout *ngIf="requestsNewAndUpdated?.length == 0">
-        <Label class="text-center font-weight-bold" text="No requests found"></Label>
-      </StackLayout>
-    </StackLayout>
-
-
-    <StackLayout *tabItem="{title: 'Awaiting'}">
-      <ListView [items]="requestsProcessing" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
-      <ng-template let-request="item" let-i="index">
-          <StackLayout class="list-group-item">
-
+            <Label class="text-center" text="{{ request.message }}" textWrap="true"></Label>
             <StackLayout class="border gray">
               <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-              <Label class="text-center" text="Own garment"></Label>
             </StackLayout>
-            <Label class="verticalLine"></Label>
-            <StackLayout class="border green">
-              <Image [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-              <Label class="text-center" text="Your selected return garment"></Label>
-            </StackLayout>
-             <Label class="text-center font-weight-bold" text="Awaiting confirmation from user"></Label>
-
-          </StackLayout>
-
-      </ng-template>
-      </ListView>
-      <StackLayout *ngIf="requestsProcessing?.length == 0">
-        <Label class="text-center font-weight-bold" text="No requests found"></Label>
-      </StackLayout>
-    </StackLayout>
-
-    <StackLayout *tabItem="{title: 'Done'}">
-      <ListView [items]="requestsDone" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
-      <ng-template let-request="item" let-i="index">
-          <StackLayout class="list-group-item">
-
-            <StackLayout class="{{userId == request.receivedFromId ? 'border green' : 'border gray' }}">
-              <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-              <Label class="text-center" text="{{userId == request.receivedFromId ? 'Garment selected by you' : 'Own garment'}}"></Label>
-            </StackLayout>
-            <Label class="verticalLine"></Label>
-            <StackLayout class="{{userId == request.receivedFromId ? 'border gray' : 'border green' }}">
-              <Image [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
-              <Label class="text-center" text="{{userId == request.receivedFromId ? 'Own garment' : 'Your selected return garment'}}"></Label>
-            </StackLayout>
-
-            <Button *ngIf="userId != request.receivedFromId"  class="btn btn-primary btn-rounded-lg btn-active"
-              (tap)="checkUserDetails(request.receivedFromId)" text="Check user details">
+            <Button *ngIf="userId != request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
+              (tap)="pickSwapReturnGarment(request)" text="Check it out">
             </Button>
+            <StackLayout *ngIf="requestsNew?.length != i+1" class="hr-dark m-30"></StackLayout>
+        </StackLayout>
+
+    </ng-template>
+    </ListView>
+    <StackLayout *ngIf="requestsNew?.length == 0">
+      <Label class="text-center font-weight-bold" text="No requests found"></Label>
+    </StackLayout>
+  </StackLayout>
+
+  <StackLayout *tabItem="{title: 'Matched'}">
+    <ListView [items]="requestsProcessing" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
+    <ng-template let-request="item" let-i="index">
+        <StackLayout class="list-group-item">
+
+            <Label class="text-center font-weight-bold"
+             text="New match:"></Label>
+             <Label *ngIf="userId == request.receivedFromId" class="text-center"
+              [text]="request.messageInReturn" textWrap="true"></Label>
+
+            <StackLayout class="border gray">
+              <GridLayout columns="*,*,*" rows="*,*">
+                <Image row="0" col="0" [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+                <Image row="0" col="1" src="res://swap_icon" [width]="40" [height]="40" stretch="aspectFit"></Image>
+                <Image row="0" col="2" [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+                <Label row="1" col="0" class="text-center" text="{{userId == request.receivedFromId ? 'Get' : 'Give'}}"></Label>
+                <Label row="1" col="2" class="text-center" text="{{userId == request.receivedFromId ? 'Give' : 'Get'}}"></Label>
+              </GridLayout>
+            </StackLayout>
+
             <Button *ngIf="userId == request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
-              (tap)="checkUserDetails(userId)" text="Check user details">
+              (tap)="acceptRequest(request)" text="Agree on Swap">
             </Button>
+            <Button *ngIf="userId == request.receivedFromId" class="btn btn-cancel btn-primary btn-rounded-lg"
+              (tap)="rejectRequest(request)" text="Reject request">
+            </Button>
+            <Label *ngIf="userId != request.receivedFromId" class="text-center font-weight-bold" text="Awaiting confirmation from user"></Label>
+            <StackLayout *ngIf="requestsProcessing?.length != i+1" class="hr-dark m-30"></StackLayout>
 
-          </StackLayout>
-      </ng-template>
-      </ListView>
-      <StackLayout *ngIf="requestsDone?.length == 0">
-        <Label class="text-center font-weight-bold" text="No requests found"></Label>
-      </StackLayout>
+        </StackLayout>
+    </ng-template>
+    </ListView>
+    <StackLayout *ngIf="requestsProcessing?.length == 0">
+      <Label class="text-center font-weight-bold" text="No requests found"></Label>
     </StackLayout>
-  </TabView>
+
+  </StackLayout>
+
+  <StackLayout *tabItem="{title: 'Send'}">
+    <ListView [items]="requestsSend" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
+      <ng-template let-request="item" let-i="index">
+        <StackLayout class="list-group-item">
+
+          <StackLayout *ngIf="request.status == 'NEW' && userId == request.receivedFromId">
+            <Label class="text-center font-weight-bold" text="Request send: "></Label>
+            <Label class="text-center" text="{{ request.message }}" textWrap="true"></Label>
+            <StackLayout class="border gray">
+              <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
+            </StackLayout>
+          </StackLayout>
+          <StackLayout *ngIf="requestsSend?.length != i+1" class="hr-dark m-30"></StackLayout>
+
+        </StackLayout>
+      </ng-template>
+    </ListView>
+    <StackLayout *ngIf="requestsSend?.length == 0">
+      <Label class="text-center font-weight-bold" text="No requests found"></Label>
+    </StackLayout>
+  </StackLayout>
+
+</TabView>
+
+<StackLayout *ngIf="showHistory">
+  <ListView [items]="requestsDone" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
+  <ng-template let-request="item" let-i="index">
+      <StackLayout class="list-group-item">
+
+        <StackLayout class="border gray">
+          <GridLayout columns="*,*,*" rows="*,*">
+            <Image row="0" col="0" [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+            <Image row="0" col="1" src="res://swap_icon" [width]="40" [height]="40" stretch="aspectFit"></Image>
+            <Image row="0" col="2" [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+            <Label row="1" col="0" class="text-center" text="{{userId == request.receivedFromId ? 'Got' : 'Gave'}}"></Label>
+            <Label row="1" col="2" class="text-center" text="{{userId == request.receivedFromId ? 'Gave' : 'Got'}}"></Label>
+          </GridLayout>
+        </StackLayout>
+
+
+        <Button *ngIf="userId != request.receivedFromId"  class="btn btn-primary btn-rounded-lg btn-active"
+          (tap)="checkUserDetails(request.receivedFromId)" text="Check user details">
+        </Button>
+        <Button *ngIf="userId == request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
+          (tap)="checkUserDetails(userId)" text="Check user details">
+        </Button>
+
+      </StackLayout>
+  </ng-template>
+  </ListView>
+  <StackLayout *ngIf="requestsDone?.length == 0">
+    <Label class="text-center font-weight-bold" text="No requests found"></Label>
+  </StackLayout>
 </StackLayout>

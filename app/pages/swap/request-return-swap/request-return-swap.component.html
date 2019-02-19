@@ -3,25 +3,23 @@
   <Label class="action-bar-title" text="Swap return request"></Label>
 </ActionBar>
 
-<StackLayout class="page">
+  <GridLayout class="page" rows="*,*">
 
-  <StackLayout class="border gray">
-    <Image class="image-padding" [src]="garment.image" [width]="thumbSize" [height]="thumbSize"
-     stretch="aspectFit" row="0"></Image>
-     <Label class="text-center" text="Your garment"></Label>
-  </StackLayout>
-  <Label class="verticalLine"></Label>
-  <StackLayout class="border green">
-    <Image class="image-padding" [src]="garmentInReturn.image" [width]="previewSize" [height]="previewSize"
-    stretch="aspectFit" row="0"></Image>
-    <Label row="1" class="text-center font-weight-bold" [text]="garmentInReturn.name"></Label>
-    <Label row="2" class="text-center" [text]="garmentInReturn.brand"></Label>
-    <Label row="3" class="text-center" [text]="garmentInReturn.size"></Label>
-  </StackLayout>
+    <StackLayout row="0" class="border gray">
+      <GridLayout columns="*,*,*" rows="*,*">
+        <Image row="0" col="0" [src]="garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+        <Image row="0" col="1" src="res://swap_icon" [width]="40" [height]="40" stretch="aspectFit"></Image>
+        <Image row="0" col="2" [src]="garmentInReturn.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+        <Label row="1" col="0" class="text-center" text="Give"></Label>
+        <Label row="1" col="2" class="text-center" text="Get"></Label>
+      </GridLayout>
+      <StackLayout><Label text="teeeest"></Label></StackLayout>
+    </StackLayout>
 
-  <StackLayout class="form">
-    <Label text="Enter personal message:" class="text-center"></Label>
-    <TextField autocorrect="false" class="input input-rounded m-t-10" [(ngModel)]="swapRequest.messageInReturn"></TextField>
-    <Button class="btn btn-primary btn-rounded-lg btn-active" text="Send swap return request" (tap)="sendSwapRequest()"></Button>
-   </StackLayout>
-</StackLayout>
+    <StackLayout row="1" class="form">
+      <Label text="Enter personal message:" class="text-center"></Label>
+      <TextField autocorrect="false" class="input input-rounded m-t-10" [(ngModel)]="swapRequest.messageInReturn"></TextField>
+      <Button class="btn btn-primary btn-rounded-lg btn-active" text="Send swap return request" (tap)="sendSwapRequest()"></Button>
+    </StackLayout>
+
+  </GridLayout>
