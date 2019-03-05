@@ -6,7 +6,7 @@ export class ReceivedRequest {
   message: string;
   status: string;
   userId: number;
-  received: boolean;
+  statusUpdated: boolean;
   receivedFromId: number;
   receivedFromUser: string;
   garmentInReturnId: number;

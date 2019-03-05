@@ -63,7 +63,6 @@ export class RequestSwapComponent implements OnInit {
       this.swapRequest = swapRequest;
       this.swapRequest.garmentId = this.garmentId;
       this.currentUser = this.dataService.getMockUser();
-      this.swapRequest.received = false;
       this.swapRequest.receivedFromId = this.currentUser.id;
       this.swapRequest.status = 'NEW';
 

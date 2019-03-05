@@ -27,11 +27,12 @@
               <StackLayout orientation="horizontal">
 
                 <Button class="btn btn-primary btn-lg btn-active" text="Start swapping" (tap)="navigateToAllGarments()"></Button>
-                <Button class="btn btn-primary btn-lg btn-active" text="Add Garment" (tap)="navigateToAllGarments()"></Button>
+                <Button class="btn btn-primary btn-lg btn-active" text="Add Garment" (tap)="navigateToAddGarment()"></Button>
 
                </StackLayout>
-               <Button class="btn btn-primary btn-lg btn-active {{newRequests ? 'font-weight-bold' : 'font-weight-bold'}}" text="Open requests (3)" (tap)="navigateToAddGarment()"></Button>
-
+               <Label *ngIf="swapRequestNewCount != 0" class="text-danger text-center" text="{{swapRequestNewCount}} new request!"></Label>
+               <Button class="btn btn-primary btn-lg btn-active {{newRequests ? 'font-weight-bold' : 'font-weight-bold'}}"
+               text="Open requests ({{swapRequestCount + swapRequestNewCount}})" (tap)="navigateToOpenSwapRequests()"></Button>
 
 
             <Label text="&#xA;"></Label>

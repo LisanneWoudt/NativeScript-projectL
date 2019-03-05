@@ -54,11 +54,11 @@ export class GarmentOverviewComponent implements OnInit {
       Promise.all(this.promises)
       .then(res => {
       }, error => {
-        console.log('Error:' + error);
+        console.log('Error in getAllGarments:' + error);
         this.router.navigate(['/error']);
       })
     }, errorResponse => {
-      console.log('Error:' + errorResponse);
+      console.log('Error in getAllGarments(2):' + errorResponse);
       this.router.navigate(['/error']);
     });
   }
@@ -92,7 +92,7 @@ export class GarmentOverviewComponent implements OnInit {
           return res;
         },
         msg => {
-         console.log('Error:' + msg);
+         console.log('Error in downloadImage:' + msg);
          this.router.navigate(['/error']);
         }
       )

@@ -44,7 +44,6 @@ export class InboxComponent implements AfterViewInit, OnInit {
 
   openMessage(args) {
     console.log(args.index);
-    this.requests[args.index].received = true;
   }
 
   navigateBack() {

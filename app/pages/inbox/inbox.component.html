@@ -23,8 +23,8 @@
                 <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
                 <StackLayout class="list-group-item">
                   <StackLayout class="hr-light m-10"></StackLayout>
-                    <Label [class]="request.received ? 'underline' : 'boldText underline'" text="New swap request" ></Label>
-                    <Label [class]="request.received ? 'none' : 'boldText'" [text]="request.message"></Label>
+                    <Label text="New swap request" ></Label>
+                    <Label [text]="request.message"></Label>
                 </StackLayout>
             </ng-template>
             </ListView>

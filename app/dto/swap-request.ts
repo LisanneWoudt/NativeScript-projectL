@@ -3,7 +3,7 @@ export class SwapRequest {
   garmentId: number;
   message: string;
   userId: number;
-  received: boolean;
+  statusUpdated: boolean;
   receivedFromId: number;
   status: string;
   garmentInReturnId: number;

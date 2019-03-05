@@ -45,7 +45,7 @@ export class RequestsComponent implements OnInit {
       this.swapRequests = data;
       this.getExtraRequestData();
     }, errorResponse => {
-      console.log("ERROR");
+      console.log("ERROR in getExtraRequestData");
       })
   }
 
@@ -90,7 +90,6 @@ export class RequestsComponent implements OnInit {
          })
        }
     })
-
     this.getSwapRequestsByStatus(item);
   });
   }
@@ -137,6 +136,32 @@ export class RequestsComponent implements OnInit {
       console.log("ERROR");
       this.router.navigate(['/error']);
     });
+  }
+
+  tabIndexChanged(event: any) {
+    if (event.oldIndex == 0) {
+      for (let request of this.requestsNew) {
+        if (request.statusUpdated == true) {
+          this.updateSwapRequestStatusBool(request.id);
+        }
+      }
+    }
+    else if (event.oldIndex == 1) {
+      for (let request of this.requestsProcessing) {
+        if ((this.userId == request.receivedFromId) && request.statusUpdated == true) {
+          this.updateSwapRequestStatusBool(request.id);
+        }
+      }
+    }
+  }
+
+  updateSwapRequestStatusBool(swapRequestId: number) {
+    this.swapService.updateSwapRequestStatusBool(swapRequestId).subscribe(response => {
+       // no action
+    }, error => {
+        console.log("ERROR in updating swapRequestStatusBool");
+        this.router.navigate(['/error']);
+      });
   }
 
   checkUserDetails(userId: number) {

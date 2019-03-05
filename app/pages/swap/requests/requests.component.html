@@ -1,10 +1,10 @@
-<TabView *ngIf="!showHistory">
+<TabView *ngIf="!showHistory" (selectedIndexChanged)="tabIndexChanged($event)" toggleNavButton>
   <StackLayout *tabItem="{title: 'New'}">
     <ListView [items]="requestsNew" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
     <ng-template let-request="item" let-i="index">
         <StackLayout class="list-group-item">
 
-            <Label *ngIf="userId != request.receivedFromId" class="text-center font-weight-bold"
+            <Label *ngIf="userId != request.receivedFromId" class="{{request.statusUpdated ? 'text-danger' : '' }} text-center font-weight-bold"
               text="Swap request from {{ request.receivedFromUser }}:"></Label>
             <Label *ngIf="userId == request.receivedFromId" class="text-center font-weight-bold"
                 text="Request send: "></Label>
@@ -30,8 +30,8 @@
     <ListView [items]="requestsProcessing" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
     <ng-template let-request="item" let-i="index">
         <StackLayout class="list-group-item">
-
-            <Label class="text-center font-weight-bold"
+            <Label [text]="tabMatchedTitle"></Label>
+            <Label class="{{request.statusUpdated ? 'text-danger' : '' }} text-center font-weight-bold"
              text="New match:"></Label>
              <Label *ngIf="userId == request.receivedFromId" class="text-center"
               [text]="request.messageInReturn" textWrap="true"></Label>
