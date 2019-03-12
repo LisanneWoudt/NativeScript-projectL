@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,16 +9,18 @@ import { Router } from '@angular/router';
 
 export class OpenRequestsComponent implements OnInit {
 
+  @ViewChild('appRequests') child;
+
   showHistory: boolean = false;
 
   constructor(private router: Router) { }
 
   ngOnInit(){
-    
+
   }
 
   navigateToHome() {
-    this.router.navigate(['/home']);
+    this.child.navigateToHome();
   }
 
 }

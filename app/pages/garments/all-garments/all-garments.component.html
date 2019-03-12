@@ -10,7 +10,7 @@
       <Label text="&#xA;"></Label>
       <Label class="filterdrawer-header" text="Gender"></Label>
       <StackLayout *ngFor="let gender of genders">
-          <CheckBox text="{{ gender }}" checked="false" (tap)=child.filterGarmentsOnSize(gender) fillColor="#006968"></CheckBox>
+          <CheckBox text="{{ gender }}" checked="false" (tap)=child.filterGarmentsOnGender(gender) fillColor="#006968"></CheckBox>
       </StackLayout>
 
       <Label text="&#xA;"></Label>

@@ -1,4 +1,4 @@
-<TabView *ngIf="!showHistory" (selectedIndexChanged)="tabIndexChanged($event)" toggleNavButton>
+<TabView *ngIf="!showHistory" (selectedIndexChanged)="tabIndexChanged($event, false)" toggleNavButton>
   <StackLayout *tabItem="{title: 'New'}">
     <ListView [items]="requestsNew" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
     <ng-template let-request="item" let-i="index">
@@ -68,16 +68,26 @@
     <ListView [items]="requestsSend" (itemTap)="openMessage($event)" class="list-group" separatorColor="white">
       <ng-template let-request="item" let-i="index">
         <StackLayout class="list-group-item">
-
-          <StackLayout *ngIf="request.status == 'NEW' && userId == request.receivedFromId">
+          <StackLayout>
             <Label class="text-center font-weight-bold" text="Request send: "></Label>
-            <Label class="text-center" text="{{ request.message }}" textWrap="true"></Label>
-            <StackLayout class="border gray">
+            <Label *ngIf="request.status == 'NEW'" class="text-center" text="{{ request.message }}" textWrap="true"></Label>
+            <Label *ngIf="request.status == 'PROCESSING'" class="text-center" text="{{ request.messageInReturn }}" textWrap="true"></Label>
+
+            <StackLayout *ngIf="request.status == 'NEW'" class="border gray">
               <Image [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"></Image>
             </StackLayout>
+            <StackLayout *ngIf="request.status == 'PROCESSING'" class="border gray">
+              <GridLayout columns="*,*,*" rows="*,*">
+                <Image row="0" col="0" [src]="request.garmentImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+                <Image row="0" col="1" src="res://swap_icon" [width]="40" [height]="40" stretch="aspectFit"></Image>
+                <Image row="0" col="2" [src]="request.garmentInReturnImage" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+                <Label row="1" col="0" class="text-center" text="{{userId == request.receivedFromId ? 'Get' : 'Give'}}"></Label>
+                <Label row="1" col="2" class="text-center" text="{{userId == request.receivedFromId ? 'Give' : 'Get'}}"></Label>
+              </GridLayout>
+            </StackLayout>
+
           </StackLayout>
           <StackLayout *ngIf="requestsSend?.length != i+1" class="hr-dark m-30"></StackLayout>
-
         </StackLayout>
       </ng-template>
     </ListView>

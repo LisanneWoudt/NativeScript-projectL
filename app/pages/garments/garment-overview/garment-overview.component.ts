@@ -18,6 +18,7 @@ export class GarmentOverviewComponent implements OnInit {
   garments: Garment[] = new Array;
   promises: Array<any> = new Array;
   selectedSizes: String[] = new Array;
+  selectedGender: String[] = new Array;
 
   imageSrc: any;
   //Thumbsize/previewSize magically makes spinner on item stop when loaded
@@ -79,8 +80,24 @@ export class GarmentOverviewComponent implements OnInit {
     }
   }
 
+  filterGarmentsOnGender(gender: string) {
+    gender = gender.toUpperCase();
+    if (!gender || this.selectedGender.includes(gender)) {
+      this.selectedGender = this.selectedGender.filter(obj => obj !== gender);
+      if (this.selectedGender.length == 0) {
+        this.garmentFilter = {};
+      }
+      else {
+       this.garmentFilter = {gender: this.selectedGender};
+      }
+    }
+    else {
+      this.selectedGender.push(gender);
+      this.garmentFilter = {gender: this.selectedGender};
+    }
+  }
+
   filterGarmentsOnUser(userId: number) {
-    console.log("filter garments on userid " + userId);
     this.garmentFilter = {userId: [userId]};
   }
 

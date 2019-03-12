@@ -43,6 +43,7 @@ export class RequestsComponent implements OnInit {
   getSwapRequests() {
     this.swapService.getUserSwapRequests(this.userId).subscribe(data => {
       this.swapRequests = data;
+      this.sortDataByDate();
       this.getExtraRequestData();
     }, errorResponse => {
       console.log("ERROR in getExtraRequestData");
@@ -56,8 +57,11 @@ export class RequestsComponent implements OnInit {
      else if (receivedRequest.status == 'NEW' && this.userId == receivedRequest.receivedFromId) {
        this.requestsSend.push(receivedRequest);
      }
-     else if (receivedRequest.status == 'PROCESSING') {
+     else if (receivedRequest.status == 'PROCESSING' && this.userId == receivedRequest.receivedFromId) {
        this.requestsProcessing.push(receivedRequest);
+     }
+     else if (receivedRequest.status == 'PROCESSING' && this.userId != receivedRequest.receivedFromId) {
+       this.requestsSend.push(receivedRequest);
      }
      else if (receivedRequest.status == 'DONE') {
        this.requestsDone.push(receivedRequest);
@@ -138,15 +142,15 @@ export class RequestsComponent implements OnInit {
     });
   }
 
-  tabIndexChanged(event: any) {
-    if (event.oldIndex == 0) {
+  tabIndexChanged(event: any, leavingPage: boolean) {
+    if (leavingPage || event.oldIndex == 0) {
       for (let request of this.requestsNew) {
         if (request.statusUpdated == true) {
           this.updateSwapRequestStatusBool(request.id);
         }
       }
     }
-    else if (event.oldIndex == 1) {
+    if (leavingPage || event.oldIndex == 1) {
       for (let request of this.requestsProcessing) {
         if ((this.userId == request.receivedFromId) && request.statusUpdated == true) {
           this.updateSwapRequestStatusBool(request.id);
@@ -168,7 +172,14 @@ export class RequestsComponent implements OnInit {
     console.log(userId);
   }
 
+  sortDataByDate() {
+     return this.swapRequests.sort((a, b) => {
+     return <any>new Date(b.dateUpdated) - <any>new Date(a.dateUpdated);
+   });
+  }
+
   navigateToHome() {
+    this.tabIndexChanged(null, true);
     this.router.navigate(['/home']);
   }
 }

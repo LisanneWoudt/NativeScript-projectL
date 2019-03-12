@@ -16,7 +16,7 @@ import { OpenRequestsComponent } from "./pages/swap/open-requests/open-requests.
 import { HistoryComponent } from "./pages/swap/history/history.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "", redirectTo: "/garments/all", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },

@@ -12,4 +12,7 @@ export class ReceivedRequest {
   garmentInReturnId: number;
   garmentInReturnImage: any;
   garmentImage: any;
+  dateUpdated: Date;
+  gender: string;
+  garmentType: string;
 }
