@@ -19,6 +19,12 @@
           <CheckBox text="{{ size }}" checked="false" (tap)=child.filterGarmentsOnSize(size) fillColor="#006968"></CheckBox>
       </StackLayout>
 
+      <Label text="&#xA;"></Label>
+      <Label class="filterdrawer-header" text="Type"></Label>
+      <StackLayout *ngFor="let type of types">
+          <CheckBox text="{{ type }}" checked="false" (tap)=child.filterGarmentsOnType(type) fillColor="#006968"></CheckBox>
+      </StackLayout>
+
     </StackLayout>
 
     <StackLayout tkMainContent>

@@ -14,7 +14,7 @@ export class LoginService {
 
   login(user: User): Observable<any> {
     console.log(user);
-    return this.http.post("http://192.168.2.106:8080/user/login", user, httpOptions);
+    return this.http.post("http://192.168.2.154:8080/user/login", user, httpOptions);
     //
 //    return this.http.get(this.url + '/user/login', httpOptions);
   }

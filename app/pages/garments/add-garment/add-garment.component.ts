@@ -52,7 +52,6 @@ export class AddGarmentComponent implements OnInit {
     private imageService: ImageService, private router: Router) {
   }
 
-
   ngOnInit() {
     this.getMockPant();
   }
@@ -160,8 +159,6 @@ export class AddGarmentComponent implements OnInit {
         task = this.imageService.multipartUpload(data.toString(), this.imageString);
         task.on("complete", data => {
           this.processing = false;
-          console.log("rEADY YA");
-          console.log(data);
           this.responseSuccess();
         });
         task.on("error", data => {

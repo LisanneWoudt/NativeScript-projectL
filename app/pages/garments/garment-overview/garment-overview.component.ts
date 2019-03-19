@@ -17,18 +17,25 @@ export class GarmentOverviewComponent implements OnInit {
 
   garments: Garment[] = new Array;
   promises: Array<any> = new Array;
-  selectedSizes: String[] = new Array;
-  selectedGender: String[] = new Array;
+  allSizes: String[] = ['XS', 'S', 'M', 'L', 'XL'];
+  allGenders: String[] = ['MAN', 'WOMAN'];
+  allTypes: String[] = ['SHIRT', 'PANT'];
+  selectedSizes: String[] = this.allSizes;
+  selectedGender: String[] = this.allGenders;
+  selectedTypes: String[] = this.allTypes;
+  lastSelectedGender: string;
+  lastSelectedSize: string;
+  lastSelectedType: string;
 
   imageSrc: any;
-  //Thumbsize/previewSize magically makes spinner on item stop when loaded
-  thumbSize: number = 120;
+  //PreviewSize magically makes spinner on item stop when loaded
   previewSize: number = 120;
   count: number;
   processing: boolean;
   userId: number;
   garmentFilter: any = {};
   swapRequest: SwapRequest;
+
 
   @Input('garmentsUrl') garmentsUrl: string;
   @Input('garmentId') swapGarmentId: number = 0;
@@ -65,36 +72,49 @@ export class GarmentOverviewComponent implements OnInit {
   }
 
   filterGarmentsOnSize(size: string) {
-    if (!size || this.selectedSizes.includes(size)) {
-      this.selectedSizes = this.selectedSizes.filter(obj => obj !== size);
-      if (this.selectedSizes.length == 0) {
-        this.garmentFilter = {};
-      }
-      else {
-       this.garmentFilter = {size: this.selectedSizes};
-      }
-    }
-    else {
-      this.selectedSizes.push(size);
-      this.garmentFilter = {size: this.selectedSizes};
-    }
+    this.filterGarments(size, 'size', this.selectedSizes, this.allSizes, this.lastSelectedSize);
   }
-
   filterGarmentsOnGender(gender: string) {
     gender = gender.toUpperCase();
-    if (!gender || this.selectedGender.includes(gender)) {
-      this.selectedGender = this.selectedGender.filter(obj => obj !== gender);
-      if (this.selectedGender.length == 0) {
-        this.garmentFilter = {};
-      }
-      else {
-       this.garmentFilter = {gender: this.selectedGender};
+    this.filterGarments(gender, 'gender', this.selectedGender, this.allGenders, this.lastSelectedGender);
+  }
+  filterGarmentsOnType(type: string) {
+    this.filterGarments(type, 'garmentType', this.selectedTypes, this.allTypes, this.lastSelectedType);
+  }
+
+  filterGarments(filterKey: string, filterOn: string, selectedList: Array<String>,
+    allList: Array<String>, lastSelected: string) {
+
+    if (selectedList.length == allList.length && !lastSelected) {
+      selectedList = [];
+    }
+    if (selectedList.includes(filterKey)) {
+      selectedList = selectedList.filter(obj => obj !== filterKey);
+      if (selectedList.length == 0) {
+        selectedList = allList;
+        lastSelected = null;
       }
     }
     else {
-      this.selectedGender.push(gender);
-      this.garmentFilter = {gender: this.selectedGender};
+      selectedList.push(filterKey);
+      lastSelected = filterKey;
     }
+
+    if(filterOn == 'size') {
+      this.selectedSizes = selectedList;
+      this.lastSelectedSize = lastSelected;
+    }
+    if(filterOn == 'gender') {
+      this.selectedGender = selectedList;
+      this.lastSelectedGender = lastSelected;
+    }
+    if(filterOn == 'garmentType') {
+      this.selectedTypes = selectedList;
+      this.lastSelectedType = lastSelected;
+    }
+
+    this.garmentFilter = {'size': this.selectedSizes, 'gender': this.selectedGender,
+      'garmentType': this.selectedTypes}
   }
 
   filterGarmentsOnUser(userId: number) {
@@ -116,9 +136,11 @@ export class GarmentOverviewComponent implements OnInit {
    }
 
    toGarmentDetail(garmentId: number) {
-     this.swapRequest = this.dataService.getSwapRequest();
-     this.swapRequest.garmentInReturnId = garmentId;
-     this.dataService.setSwapRequest(this.swapRequest);
+     if (this.swapRequest) {
+       this.swapRequest = this.dataService.getSwapRequest();
+       this.swapRequest.garmentInReturnId = garmentId;
+       this.dataService.setSwapRequest(this.swapRequest);
+     }
      this.router.navigate(['/garment/', garmentId])
    }
 

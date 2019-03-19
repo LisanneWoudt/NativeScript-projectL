@@ -3,6 +3,7 @@ import {Garment} from '../../../dto/garment';
 import {Router, ActivatedRoute} from '@angular/router';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
+import {DataService} from '../../../shared/services/data.service';
 
 @Component({
     selector: "app-garment-detail",
@@ -15,6 +16,7 @@ export class GarmentDetailComponent implements OnInit {
   private sub: any;
   garment: Garment;
   garmentId: number;
+  garmentSwapId: number;
 
   imageSrc: any;
   //Thumbsize/previewSize magically makes spinner on item stop when loaded
@@ -22,7 +24,8 @@ export class GarmentDetailComponent implements OnInit {
   previewSize: number = 200;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private garmentService: GarmentService, private imageService: ImageService) { }
+    private garmentService: GarmentService, private imageService: ImageService,
+    private dataService: DataService) { }
 
   ngOnInit() {
 
@@ -31,7 +34,6 @@ export class GarmentDetailComponent implements OnInit {
      });
 
      this.garmentService.getGarment(this.garmentId).subscribe(data => {
-       console.log(data);
        this.garment = data;
        this.checkSize();
 
@@ -47,6 +49,12 @@ export class GarmentDetailComponent implements OnInit {
            }
          )
      })
+
+     if (this.dataService.getSwapRequest()) {
+       this.garmentSwapId = this.dataService.getSwapRequest().id;
+       console.log('garment swap id: ' + this.garmentSwapId);
+     }
+
   }
 
   checkSize() {

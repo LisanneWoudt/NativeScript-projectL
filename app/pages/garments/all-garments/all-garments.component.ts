@@ -19,6 +19,7 @@ export class AllGarmentsComponent implements OnInit {
   garmentsUrl: string = 'all/';
   sizes = ["XS", "S", "M", "L", "XL"];
   genders = ["Woman", "Man"];
+  types = ["SHIRT", "PANT"];
 
   constructor(private router: Router) { }
 
