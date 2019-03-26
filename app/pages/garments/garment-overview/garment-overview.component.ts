@@ -17,7 +17,7 @@ export class GarmentOverviewComponent implements OnInit {
 
   garments: Garment[] = new Array;
   promises: Array<any> = new Array;
-  allSizes: String[] = ['XS', 'S', 'M', 'L', 'XL'];
+  allSizes: String[] = ['XS', 'S', 'M', 'L', 'XL', '27', '28', '30'];
   allGenders: String[] = ['MAN', 'WOMAN'];
   allTypes: String[] = ['SHIRT', 'PANT'];
   selectedSizes: String[] = this.allSizes;
@@ -122,7 +122,7 @@ export class GarmentOverviewComponent implements OnInit {
   }
 
   search(garmentId: number, int: number) {
-    this.imageService.downloadImage(garmentId).then(
+    this.imageService.downloadCompressedImage(garmentId).then(
         res => {
           this.garments[int].image = res;
           this.imageSrc = res;

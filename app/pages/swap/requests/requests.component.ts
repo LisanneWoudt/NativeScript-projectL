@@ -74,7 +74,7 @@ export class RequestsComponent implements OnInit {
     this.userService.getUser(item.receivedFromId).subscribe(data => {
       item.receivedFromUser = data.name;
 
-      this.imageService.downloadImage(item.garmentId).then(
+      this.imageService.downloadCompressedImage(item.garmentId).then(
         res => {
           item.garmentImage = res;
           return res;
@@ -84,7 +84,7 @@ export class RequestsComponent implements OnInit {
         })
 
      if (item.garmentInReturnId != null) {
-       this.imageService.downloadImage(item.garmentInReturnId).then(
+       this.imageService.downloadCompressedImage(item.garmentInReturnId).then(
          res => {
            item.garmentInReturnImage = res;
            return res;

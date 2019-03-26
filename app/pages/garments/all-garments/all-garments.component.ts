@@ -17,7 +17,7 @@ export class AllGarmentsComponent implements OnInit {
   drawer: RadSideDrawer;
 
   garmentsUrl: string = 'all/';
-  sizes = ["XS", "S", "M", "L", "XL"];
+  sizes = ['XS', 'S', 'M', 'L', 'XL', '27', '28', '30'];
   genders = ["Woman", "Man"];
   types = ["SHIRT", "PANT"];
 

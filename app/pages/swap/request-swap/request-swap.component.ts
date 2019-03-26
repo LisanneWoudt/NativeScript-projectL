@@ -40,7 +40,7 @@ export class RequestSwapComponent implements OnInit {
     this.garmentService.getGarment(id).subscribe(data => {
       console.log(data);
       this.garment = data;
-      this.imageService.downloadImage(this.garmentId).then(
+      this.imageService.downloadCompressedImage(this.garmentId).then(
           res => {
             console.log('success');
             this.garment.image = res;

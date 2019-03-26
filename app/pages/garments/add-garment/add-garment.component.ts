@@ -1,8 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Garment} from '../../../dto/garment';
-import {Pant} from '../../../dto/pant';
 import { User } from '../../../dto/user';
-import { Shirt } from '../../../dto/shirt';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {DataService} from '../../../shared/services/data.service';
 import {ImageService} from '../../../shared/services/image.service';
@@ -25,9 +23,7 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 
 export class AddGarmentComponent implements OnInit {
 
- garment: Garment = new Garment();
- pant: Pant = new Pant();
- shirt: Shirt = new Shirt();
+ garment: Garment = new Garment()
  currentUser: User = new User();
  selectedIndex: number;
  categories: String[] = ["Pant", "Shirt"];
@@ -53,18 +49,16 @@ export class AddGarmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getMockPant();
+    this.getMockGarment();
   }
 
-  getMockPant() {
+  getMockGarment() {
     this.categorySelected = true;
     this.pantSelected = true;
     this.selectedIndex = 0;
     this.garment.name = "nieuwe broek";
     this.garment.brand ="Vero Moda";
     this.garment.userId = 1;
-    this.pant.waistSize = 27;
-    this.pant.waistLength = 34;
   }
 
   getImage() {
@@ -119,14 +113,14 @@ export class AddGarmentComponent implements OnInit {
     }
   }
 
-  addGarment(garment: Garment, pant: Pant, shirt: Shirt) {
+  addGarment(garment: Garment) {
     if (!this.shirtSelected && !this.pantSelected) {
       alert({title: "Type missing",
         message: "Please select a garment type",
         okButtonText: "Ok"});
       return;
     }
-    if (!this.checkFormFilled(garment, pant, shirt)) {
+    if (!this.checkFormFilled(garment)) {
       alert({title: "Field(s) empty",
         message: "Please fill all input fields",
         okButtonText: "Ok"});
@@ -135,28 +129,21 @@ export class AddGarmentComponent implements OnInit {
 
     this.currentUser = this.dataService.getMockUser();
 
-    if (this.pantSelected == true) {
-      this.pant.name = garment.name;
-      this.pant.brand = garment.brand;
-      this.pant.userId = this.currentUser.id;
-      this.pant.waistSize = pant.waistSize;
-      this.pant.waistLength = pant.waistLength;
-      console.log(this.pant);
+    this.garment = garment;
+    if (this.pantSelected) {
+      this.garment.garmentType = 'PANT';
     }
-    else if (this.shirtSelected) {
-        this.shirt.name = garment.name;
-        this.shirt.brand = garment.brand;
-        this.shirt.userId = this.currentUser.id;
-        this.shirt.size = shirt.size;
-        console.log(this.shirt);
+    else {
+      this.garment.garmentType = 'SHIRT';
     }
+
     this.processing = true;
 
-    this.garmentService.saveGarment(this.pant, this.shirt)
+    this.garmentService.saveGarment(this.garment)
       .subscribe(data => {
 
         let task: bghttp.Task;
-        task = this.imageService.multipartUpload(data.toString(), this.imageString);
+        task = this.imageService.multipartUpload(data.id.toString(), this.imageString);
         task.on("complete", data => {
           this.processing = false;
           this.responseSuccess();
@@ -169,18 +156,12 @@ export class AddGarmentComponent implements OnInit {
     });
   }
 
-  checkFormFilled(garment: Garment, pant: Pant, shirt: Shirt) {
-    if (!garment.name || !garment.brand || !this.imageString) {
+  checkFormFilled(garment: Garment) {
+    if (!garment.name || !garment.brand || !this.imageString || !garment.size) {
       return false;
     }
-    if (this.shirtSelected) {
-      if (!shirt.size) {
-        console.log(shirt);
-        return false;
-      }
-    }
-    else if (this.pantSelected) {
-      if (!pant.waistSize || !pant.waistLength) {
+    if (this.pantSelected) {
+      if (!garment.length_size) {
         return false;
       }
     }

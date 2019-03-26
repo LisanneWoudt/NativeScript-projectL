@@ -19,12 +19,11 @@
        <TextField class="input-field" [isEnabled]="!processing" row="1" hint="Name" [(ngModel)]="garment.name"
          autocorrect="false" autocapitalizationType="none"></TextField>
        <TextField class="input-field" [isEnabled]="!processing" row="2" hint="Brand" [(ngModel)]="garment.brand"></TextField>
-       <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="3" hint="Waist size" [(ngModel)]="pant.waistSize"></TextField>
-       <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="pant.waistLength"></TextField>
-       <TextField class="input-field" [isEnabled]="!processing" *ngIf="shirtSelected" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="shirt.size"></TextField>
+       <TextField class="input-field" [isEnabled]="!processing" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="garment.size"></TextField>
+       <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="garment.length_size"></TextField>
        <Image [isEnabled]="!processing" row="5" [src]="imageSrc" *ngIf="isSingleMode" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
        <Button [isEnabled]="!processing" row="6" class="btn btn-outline btn-rounded-lg btn-active" text="Upload image" (tap)="getImage()"></Button>
-       <Button [isEnabled]="!processing" row="7" class="btn btn-primary btn-rounded-lg btn-active" text="Add garment" *ngIf="busy" (tap)="addGarment(garment, pant, shirt)"></Button>
+       <Button [isEnabled]="!processing" row="7" class="btn btn-primary btn-rounded-lg btn-active" text="Add garment" *ngIf="busy" (tap)="addGarment(garment)"></Button>
 
     </GridLayout>
 

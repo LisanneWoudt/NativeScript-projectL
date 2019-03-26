@@ -3,11 +3,12 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
+const httpModule = require("http");
 
 @Injectable()
 export class ImageService {
 
-    baseUrl: string = 'http://192.168.2.154:8080/images/';
+    baseUrl: string = 'http://192.168.2.180:8080/images/';
 
     constructor(private http: HttpClient) {}
 
@@ -34,7 +35,10 @@ export class ImageService {
   }
 
   downloadImage(garmentId: number) {
-    const httpModule = require("http");
-    return httpModule.getImage(this.baseUrl + "download/compressed/" + garmentId);
+    return httpModule.getImage(this.baseUrl + "download/" + garmentId);
+  }
+
+  downloadCompressedImage(garmentId: number) {
+    return httpModule.getImage(this.baseUrl + "download/compressed/" + garmentId)
   }
 }
