@@ -6,6 +6,7 @@ import { ErrorComponent } from "./pages/error/error.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
+import { EditGarmentComponent } from "./pages/garments/edit-garment/edit-garment.component";
 import { AllGarmentsComponent } from "./pages/garments/all-garments/all-garments.component";
 import { RequestSwapComponent } from "./pages/swap/request-swap/request-swap.component";
 import { GarmentDetailComponent} from "./pages/garments/garment-detail/garment-detail.component";
@@ -16,11 +17,12 @@ import { OpenRequestsComponent } from "./pages/swap/open-requests/open-requests.
 import { HistoryComponent } from "./pages/swap/history/history.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/garments/all", pathMatch: "full" },
+    { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "garments/add", component: AddGarmentComponent},
+    { path: "garments/edit", component: EditGarmentComponent},
     { path: "garments/all", component: AllGarmentsComponent},
     { path: "swap-request/:id", component: RequestSwapComponent},
     { path: "swap-return-request", component: RequestReturnSwapComponent},

@@ -8,7 +8,7 @@ const httpModule = require("http");
 @Injectable()
 export class ImageService {
 
-    baseUrl: string = 'http://192.168.2.180:8080/images/';
+    baseUrl: string = 'http://192.168.2.21:8080/images/';
 
     constructor(private http: HttpClient) {}
 

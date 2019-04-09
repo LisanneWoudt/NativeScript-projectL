@@ -6,7 +6,7 @@ import {SwapRequest} from '../../dto/swap-request';
 @Injectable()
 export class UserService {
 
-    baseUrl: string = 'http://192.168.2.180:8080/users/';
+    baseUrl: string = 'http://192.168.2.231:8080/users/';
 
     constructor(private http: HttpClient) {}
 

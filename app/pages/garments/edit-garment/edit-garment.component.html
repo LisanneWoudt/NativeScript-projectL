@@ -1,0 +1,8 @@
+<ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
+  <Label class="action-bar-title" text="Edit garment"></Label>
+</ActionBar>
+
+<app-garment-input-fields (showSuccessDialog)="responseSuccess($event)"
+  urlString="update">
+</app-garment-input-fields>

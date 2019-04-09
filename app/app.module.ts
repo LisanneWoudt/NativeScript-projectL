@@ -17,6 +17,8 @@ import { LoginComponent} from "./pages/login/login.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
+import { EditGarmentComponent } from "./pages/garments/edit-garment/edit-garment.component";
+import { GarmentInputFieldsComponent } from "./pages/garments/garment-input-fields/garment-input-fields.component";
 import { RequestSwapComponent } from "./pages/swap/request-swap/request-swap.component";
 import { GarmentOverviewComponent } from "./pages/garments/garment-overview/garment-overview.component";
 import { GarmentDetailComponent } from "./pages/garments/garment-detail/garment-detail.component";
@@ -66,6 +68,8 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
         LoginComponent,
         AllGarmentsComponent,
         AddGarmentComponent,
+        EditGarmentComponent,
+        GarmentInputFieldsComponent,
         RequestSwapComponent,
         GarmentOverviewComponent,
         GarmentDetailComponent,

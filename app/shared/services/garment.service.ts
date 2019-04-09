@@ -6,7 +6,7 @@ import {Garment} from '../../dto/garment';
 @Injectable()
 export class GarmentService {
 
-    baseUrl: string = 'http://192.168.2.180:8080/garments/';
+    baseUrl: string = 'http://192.168.2.21:8080/garments/';
 
     constructor(private http: HttpClient) {}
 
@@ -18,7 +18,11 @@ export class GarmentService {
       return this.http.get(this.baseUrl + id);
     }
 
-    saveGarment(garment: Garment): Observable<any> {
-      return this.http.post(this.baseUrl + 'add', garment);
+    saveGarment(garment: Garment, urlString: String): Observable<any> {
+      return this.http.post(this.baseUrl + urlString, garment);
+    }
+
+    deleteGarment(id: number): Observable<any> {
+      return this.http.delete(this.baseUrl + 'delete/' + id)
     }
 }

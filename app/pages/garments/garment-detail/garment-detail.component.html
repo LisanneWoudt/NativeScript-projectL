@@ -14,8 +14,16 @@
          <Label text="&#xA;" row="4"></Label>
     </CardView>
 
-  <Button *ngIf="!garmentSwapId" class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!"
-    (tap)="toSwapRequest(garment.id)"></Button>
-  <Button *ngIf="garmentSwapId" class="btn btn-primary btn-rounded-lg btn-active" text="Select this item"
-    (tap)="toSwapReturnRequest(garment.id)"></Button>
+
+    <Button *ngIf="!garmentSwapId && userId != garment.userId" class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!"
+        (tap)="toSwapRequest(garment.id)"></Button>
+    <Button *ngIf="garmentSwapId" class="btn btn-primary btn-rounded-lg btn-active" text="Select this item"
+      (tap)="toSwapReturnRequest(garment.id)"></Button>
+
+    <StackLayout *ngIf="!garmentSwapId && userId == garment.userId">
+      <Button class="btn btn-primary btn-rounded-lg btn-active" text="Edit item"
+        (tap)="toEditGarment(garment)"></Button>
+      <Button class="btn btn-cancel btn-rounded-lg btn-active" text="Delete item"
+        (tap)="confirmDeleteGarment(garment.id)"></Button>
+    </StackLayout>
 </StackLayout>
