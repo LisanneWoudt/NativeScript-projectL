@@ -26,7 +26,6 @@ export class RequestsComponent implements OnInit {
   requestsProcessing: ReceivedRequest[] = new Array;
   requestsDone: ReceivedRequest[] = new Array;
   previewSize: number = 60;
-  history: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private swapService: SwapService,
     private userService: UserService, private imageService: ImageService,

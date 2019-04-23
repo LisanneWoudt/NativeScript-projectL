@@ -80,10 +80,6 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/garments/all'])
     }
 
-    navigateToInbox() {
-      this.router.navigate(['/inbox'])
-    }
-
     navigateToOpenSwapRequests() {
       this.router.navigate(['/swap-requests/open/', this.currentUser.id])
     }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import {User} from '../../dto/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from '../../environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,7 +15,7 @@ export class LoginService {
 
   login(user: User): Observable<any> {
     console.log(user);
-    return this.http.post("http://192.168.2.231:8080/user/login", user, httpOptions);
+    return this.http.post(environment.host + "user/login", user, httpOptions);
     //
 //    return this.http.get(this.url + '/user/login', httpOptions);
   }

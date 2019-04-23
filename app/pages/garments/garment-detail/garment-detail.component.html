@@ -14,7 +14,6 @@
          <Label text="&#xA;" row="4"></Label>
     </CardView>
 
-
     <Button *ngIf="!garmentSwapId && userId != garment.userId" class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!"
         (tap)="toSwapRequest(garment.id)"></Button>
     <Button *ngIf="garmentSwapId" class="btn btn-primary btn-rounded-lg btn-active" text="Select this item"

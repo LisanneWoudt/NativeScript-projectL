@@ -28,7 +28,6 @@ export class GarmentOverviewComponent implements OnInit {
   lastSelectedType: string;
 
   imageSrc: any;
-  //PreviewSize magically makes spinner on item stop when loaded
   previewSize: number = 120;
   count: number;
   processing: boolean;

@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import {Garment} from '../../../dto/garment';
-import { User } from '../../../dto/user';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {DataService} from '../../../shared/services/data.service';
 import {ImageService} from '../../../shared/services/image.service';
 import {Router} from '@angular/router';
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
+import { ValueList } from "nativescript-drop-down";
 import * as camera from "nativescript-camera";
 import * as imagepicker from "nativescript-imagepicker";
 var fs = require("file-system");
@@ -23,19 +23,14 @@ var session = bghttp.session("image-upload");
 export class GarmentInputFieldsComponent implements OnInit {
 
  garment: Garment = new Garment()
- currentUser: User = new User();
- selectedIndex: number;
- categories: String[] = ["Pant", "Shirt"];
+ selectedIndex: number = 1;
+
  categorySelected: Boolean = false;
  pantSelected: Boolean = false;
  shirtSelected: Boolean = false;
- result: number;
- uploadedImage: any;
+ categories = ["Pant", "Shirt", "Other"]
 
- imageAssets = [];
  imageSrc: any;
- isSingleMode: boolean = true;
- thumbSize: number = 80;
  previewSize: number = 300;
  imageString: string;
  busy: boolean = true;
@@ -68,21 +63,17 @@ export class GarmentInputFieldsComponent implements OnInit {
       context
       .authorize()
       .then(() => {
-          that.imageAssets = [];
           that.imageSrc = null;
           return context.present();
       })
       .then((selection) => {
           this.imageString = selection[0]._android;
-          that.imageSrc = that.isSingleMode && selection.length > 0 ? selection[0] : null;
+          that.imageSrc = selection.length > 0 ? selection[0] : null;
 
-          // set the images to be loaded from the assets with optimal sizes (optimize memory usage)
           selection.forEach(function (element) {
-              element.options.width = that.isSingleMode ? that.previewSize : that.thumbSize;
-              element.options.height = that.isSingleMode ? that.previewSize : that.thumbSize;
+              element.options.width = that.previewSize;
+              element.options.height = that.previewSize;
           });
-
-          that.imageAssets = selection;
       }).catch(function (e) {
           console.log(e);
       });
@@ -108,7 +99,6 @@ export class GarmentInputFieldsComponent implements OnInit {
     if (!this.validateGarment(garment)) {
       return;
     };
-    this.currentUser = this.dataService.getMockUser();
 
     this.garment = garment;
     if (this.pantSelected) {

@@ -1,23 +1,27 @@
 <StackLayout class="page">
-  <GridLayout class="form" rows="*,*,*,*,*,*,*,*,*" columns="*">
+  <GridLayout class="form" rows="*,*,*,*,*,*,*,*,*,*" columns="*">
     <ActivityIndicator row="1" [busy]="processing" width="100" height="100" class="activity-indicator"></ActivityIndicator>
-    <DropDown [isEnabled]="!processing"
-              class="input-field h3"
-              #dd
+    <DropDown #dd
+              class="dropdown"
+              [isEnabled]="!processing"
               [items]="categories"
               [(ngModel)]="selectedIndex"
               (selectedIndexChanged)="onchange($event)"
-              row="0">
+              row="0"
+              rowSpan="2">
      </DropDown>
-     <Label class="dropdown" *ngIf="!categorySelected" text="Type:"></Label>
-     <TextField class="input-field" [isEnabled]="!processing" row="1" hint="Name" [(ngModel)]="garment.name"
+     <Label text="Type:"
+              row="0"
+              fontSize="18"
+              class="input-field dropdown-text"></Label>
+     <TextField class="input-field" [isEnabled]="!processing" row="2" hint="Name" [(ngModel)]="garment.name"
        autocorrect="false" autocapitalizationType="none"></TextField>
-     <TextField class="input-field" [isEnabled]="!processing" row="2" hint="Brand" [(ngModel)]="garment.brand"></TextField>
-     <TextField class="input-field" [isEnabled]="!processing" row="3" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="garment.size"></TextField>
-     <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="4" hint="Waist length" [(ngModel)]="garment.length_size"></TextField>
-     <Image [isEnabled]="!processing" row="5" [src]="garment.id == undefined ? imageSrc : garment.image" *ngIf="isSingleMode" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
-     <Button [isEnabled]="!processing" row="6" class="btn btn-outline btn-rounded-lg btn-active" text="Upload image" (tap)="getImage()"></Button>
-     <Button [isEnabled]="!processing" row="7" class="btn btn-primary btn-rounded-lg btn-active" text="Save garment" *ngIf="busy" (tap)="addGarment(garment)"></Button>
+     <TextField class="input-field" [isEnabled]="!processing" row="3" hint="Brand" [(ngModel)]="garment.brand"></TextField>
+     <TextField class="input-field" [isEnabled]="!processing" row="4" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="garment.size"></TextField>
+     <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="5" hint="Waist length" [(ngModel)]="garment.length_size"></TextField>
+     <Image [isEnabled]="!processing" row="6" [src]="garment.id == undefined ? imageSrc : garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
+     <Button [isEnabled]="!processing" row="7" class="btn btn-outline btn-rounded-lg btn-active" text="Upload image" (tap)="getImage()"></Button>
+     <Button [isEnabled]="!processing" row="8" class="btn btn-primary btn-rounded-lg btn-active" text="Save garment" (tap)="addGarment(garment)"></Button>
 
   </GridLayout>
 

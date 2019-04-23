@@ -3,19 +3,19 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
-const httpModule = require("http");
+import httpModule = require("http");
+import {environment} from '../../environment';
 
 @Injectable()
 export class ImageService {
 
-    baseUrl: string = 'http://192.168.2.21:8080/images/';
+  baseUrl: string = 'images/';
 
-    constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient) {}
 
   multipartUpload(filename: string, file: string): bghttp.Task {
     var request = {
-        url: this.baseUrl + 'upload',
+        url: environment.host + this.baseUrl + 'upload',
         method: "POST",
         headers: {
             "Content-Type": "application/octet-stream",
@@ -35,10 +35,10 @@ export class ImageService {
   }
 
   downloadImage(garmentId: number) {
-    return httpModule.getImage(this.baseUrl + "download/" + garmentId);
+    return httpModule.getImage(environment.host + this.baseUrl + "download/" + garmentId);
   }
 
   downloadCompressedImage(garmentId: number) {
-    return httpModule.getImage(this.baseUrl + "download/compressed/" + garmentId)
+    return httpModule.getImage(environment.host + this.baseUrl + "download/compressed/" + garmentId)
   }
 }

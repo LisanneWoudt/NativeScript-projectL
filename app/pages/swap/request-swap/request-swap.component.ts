@@ -25,7 +25,6 @@ export class RequestSwapComponent implements OnInit {
   private sub: any;
   garment: Garment = new Garment();
   swapRequest: SwapRequest = new SwapRequest();
-  thumbSize: number = 120;
   previewSize: number = 120;
   imageSrc: any;
 

@@ -15,9 +15,7 @@ export class OpenRequestsComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit(){
-
-  }
+  ngOnInit(){}
 
   navigateToHome() {
     this.child.navigateToHome();

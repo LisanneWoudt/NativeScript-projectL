@@ -129,3 +129,10 @@ components that have the btn class name.
 .btn.btn-cancel {
   background-color: red;
 }
+
+.dropdown {
+  margin-left: 50px;
+  margin-top: 40px;
+  color: #006968;
+  font-weight: bold;
+}

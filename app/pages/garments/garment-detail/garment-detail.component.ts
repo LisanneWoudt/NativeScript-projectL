@@ -21,8 +21,6 @@ export class GarmentDetailComponent implements OnInit {
   garmentSwapId: number;
 
   imageSrc: any;
-  //Thumbsize/previewSize magically makes spinner on item stop when loaded
-  thumbSize: number = 200;
   previewSize: number = 200;
 
   constructor(private router: Router, private route: ActivatedRoute,
@@ -50,14 +48,12 @@ export class GarmentDetailComponent implements OnInit {
            }
          )
      })
-
      if (this.dataService.getSwapRequest()) {
        this.garmentSwapId = this.dataService.getSwapRequest().id;
      }
   }
 
   confirmDeleteGarment(garmentId: number) {
-
    dialogs.confirm({
       title: "Delete item",
       message: "Are you sure you want to delete this item",

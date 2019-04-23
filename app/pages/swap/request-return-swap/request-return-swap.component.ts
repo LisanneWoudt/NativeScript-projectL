@@ -75,7 +75,6 @@ export class RequestReturnSwapComponent implements OnInit {
   }
 
   navigateToOpenRequests() {
-    console.log(this.currentUser);
     this.router.navigate(['/swap-requests/open/', this.currentUser.id]);
   }
 

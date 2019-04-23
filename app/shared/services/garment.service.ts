@@ -2,27 +2,28 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Garment} from '../../dto/garment';
+import { environment } from '../../environment';
 
 @Injectable()
 export class GarmentService {
 
-    baseUrl: string = 'http://192.168.2.21:8080/garments/';
+    baseUrl: string = 'garments/';
 
     constructor(private http: HttpClient) {}
 
     getAllGarments(urlpart: string, userId: number): Observable<any> {
-      return this.http.get(this.baseUrl + urlpart + userId);
+      return this.http.get(environment.host + this.baseUrl + urlpart + userId);
     }
 
     getGarment(id: number): Observable<any> {
-      return this.http.get(this.baseUrl + id);
+      return this.http.get(environment.host + this.baseUrl + id);
     }
 
     saveGarment(garment: Garment, urlString: String): Observable<any> {
-      return this.http.post(this.baseUrl + urlString, garment);
+      return this.http.post(environment.host + this.baseUrl + urlString, garment);
     }
 
     deleteGarment(id: number): Observable<any> {
-      return this.http.delete(this.baseUrl + 'delete/' + id)
+      return this.http.delete(environment.host + this.baseUrl + 'delete/' + id)
     }
 }
