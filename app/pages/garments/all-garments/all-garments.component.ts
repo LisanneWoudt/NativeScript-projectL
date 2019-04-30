@@ -17,9 +17,9 @@ export class AllGarmentsComponent implements OnInit {
   drawer: RadSideDrawer;
 
   garmentsUrl: string = 'all/';
-  sizes = ['XS', 'S', 'M', 'L', 'XL', '27', '28', '30'];
-  genders = ["Woman", "Man"];
-  types = ["SHIRT", "PANT"];
+  sizes: string[];
+  types: string[];
+  sizeLengths: number[];
 
   constructor(private router: Router) { }
 
@@ -27,14 +27,18 @@ export class AllGarmentsComponent implements OnInit {
 
   ngAfterViewInit() {
       this.drawer = this.drawerComponent.sideDrawer;
-  }
-
-  navigateBack() {
-    this.router.navigate(['/home']);
+      this.sizes = this.child.allSizes;
+      this.sizes.sort();
+      this.types = this.child.allTypes;
+      this.sizeLengths = this.child.allLengths;
   }
 
   public toggleDrawer() {
     this.drawer.toggleDrawerState();
+  }
+
+  navigateBack() {
+    this.router.navigate(['/home']);
   }
 
 }

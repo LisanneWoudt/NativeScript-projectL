@@ -1,8 +1,15 @@
-<StackLayout *ngFor="let size of sizes">
-    <CheckBox text="{{ size }}" checked="false" (tap)=filterGarmentsOnSize(size)></CheckBox>
-</StackLayout>
 
 <StackLayout class="border page-border">
+
+  <StackLayout orientation="horizontal">
+    <Label *ngIf="garmentFilter['size'] && garmentFilter['size'].length != allSizes.length"
+     text="Size: {{garmentFilter['size'].sort()}}  " class="boldText" textWrap="true"></Label>
+    <Label *ngIf="garmentFilter['garmentType'] && garmentFilter['garmentType'].length != allTypes.length"
+     text="Type: {{garmentFilter['garmentType'].sort()}}" class="boldText"   ></Label>
+     <Label *ngIf="garmentFilter['lengthSize'] && garmentFilter['lengthSize'].length != allTypes.length"
+      text="Length: {{garmentFilter['lengthSize'].sort()}}" class="boldText"></Label>
+  </StackLayout>
+
   <StackLayout> <Label text="&#xA;"></Label></StackLayout>
   <StackLayout width="100%" *ngFor="let item of ( garments | garmentAttributeFilter : garmentFilter )">
       <CardView margin="2" elevation="10" radius="1">

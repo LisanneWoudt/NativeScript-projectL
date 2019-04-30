@@ -1,16 +1,17 @@
 <ActionBar class="action-bar">
   <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
   <Label class="action-bar-title" text="All items"></Label>
+  <ActionItem text="Menu" android.systemIcon="ic_menu_btn_add" (tap)="toggleDrawer()"></ActionItem>
 </ActionBar>
 
 <StackLayout orientation="vertical" class="page">
-  <RadSideDrawer tkExampleTitle tkToggleNavButton>
+  <RadSideDrawer tkExampleTitle tkToggleNavButton drawerTransition="SlideInOnTopTransition">
     <StackLayout tkDrawerContent class="sidedrawer-left">
 
       <Label text="&#xA;"></Label>
-      <Label class="filterdrawer-header" text="Gender"></Label>
-      <StackLayout *ngFor="let gender of genders">
-          <CheckBox text="{{ gender }}" checked="false" (tap)=child.filterGarmentsOnGender(gender) fillColor="#006968"></CheckBox>
+      <Label class="filterdrawer-header" text="Type"></Label>
+      <StackLayout *ngFor="let type of types">
+          <CheckBox text="{{ type }}" checked="false" (tap)=child.filterGarmentsOnType(type) fillColor="#006968"></CheckBox>
       </StackLayout>
 
       <Label text="&#xA;"></Label>
@@ -20,9 +21,9 @@
       </StackLayout>
 
       <Label text="&#xA;"></Label>
-      <Label class="filterdrawer-header" text="Type"></Label>
-      <StackLayout *ngFor="let type of types">
-          <CheckBox text="{{ type }}" checked="false" (tap)=child.filterGarmentsOnType(type) fillColor="#006968"></CheckBox>
+      <Label class="filterdrawer-header" text="Length"></Label>
+      <StackLayout *ngFor="let length of sizeLengths">
+          <CheckBox text="{{ length }}" checked="false" (tap)=child.filterGarmentsOnLength(length) fillColor="#006968"></CheckBox>
       </StackLayout>
 
     </StackLayout>
@@ -35,7 +36,8 @@
           <Label text="&#xA;"></Label>
           <Button class="btn btn-outline m-l-30" text="Apply filter" (tap)="toggleDrawer()"></Button>
 
-          <app-garment-overview #garmentOverview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
+          <app-garment-overview #garmentOverview [(garmentsUrl)]="garmentsUrl"
+           (notify)="setSizes($event)"></app-garment-overview>
 
           </StackLayout>
         </ScrollView>

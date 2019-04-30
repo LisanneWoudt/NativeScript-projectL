@@ -28,7 +28,7 @@ export class GarmentInputFieldsComponent implements OnInit {
  categorySelected: Boolean = false;
  pantSelected: Boolean = false;
  shirtSelected: Boolean = false;
- categories = ["Pant", "Shirt", "Other"]
+ categories: String[] = new Array();
 
  imageSrc: any;
  previewSize: number = 300;
@@ -46,6 +46,15 @@ export class GarmentInputFieldsComponent implements OnInit {
 
   ngOnInit() {
     this.garment = this.dataService.getGarment();
+    this.getGarmentTypes();
+  }
+
+  getGarmentTypes() {
+      this.garmentService.getGarmentTypes().subscribe(data => {
+          this.categories = data;
+      }, error => {
+            console.log("error while getting garmentTypes:" + error);
+      })
   }
 
   getImage() {
@@ -152,7 +161,7 @@ export class GarmentInputFieldsComponent implements OnInit {
       return false;
     }
     if (this.pantSelected) {
-      if (!garment.length_size) {
+      if (!garment.lengthSize) {
         return false;
       }
     }

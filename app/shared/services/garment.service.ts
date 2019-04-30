@@ -26,4 +26,8 @@ export class GarmentService {
     deleteGarment(id: number): Observable<any> {
       return this.http.delete(environment.host + this.baseUrl + 'delete/' + id)
     }
+
+    getGarmentTypes(): Observable<any> {
+      return this.http.get(environment.host + this.baseUrl + 'garmentTypes');
+    }
 }

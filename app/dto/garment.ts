@@ -6,7 +6,7 @@ export class Garment {
   brand: string;
   userId: number;
   size: string;
-  length_size: number;
+  lengthSize: number;
   garmentType: string;
   image: any;
 }

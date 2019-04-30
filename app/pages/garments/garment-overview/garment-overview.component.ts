@@ -17,13 +17,13 @@ export class GarmentOverviewComponent implements OnInit {
 
   garments: Garment[] = new Array;
   promises: Array<any> = new Array;
-  allSizes: String[] = ['XS', 'S', 'M', 'L', 'XL', '27', '28', '30'];
-  allGenders: String[] = ['MAN', 'WOMAN'];
-  allTypes: String[] = ['SHIRT', 'PANT'];
-  selectedSizes: String[] = this.allSizes;
-  selectedGender: String[] = this.allGenders;
-  selectedTypes: String[] = this.allTypes;
-  lastSelectedGender: string;
+  allSizes: string[] = new Array;
+  allLengths: number[] = new Array;
+  allTypes: string[] = new Array;
+  selectedSizes: string[] = this.allSizes;
+  selectedLength: number[] = this.allLengths;
+  selectedTypes: string[] = this.allTypes;
+  lastSelectedLength: string;
   lastSelectedSize: string;
   lastSelectedType: string;
 
@@ -34,7 +34,6 @@ export class GarmentOverviewComponent implements OnInit {
   userId: number;
   garmentFilter: any = {};
   swapRequest: SwapRequest;
-
 
   @Input('garmentsUrl') garmentsUrl: string;
   @Input('garmentId') swapGarmentId: number = 0;
@@ -50,12 +49,13 @@ export class GarmentOverviewComponent implements OnInit {
   getAllGarments() {
     this.processing = true;
     this.garmentService.getAllGarments(this.garmentsUrl, this.userId).subscribe(data => {
-      console.log(data);
+
       this.garments = data;
 
       for (let int in this.garments) {
         this.count = +int;
-        this.promises.push(this.search(this.garments[this.count].id, this.count));
+        this.promises.push(this.getImage(this.garments[this.count].id, this.count));
+        this.setCategories(this.garments[this.count]);
       }
 
       Promise.all(this.promises)
@@ -70,19 +70,33 @@ export class GarmentOverviewComponent implements OnInit {
     });
   }
 
+  setCategories(garment: Garment){
+    if (!this.allSizes.includes(garment.size)) {
+      this.allSizes.push(garment.size);
+    }
+    if (!this.allTypes.includes(garment.garmentType)) {
+      this.allTypes.push(garment.garmentType);
+    }
+    if (!this.allLengths.includes(garment.lengthSize)) {
+      this.allLengths.push(garment.lengthSize);
+    }
+  }
+
+  filterGarmentsOnUser(userId: number) {
+    this.garmentFilter = {userId: [userId]};
+  }
   filterGarmentsOnSize(size: string) {
     this.filterGarments(size, 'size', this.selectedSizes, this.allSizes, this.lastSelectedSize);
   }
-  filterGarmentsOnGender(gender: string) {
-    gender = gender.toUpperCase();
-    this.filterGarments(gender, 'gender', this.selectedGender, this.allGenders, this.lastSelectedGender);
+  filterGarmentsOnLength(length: number) {
+    this.filterGarments(length, 'length', this.selectedLength, this.allLengths, this.lastSelectedLength);
   }
   filterGarmentsOnType(type: string) {
     this.filterGarments(type, 'garmentType', this.selectedTypes, this.allTypes, this.lastSelectedType);
   }
 
-  filterGarments(filterKey: string, filterOn: string, selectedList: Array<String>,
-    allList: Array<String>, lastSelected: string) {
+  filterGarments(filterKey: any, filterOn: string, selectedList: Array<any>,
+    allList: Array<any>, lastSelected: string) {
 
     if (selectedList.length == allList.length && !lastSelected) {
       selectedList = [];
@@ -99,28 +113,28 @@ export class GarmentOverviewComponent implements OnInit {
       lastSelected = filterKey;
     }
 
-    if(filterOn == 'size') {
-      this.selectedSizes = selectedList;
-      this.lastSelectedSize = lastSelected;
-    }
-    if(filterOn == 'gender') {
-      this.selectedGender = selectedList;
-      this.lastSelectedGender = lastSelected;
-    }
-    if(filterOn == 'garmentType') {
-      this.selectedTypes = selectedList;
-      this.lastSelectedType = lastSelected;
-    }
+    this.updateLastSelectedCategory(filterOn, selectedList, lastSelected);
 
-    this.garmentFilter = {'size': this.selectedSizes, 'gender': this.selectedGender,
+    this.garmentFilter = {'size': this.selectedSizes, 'lengthSize': this.selectedLength,
       'garmentType': this.selectedTypes}
   }
 
-  filterGarmentsOnUser(userId: number) {
-    this.garmentFilter = {userId: [userId]};
+  updateLastSelectedCategory(category: string, selectedList: Array<any>, lastSelected: string) {
+    if(category == 'size') {
+      this.selectedSizes = selectedList;
+      this.lastSelectedSize = lastSelected;
+    }
+    if(category == 'length') {
+      this.selectedLength = selectedList;
+      this.lastSelectedLength = lastSelected;
+    }
+    if(category == 'garmentType') {
+      this.selectedTypes = selectedList;
+      this.lastSelectedType = lastSelected;
+    }
   }
 
-  search(garmentId: number, int: number) {
+  getImage(garmentId: number, int: number) {
     this.imageService.downloadCompressedImage(garmentId).then(
         res => {
           this.garments[int].image = res;

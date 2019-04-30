@@ -124,8 +124,14 @@ components that have the btn class name.
 }
 
 .sidedrawer-left {
-  width: 400px;
+  width: 500px;
 }
+
+.sidedrawer-top {
+  background-color: white;
+}
+
+
 .btn.btn-cancel {
   background-color: red;
 }
