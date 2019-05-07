@@ -28,7 +28,6 @@ export class AllGarmentsComponent implements OnInit {
   ngAfterViewInit() {
       this.drawer = this.drawerComponent.sideDrawer;
       this.sizes = this.child.allSizes;
-      this.sizes.sort();
       this.types = this.child.allTypes;
       this.sizeLengths = this.child.allLengths;
   }

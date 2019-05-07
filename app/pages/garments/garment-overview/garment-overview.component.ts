@@ -49,7 +49,6 @@ export class GarmentOverviewComponent implements OnInit {
   getAllGarments() {
     this.processing = true;
     this.garmentService.getAllGarments(this.garmentsUrl, this.userId).subscribe(data => {
-
       this.garments = data;
 
       for (let int in this.garments) {
@@ -65,7 +64,7 @@ export class GarmentOverviewComponent implements OnInit {
         this.router.navigate(['/error']);
       })
     }, errorResponse => {
-      console.log('Error in getAllGarments(2):' + errorResponse);
+      console.log('Error in getAllGarments(2):' + errorResponse.toString());
       this.router.navigate(['/error']);
     });
   }
@@ -142,8 +141,7 @@ export class GarmentOverviewComponent implements OnInit {
           return res;
         },
         msg => {
-         console.log('Error in downloadImage:' + msg);
-         this.router.navigate(['/error']);
+         console.log('Image could not be loaded:' + msg);
         }
       )
    }

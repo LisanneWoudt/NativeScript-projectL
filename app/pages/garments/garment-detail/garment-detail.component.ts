@@ -19,8 +19,6 @@ export class GarmentDetailComponent implements OnInit {
   garmentId: number;
   userId: number;
   garmentSwapId: number;
-
-  imageSrc: any;
   previewSize: number = 200;
 
   constructor(private router: Router, private route: ActivatedRoute,
@@ -40,11 +38,10 @@ export class GarmentDetailComponent implements OnInit {
        this.imageService.downloadImage(this.garmentId).then(
            res => {
              this.garment.image = res;
-             this.imageSrc = res;
              return res;
            },
            msg => {
-             console.log("error!")
+             console.log("error in downloading image")
            }
          )
      })

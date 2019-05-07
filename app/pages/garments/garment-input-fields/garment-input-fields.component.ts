@@ -23,12 +23,14 @@ var session = bghttp.session("image-upload");
 export class GarmentInputFieldsComponent implements OnInit {
 
  garment: Garment = new Garment()
- selectedIndex: number = 1;
 
+ selectedIndex: String = "Pant";
  categorySelected: Boolean = false;
  pantSelected: Boolean = false;
  shirtSelected: Boolean = false;
+ categoryMap: Map<number, string>;
  categories: String[] = new Array();
+ categoryKeys: number[] = new Array();
 
  imageSrc: any;
  previewSize: number = 300;
@@ -51,7 +53,11 @@ export class GarmentInputFieldsComponent implements OnInit {
 
   getGarmentTypes() {
       this.garmentService.getGarmentTypes().subscribe(data => {
-          this.categories = data;
+        this.categoryMap = data;
+        for (let cat in this.categoryMap) {
+          this.categoryKeys.push(parseInt(cat));
+          this.categories.push(this.categoryMap[cat]);
+        }
       }, error => {
             console.log("error while getting garmentTypes:" + error);
       })
@@ -105,18 +111,12 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   addGarment(garment: Garment) {
+    console.log(garment);
     if (!this.validateGarment(garment)) {
       return;
     };
 
     this.garment = garment;
-    if (this.pantSelected) {
-      this.garment.garmentType = 'PANT';
-    }
-    else {
-      this.garment.garmentType = 'SHIRT';
-    }
-
     this.processing = true;
 
     this.garmentService.saveGarment(this.garment, this.urlString)
