@@ -111,7 +111,6 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   addGarment(garment: Garment) {
-    console.log(garment);
     if (!this.validateGarment(garment)) {
       return;
     };
