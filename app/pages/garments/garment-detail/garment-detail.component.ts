@@ -15,7 +15,7 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 export class GarmentDetailComponent implements OnInit {
 
   private sub: any;
-  garment: Garment;
+  garment: Garment = new Garment();
   garmentId: number;
   userId: number;
   garmentSwapId: number;
@@ -85,7 +85,15 @@ export class GarmentDetailComponent implements OnInit {
     this.router.navigate(['garments/edit'])
   }
   navigateBack() {
-    this.router.navigate(['/home']);
+    if (!this.garmentSwapId && this.userId != this.garment.userId) {
+      this.router.navigate(['/garments/all']);
+    }
+    else if (this.garmentSwapId){
+      this.router.navigate(['/swap-requests/return-garment/' + this.garment.userId]);
+    }
+    else {
+      this.router.navigate(['/home']);
+    }
   }
 
 }

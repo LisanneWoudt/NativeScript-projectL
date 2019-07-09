@@ -12,6 +12,8 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 
 export class EditGarmentComponent {
 
+  garmentId: number;
+
   constructor(private router: Router, private dataService: DataService) {
   }
 
@@ -27,8 +29,8 @@ export class EditGarmentComponent {
   }
 
   navigateBack() {
-    this.dataService.setGarment(new Garment());
-    this.router.navigate(['/home']);
+    this.garmentId = this.dataService.getGarment().id;
+    this.router.navigate(['/garment/' + this.garmentId]);
   }
 
 }

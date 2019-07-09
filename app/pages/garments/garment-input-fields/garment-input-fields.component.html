@@ -5,7 +5,7 @@
               class="dropdown"
               [isEnabled]="!processing"
               [items]="categories"
-              [(ngModel)]="garment.garmentType"
+              [(ngModel)]="selectedIndex"
               (selectedIndexChanged)="onchange($event)"
               row="0"
               rowSpan="2">
@@ -18,8 +18,8 @@
        autocorrect="false" autocapitalizationType="none"></TextField>
      <TextField class="input-field" [isEnabled]="!processing" row="3" hint="Brand" [(ngModel)]="garment.brand"></TextField>
      <TextField class="input-field" [isEnabled]="!processing" row="4" hint="Size (i.e. 34, 38 or S, XL)" [(ngModel)]="garment.size"></TextField>
-     <TextField class="input-field" [isEnabled]="!processing" *ngIf="pantSelected" row="5" hint="Waist length" [(ngModel)]="garment.length_size"></TextField>
-     <!-- <Image [isEnabled]="!processing" row="6" [src]="garment.id == undefined ? imageSrc : garment.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image> -->
+     <TextField class="input-field" [isEnabled]="!processing" *ngIf="longForm" row="5" hint="Waist length" [(ngModel)]="garment.lengthSize"></TextField>
+     <Image [isEnabled]="!processing" row="6" [src]="imageSrc" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
      <Button [isEnabled]="!processing" row="7" class="btn btn-outline btn-rounded-lg btn-active" text="Upload image" (tap)="getImage()"></Button>
      <Button [isEnabled]="!processing" row="8" class="btn btn-primary btn-rounded-lg btn-active" text="Save garment" (tap)="addGarment(garment)"></Button>
 

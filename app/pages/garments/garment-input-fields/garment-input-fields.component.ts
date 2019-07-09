@@ -13,7 +13,6 @@ import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
 
-//let imagepicker = require("nativescript-imagepicker")
 @Component({
     selector: "app-garment-input-fields",
     moduleId: module.id,
@@ -22,15 +21,11 @@ var session = bghttp.session("image-upload");
 
 export class GarmentInputFieldsComponent implements OnInit {
 
- garment: Garment = new Garment()
-
- selectedIndex: String = "Pant";
- categorySelected: Boolean = false;
- pantSelected: Boolean = false;
- shirtSelected: Boolean = false;
- categoryMap: Map<number, string>;
- categories: String[] = new Array();
- categoryKeys: number[] = new Array();
+ garment: Garment = new Garment();
+ longForm: boolean = false;
+ selectedIndex: string = "1";
+ categoryMap: Map<string, string>;
+ categories: string[] = new Array();
 
  imageSrc: any;
  previewSize: number = 300;
@@ -48,6 +43,9 @@ export class GarmentInputFieldsComponent implements OnInit {
 
   ngOnInit() {
     this.garment = this.dataService.getGarment();
+    if (this.garment.image) {
+      this.imageSrc = this.garment.image;
+    }
     this.getGarmentTypes();
   }
 
@@ -55,12 +53,20 @@ export class GarmentInputFieldsComponent implements OnInit {
       this.garmentService.getGarmentTypes().subscribe(data => {
         this.categoryMap = data;
         for (let cat in this.categoryMap) {
-          this.categoryKeys.push(parseInt(cat));
           this.categories.push(this.categoryMap[cat]);
         }
+
+        this.setSelectedIndex();
       }, error => {
             console.log("error while getting garmentTypes:" + error);
       })
+  }
+
+  setSelectedIndex() {
+    if (this.garment && this.garment.garmentType) {
+      //TODO: works only after updating garment?
+      this.selectedIndex = this.categories.indexOf(this.garment.garmentType).toString();
+    }
   }
 
   getImage() {
@@ -95,27 +101,23 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   public onchange(args: SelectedIndexChangedEventData) {
-    this.categorySelected = true;
-    if (args.newIndex == 0) {
-        this.pantSelected = true;
-        this.shirtSelected = false;
+    if (this.categoryMap[args.newIndex] == "Pant") {
+        this.longForm = true;
     }
-    if (args.newIndex == 1) {
-      this.shirtSelected = true;
-      this.pantSelected = false;
-    }
-    if (args.newIndex == null) {
-      this.shirtSelected = true;
-      this.pantSelected = true;
+    else {
+      this.longForm = false;
     }
   }
 
   addGarment(garment: Garment) {
+
+    this.garment = garment;
+    this.garment.garmentType = this.categoryMap[this.selectedIndex];
+
     if (!this.validateGarment(garment)) {
       return;
     };
 
-    this.garment = garment;
     this.processing = true;
 
     this.garmentService.saveGarment(this.garment, this.urlString)
@@ -139,7 +141,7 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   validateGarment(garment: Garment) {
-    if (!this.shirtSelected && !this.pantSelected) {
+    if (!this.garment.garmentType) {
       alert({title: "Type missing",
         message: "Please select a garment type",
         okButtonText: "Ok"});
@@ -155,11 +157,12 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   checkFormFilled(garment: Garment) {
+    console.log(garment);
     if (!garment.name || !garment.brand || (!this.imageString &&
       !this.garment.image) || !garment.size) {
       return false;
     }
-    if (this.pantSelected) {
+    if (this.longForm) {
       if (!garment.lengthSize) {
         return false;
       }
