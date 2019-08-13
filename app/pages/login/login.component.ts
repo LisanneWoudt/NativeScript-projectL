@@ -3,6 +3,7 @@ import {User} from '../../dto/user';
 import {Router} from '@angular/router';
 import {LoginService} from '../../shared/services/login.service';
 import {DataService} from '../../shared/services/data.service';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-login-user",
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   login(user: User) {
     this.loginService.login(user).subscribe(data => {
       if (data == null) {
-        console.log("Unknown user or bad password")
+        this.loginFailed();
       }
       else {
         this.dataService.setUser(data);
@@ -31,10 +32,17 @@ export class LoginComponent implements OnInit {
       }
 
     }, errorResponse => {
-        console.log("ERROR");
         console.error(errorResponse);
-      //    this.router.navigate(['/error']);
+        this.router.navigate(['/error']);
         });
+  }
+
+  loginFailed() {
+    dialogs.alert({
+        title: "Login failed",
+        message: "Username or password incorrect",
+        okButtonText: "OK"
+    });
   }
 
   navigateToHome() {

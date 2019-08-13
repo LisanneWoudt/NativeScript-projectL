@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Garment} from '../../../dto/garment';
+import {SwapRequest} from '../../../dto/swap-request';
 import {Router, ActivatedRoute} from '@angular/router';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
@@ -20,6 +21,7 @@ export class GarmentDetailComponent implements OnInit {
   userId: number;
   garmentSwapId: number;
   previewSize: number = 200;
+  swapRequest: SwapRequest;
 
   constructor(private router: Router, private route: ActivatedRoute,
     private garmentService: GarmentService, private imageService: ImageService,
@@ -76,7 +78,10 @@ export class GarmentDetailComponent implements OnInit {
     this.router.navigate(['/swap-request/', garmentId]);
   }
 
-  toSwapReturnRequest(garmentId: number) {
+  toSwapReturnRequest(garmentId: number){
+    this.swapRequest = this.dataService.getSwapRequest();
+    this.swapRequest.garmentInReturnId = garmentId;
+    this.dataService.setSwapRequest(this.swapRequest);
     this.router.navigate(['/swap-return-request'])
   }
 

@@ -68,15 +68,15 @@ export class RequestSwapComponent implements OnInit {
       console.log(this.swapRequest);
       this.swapService.sendSwapRequest(this.swapRequest).subscribe(data => {
         console.log(data);
-        this.navigateToInbox();
+        this.navigateToOpenRequests();
 
       }, error => {
         console.log(error);
       })
   }
 
-  navigateToInbox() {
-     this.router.navigate(['/inbox']);
+  navigateToOpenRequests() {
+     this.router.navigate(['/swap-requests/open/' + this.currentUser.id]);
   }
 
   navigateBack() {

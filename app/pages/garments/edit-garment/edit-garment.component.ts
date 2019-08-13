@@ -20,7 +20,7 @@ export class EditGarmentComponent {
   responseSuccess() {
     this.dataService.setGarment(new Garment());
     dialogs.alert({
-        title: "Garment added",
+        title: "Garment edited",
         message: "You have successfully edited your garment!",
         okButtonText: "OK"
     }).then(() => {

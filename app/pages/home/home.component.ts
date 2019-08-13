@@ -72,8 +72,8 @@ export class HomeComponent implements OnInit {
       })
     }
 
-    navigateToAddGarment() {
-      this.router.navigate(['/garments/add']);
+    navigateToUserProfile() {
+      this.router.navigate(['/profile']);
     }
 
     navigateToAllGarments() {

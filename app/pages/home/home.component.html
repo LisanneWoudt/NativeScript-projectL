@@ -6,46 +6,38 @@
 </ActionBar>
 
 <StackLayout orientation="vertical" class="page">
-
   <RadSideDrawer tkExampleTitle tkToggleNavButton drawerLocation="Top">
 
     <StackLayout tkDrawerContent class="sidedrawer-top">
         <StackLayout>
             <Label text="Open swap requests" class="sideLabel sideLightGrayLabel" (tap)="navigateToOpenSwapRequests()"></Label>
             <Label text="Swap history" class="sideLabel sideLightGrayLabel" (tap)="navigateToSwapHistory()"></Label>
-            <Label text="Settings" class="sideLabel sideLightGrayLabel"></Label>
+            <Label text="Your profile" class="sideLabel sideLightGrayLabel" (tap)="navigateToUserProfile()"></Label>
         </StackLayout>
     </StackLayout>
 
-      <StackLayout tkMainContent>
-
+    <StackLayout tkMainContent>
+      <ScrollView>
         <StackLayout>
-          <ScrollView>
-            <StackLayout>
 
-              <StackLayout orientation="horizontal">
+          <StackLayout orientation="horizontal">
+            <Button class="btn btn-primary btn-active inner" text="My garments"
+              (tap)="navigateToAllGarments()">
+            </Button>
+            <Button *ngIf="swapRequestCount != 0" class="btn btn-primary btn-active inner"
+              text="Requests ({{swapRequestCount}} new)" (tap)="navigateToOpenSwapRequests()">
+            </Button>
+            <Button class="btn btn-primary btn-active inner" text="History"
+              (tap)="navigateToAllGarments()">
+            </Button>
+          </StackLayout>
 
-                <Button class="btn btn-primary btn-lg btn-active" text="Start swapping" (tap)="navigateToAllGarments()"></Button>
-                <Button class="btn btn-primary btn-lg btn-active" text="Add Garment" (tap)="navigateToAddGarment()"></Button>
+          <Label text="&#xA;"></Label>
+          <Label class="h3 text-center" text="Available items"></Label>
+          <app-garment-overview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
 
-               </StackLayout>
-               <Label *ngIf="swapRequestNewCount != 0" class="text-danger text-center" text="{{swapRequestNewCount}} new request!"></Label>
-               <Button class="btn btn-primary btn-lg btn-active {{newRequests ? 'font-weight-bold' : 'font-weight-bold'}}"
-               text="Open requests ({{swapRequestCount + swapRequestNewCount}})" (tap)="navigateToOpenSwapRequests()"></Button>
-
-
-            <Label text="&#xA;"></Label>
-            <Label class="h3 text-center" text="My garments"></Label>
-
-
-            <app-garment-overview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
-
-
-            </StackLayout>
-          </ScrollView>
         </StackLayout>
-      </StackLayout>
+      </ScrollView>
+    </StackLayout>
   </RadSideDrawer>
-
-
 </StackLayout>

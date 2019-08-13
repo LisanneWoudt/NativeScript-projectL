@@ -7,6 +7,7 @@ import { GarmentService } from '../../../shared/services/garment.service';
 import { DataService } from '../../../shared/services/data.service';
 import { SwapService } from '../../../shared/services/swap.service';
 import { ImageService } from '../../../shared/services/image.service';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-request-return-swap",
@@ -42,6 +43,8 @@ export class RequestReturnSwapComponent implements OnInit {
           this.garmentInReturn = data;
       }
 
+      console.log(this.swapRequest);
+
       this.imageService.downloadCompressedImage(id).then(
           res => {
             if (type == 'garment') {
@@ -64,11 +67,22 @@ export class RequestReturnSwapComponent implements OnInit {
   sendSwapRequest(){
       this.swapRequest.status = "PROCESSING";
       this.swapService.updateSwapRequest(this.swapRequest).subscribe(data => {
-        this.navigateToOpenRequests();
+        this.responseSuccess();
       }, error => {
         console.log(error);
       })
   }
+
+    responseSuccess() {
+      dialogs.alert({
+          title: "Request send",
+          message: "Swap request has been send!",
+          okButtonText: "OK"
+      }).then(() => {
+           this.dataService.setSwapRequest(new SwapRequest())
+           this.navigateToOpenRequests();
+      });
+    }
 
   navigateBack() {
      this.router.navigate(['/garment', this.swapRequest.garmentId]);

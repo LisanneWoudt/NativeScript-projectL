@@ -35,7 +35,7 @@ export class PickSwapReturnGarmentComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/swap-requests/open/' + this.swapRequest.userId]);
   }
 
   public toggleDrawer() {
