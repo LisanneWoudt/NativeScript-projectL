@@ -17,27 +17,29 @@
     </StackLayout>
 
     <StackLayout tkMainContent>
-      <ScrollView>
-        <StackLayout>
+      <GridLayout rows="auto,auto,auto,auto" columns="*, *, *">
+        <Button row="0" col="0" class="btn btn-primary btn-active inner" text="My garments"
+         (tap)="navigateToUserProfile()">
+        </Button>
+        <Button row="0" col="1" class="btn btn-primary btn-active inner"
+         text="Requests ({{swapRequestCount}} new)" (tap)="navigateToOpenSwapRequests()">
+        </Button>
+        <Button row="0" col="2" class="btn btn-primary btn-active inner" text="History"
+         (tap)="navigateToSwapHistory()">
+        </Button>
 
-          <StackLayout orientation="horizontal">
-            <Button class="btn btn-primary btn-active inner" text="My garments"
-              (tap)="navigateToAllGarments()">
-            </Button>
-            <Button *ngIf="swapRequestCount != 0" class="btn btn-primary btn-active inner"
-              text="Requests ({{swapRequestCount}} new)" (tap)="navigateToOpenSwapRequests()">
-            </Button>
-            <Button class="btn btn-primary btn-active inner" text="History"
-              (tap)="navigateToAllGarments()">
-            </Button>
-          </StackLayout>
+        <Label row="1" col="0" colSpan="3" class="h3 text-center" text="Some of the options.."></Label>
 
-          <Label text="&#xA;"></Label>
-          <Label class="h3 text-center" text="Available items"></Label>
-          <app-garment-overview [(garmentsUrl)]="garmentsUrl"></app-garment-overview>
+        <StackLayout row="2" col="0" colSpan="3" >
+          <app-garment-overview [(garmentsUrl)]="garmentsUrl" [(limit)]="limit"></app-garment-overview>
+        </StackLayout>
+
+        <Button row="3"  col="0" colSpan="3"  class="btn btn-outline btn-rounded-lg btn-active inner" text="See more"
+          (tap)="navigateToAllGarments()">
+        </Button>
+
+   </GridLayout>
 
         </StackLayout>
-      </ScrollView>
-    </StackLayout>
   </RadSideDrawer>
 </StackLayout>

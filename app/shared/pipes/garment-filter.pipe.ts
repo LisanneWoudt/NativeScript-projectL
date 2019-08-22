@@ -4,7 +4,8 @@ import { Garment } from '../../dto/garment';
 @Pipe({name: 'garmentAttributeFilter'})
 export class GarmentFilterPipe implements PipeTransform {
   transform(garments: Garment[], filter: {[key: string]: Array<String> }) {
-
+      console.log('in transform: ');
+      console.log(garments);
       return garments.filter(item => {
          let notMatchingField = Object.keys(filter)
                                       .find(key =>

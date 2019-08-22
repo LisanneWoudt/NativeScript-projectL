@@ -3,6 +3,7 @@ import { Garment } from '../../dto/garment';
 import { User } from '../../dto/user';
 import { DataService } from '../../shared/services/data.service';
 import { SwapService } from '../../shared/services/swap.service';
+import { GarmentService } from '../../shared/services/garment.service';
 import { Router } from '@angular/router';
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
@@ -14,16 +15,14 @@ import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 })
 export class HomeComponent implements OnInit {
 
-    garments: Garment[] = new Array();
     currentUser: User = new User();
-    garment1: Garment = new Garment();
-    garment2: Garment = new Garment();
-    garmentsUrl: string = 'all/user/';
+    limit: number = 4;
+    garmentsUrl: string = 'all/';
     swapRequestCount: number;
     swapRequestNewCount: number;
 
     constructor(private dataService: DataService, private router: Router,
-      private swapService: SwapService) {
+      private swapService: SwapService, private garmentService: GarmentService) {
     }
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
@@ -41,17 +40,6 @@ export class HomeComponent implements OnInit {
 
     toggleDrawer() {
       this.drawer.toggleDrawerState();
-    }
-
-    getMockGarments() {
-     this.garment1.name = 'GARMENT1';
-     this.garment1.brand = 'H&M';
-     this.garment1.size = 'XS';
-     this.garment2.name = 'GARMENT2';
-     this.garment2.brand = 'Zara';
-     this.garment2.size = 'M';
-     this.garments.push(this.garment1);
-     this.garments.push(this.garment2);
     }
 
     getCountOpenRequests() {

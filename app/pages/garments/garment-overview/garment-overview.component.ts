@@ -14,8 +14,9 @@ import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
 })
 
 export class GarmentOverviewComponent implements OnInit {
-
   garments: Garment[] = new Array;
+  garmentsEven: Garment[] = new Array;
+  garmentsOdd: Garment[] = new Array;
   promises: Array<any> = new Array;
   allSizes: string[] = new Array;
   allLengths: number[] = new Array;
@@ -31,11 +32,13 @@ export class GarmentOverviewComponent implements OnInit {
   previewSize: number = 120;
   count: number;
   processing: boolean;
+  userIdLimit: string;
   userId: number;
   garmentFilter: any = {};
   swapRequest: SwapRequest;
 
   @Input('garmentsUrl') garmentsUrl: string;
+  @Input('limit') limit: number = 0;
   @Input('garmentId') swapGarmentId: number = 0;
 
   constructor(private garmentService: GarmentService, private imageService: ImageService,
@@ -43,17 +46,42 @@ export class GarmentOverviewComponent implements OnInit {
 
   ngOnInit() {
    this.userId = 1;
+   this.setUrlPart();
    this.getAllGarments();
   }
 
+  setUrlPart() {
+    if (this.limit > 0) {
+      this.userIdLimit = this.userId + "/" + this.limit;
+    }
+    else {
+      this.userIdLimit = this.userId.toString();
+    }
+  }
+
+  isOdd(listcount: number) {
+    //return true;
+    return listcount % 2;
+  }
   getAllGarments() {
     this.processing = true;
-    this.garmentService.getAllGarments(this.garmentsUrl, this.userId).subscribe(data => {
+    this.garmentService.getAllGarments(this.garmentsUrl, this.userIdLimit).subscribe(data => {
       this.garments = data;
+      this.garmentsEven = data;
+      this.garmentsOdd = data;
 
       for (let int in this.garments) {
         this.count = +int;
-        this.promises.push(this.getImage(this.garments[this.count].id, this.count));
+
+        //TODO: add garment to array instead of filtering. Fix filters.
+        if (this.isOdd(this.count)) {
+          this.garmentsEven = this.garmentsEven.filter(obj => this.garments[this.count] !== obj);
+          this.promises.push(this.getImage(this.garments[this.count], this.count));
+        }
+        else {
+           this.garmentsOdd = this.garmentsOdd.filter(obj => this.garments[this.count] !== obj);
+           this.promises.push(this.getImage(this.garments[this.count], this.count));
+        }
         this.setCategories(this.garments[this.count]);
       }
 
@@ -64,7 +92,8 @@ export class GarmentOverviewComponent implements OnInit {
         this.router.navigate(['/error']);
       })
     }, errorResponse => {
-      console.log('Error in getAllGarments(2):' + errorResponse.toString());
+      console.log(errorResponse)
+      console.log('Error in getAllGarments(2):' + errorResponse);
       this.router.navigate(['/error']);
     });
   }
@@ -133,10 +162,10 @@ export class GarmentOverviewComponent implements OnInit {
     }
   }
 
-  getImage(garmentId: number, int: number) {
-    this.imageService.downloadCompressedImage(garmentId).then(
+  getImage(garment: Garment, int: number) {
+    this.imageService.downloadCompressedImage(garment.id).then(
         res => {
-          this.garments[int].image = res;
+          garment.image = res;
           this.imageSrc = res;
           return res;
         },
