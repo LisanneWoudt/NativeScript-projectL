@@ -4,12 +4,15 @@
 
 <StackLayout class="page">
 
+  <TextField *ngIf="!isLoggingIn" hint="Name" [(ngModel)]="user.name"></TextField>
   <TextField hint="Email Address" keyboardType="email" [(ngModel)]="user.email"
     autocorrect="false" autocapitalizationType="none"></TextField>
   <TextField hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
+  <TextField *ngIf="!isLoggingIn" hint="Repeat password" secure="true" [(ngModel)]="passwordRepeat"></TextField>
 
-  <Button text="Login" (tap)="login(user)"></Button>  
+  <Button *ngIf="isLoggingIn" text="Login" (tap)="login(user)"></Button>
+  <Button *ngIf="!isLoggingIn" text="Register" (tap)="signUp(user)"></Button>
 
-<!-- <Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>  -->
+  <Button [text]="isLoggingIn ? 'Sign up' : 'Back to login'" (tap)="toggleDisplay()"></Button>
 
 </StackLayout>

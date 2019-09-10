@@ -14,6 +14,8 @@ import * as dialogs from "tns-core-modules/ui/dialogs";
 export class LoginComponent implements OnInit {
 
   user = new User();
+  isLoggingIn: Boolean = true;
+  passwordRepeat: string;
 
   constructor(private router: Router, private loginService: LoginService,
     private dataService: DataService) { }
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
   login(user: User) {
     this.loginService.login(user).subscribe(data => {
       if (data == null) {
-        this.loginFailed();
+        this.showAlert("Login failed", "Username or password incorrect");
       }
       else {
         this.dataService.setUser(data);
@@ -34,13 +36,61 @@ export class LoginComponent implements OnInit {
     }, errorResponse => {
         console.error(errorResponse);
         this.router.navigate(['/error']);
-        });
+      });
   }
 
-  loginFailed() {
+  signUp(user: User) {
+    if (!this.validateUser(user)) {
+      return;
+    }
+
+    this.loginService.register(user).subscribe(data => {
+      console.log(data);
+      if (data != null) {
+        this.showAlert("YAY", "Account created!");
+        this.dataService.setUser(data);
+        this.navigateToHome();
+      }
+      else {
+       this.showAlert("Oh no..", "Account could not be created");
+      }
+    },
+    errorResponse => {
+      console.error(errorResponse);
+      this.router.navigate(['/error']);
+    });
+  }
+
+  validateUser(user: User) {
+     let regexp = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+     if (!user.name || !user.email || !user.password ) {
+       this.showAlert("Oh oh", "Please fill in all input fields")
+       return false;
+     }
+     if (!regexp.test(user.email)) {
+        this.showAlert("Oh oh", "Not a valid email")
+        return false;
+     }
+     if (user.password != this.passwordRepeat) {
+        this.showAlert("Oh oh", "Passwords are not the same")
+        return false;
+     }
+     return true;
+   }
+
+  toggleDisplay() {
+    if (this.isLoggingIn) {
+      this.isLoggingIn = false;
+    }
+    else {
+      this.isLoggingIn = true;
+    }
+  }
+
+  showAlert(title: string, message: string) {
     dialogs.alert({
-        title: "Login failed",
-        message: "Username or password incorrect",
+        title: title,
+        message: message,
         okButtonText: "OK"
     });
   }

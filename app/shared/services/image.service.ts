@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import * as bghttp from "nativescript-background-http";
 var session = bghttp.session("image-upload");
-import httpModule = require("http");
+const httpModule = require("tns-core-modules/http");
 import {environment} from '../../environment';
 
 @Injectable()

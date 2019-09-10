@@ -16,33 +16,38 @@
   <GridLayout rows="*" columns="*,*" >
     <StackLayout col="0" width="100%" >
         <CardView margin="2" elevation="10" radius="1">
-           <GridLayout rows="*,*,*,*,*" columns="*" *ngFor="let item of ( garmentsOdd | garmentAttributeFilter : garmentFilter )">
-              <Image col="0" *ngIf="item.image == undefined" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                (tap)="toGarmentDetail(item.id)"></Image>
+            <GridLayout rows="*,*,*,*,*" columns="*" *ngFor="let item of ( garmentsEven | garmentAttributeFilter : garmentFilter )">
+                <StackLayout *ngIf="!isOdd(item.listNum)" >
+                <Image col="0" *ngIf="item.image == undefined" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
+                       (tap)="toGarmentDetail(item.id)"></Image>
                 <Image col="0" *ngIf="item.image != undefined" [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                  (tap)="toGarmentDetail(item.id)"></Image>
-               <Label col="0" *ngIf="!isOdd(item.listcount)" class="gridItem boldText" text="{{ item.brand }}" textWrap="true" row="2" ></Label>
-               <Label col="0" *ngIf="item.size" class="gridItem" text="{{ item.name }} ({{ item.size }})"
-               textWrap="true" row="3"></Label>
-               <Label col="0" *ngIf="item.length_size" class="gridItem" text="{{ item.name }} ({{ item.length_size }})"
-               textWrap="true" row="3"></Label>
-               <Label col="0" *ngIf="!isOdd(item.listcount)" text="&#xA;" row="4"></Label>
-           </GridLayout>
+                       (tap)="toGarmentDetail(item.id)"></Image>
+                <Label col="0" class="gridItem boldText" text="{{ item.brand }}" textWrap="true" row="2" ></Label>
+                <Label col="0" *ngIf="item.size" class="gridItem" text="{{ item.name }} ({{ item.size }})"
+                       textWrap="true" row="3"></Label>
+                <Label col="0" *ngIf="item.length_size" class="gridItem" text="{{ item.name }} ({{ item.length_size }})"
+                       textWrap="true" row="3"></Label>
+                <Label col="0" text="&#xA;" row="4"></Label>
+                </StackLayout>
+            </GridLayout>
         </CardView>
     </StackLayout>
     <StackLayout col="1" width="100%">
         <CardView margin="2" elevation="10" radius="1">
-           <GridLayout rows="*,*,*,*,*" columns="*" *ngFor="let item of ( garmentsEven | garmentAttributeFilter : garmentFilter )">
-              <Image col="0" *ngIf="item.image == undefined" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                (tap)="toGarmentDetail(item.id)"></Image>
+            <GridLayout rows="*,*,*,*,*" columns="*" *ngFor="let item of ( garmentsOdd | garmentAttributeFilter : garmentFilter )">
+
+                <StackLayout *ngIf="isOdd(item.listNum)">
+                <Image col="0" *ngIf="item.image == undefined" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
+                       (tap)="toGarmentDetail(item.id)"></Image>
                 <Image col="0" *ngIf="item.image != undefined" [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                  (tap)="toGarmentDetail(item.id)"></Image>
-               <Label col="0" *ngIf="!isOdd(item.listcount)" class="gridItem boldText" text="{{ item.brand }}" textWrap="true" row="2" ></Label>
-               <Label col="0" *ngIf="item.size && !isOdd(item.listcount)" class="gridItem" text="{{ item.name }} ({{ item.size }})"
-               textWrap="true" row="3"></Label>
-               <Label col="0" *ngIf="item.length_size && !isOdd(item.listcount)" class="gridItem" text="{{ item.name }} ({{ item.length_size }})"
-               textWrap="true" row="3"></Label>
-               <Label col="0" *ngIf="!isOdd(item.listcount)" text="&#xA;" row="4"></Label>
+                       (tap)="toGarmentDetail(item.id)"></Image>
+                <Label col="0" class="gridItem boldText" text="{{ item.brand }}" textWrap="true" row="2" ></Label>
+                <Label col="0" *ngIf="item.size" class="gridItem" text="{{ item.name }} ({{ item.size }})"
+                       textWrap="true" row="3"></Label>
+                <Label col="0" *ngIf="item.length_size" class="gridItem" text="{{ item.name }} ({{ item.length_size }})"
+                       textWrap="true" row="3"></Label>
+                <Label col="0" text="&#xA;" row="4"></Label>
+                </StackLayout>
             </GridLayout>
         </CardView>
     </StackLayout>

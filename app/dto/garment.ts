@@ -9,5 +9,5 @@ export class Garment {
   lengthSize: number;
   garmentType: string;
   image: any;
-  listcount: number;
+  listNum: number;
 }

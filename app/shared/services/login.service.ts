@@ -16,4 +16,8 @@ export class LoginService {
   login(user: User): Observable<any> {
     return this.http.post(environment.host + "users/login", user, httpOptions);
   }
+
+  register(user: User): Observable<any> {
+    return this.http.post(environment.host + "users/add", user, httpOptions)
+  }
 }

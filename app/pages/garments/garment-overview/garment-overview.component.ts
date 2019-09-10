@@ -63,6 +63,7 @@ export class GarmentOverviewComponent implements OnInit {
     //return true;
     return listcount % 2;
   }
+
   getAllGarments() {
     this.processing = true;
     this.garmentService.getAllGarments(this.garmentsUrl, this.userIdLimit).subscribe(data => {
@@ -72,7 +73,6 @@ export class GarmentOverviewComponent implements OnInit {
 
       for (let int in this.garments) {
         this.count = +int;
-
         //TODO: add garment to array instead of filtering. Fix filters.
         if (this.isOdd(this.count)) {
           this.garmentsEven = this.garmentsEven.filter(obj => this.garments[this.count] !== obj);
@@ -82,8 +82,12 @@ export class GarmentOverviewComponent implements OnInit {
            this.garmentsOdd = this.garmentsOdd.filter(obj => this.garments[this.count] !== obj);
            this.promises.push(this.getImage(this.garments[this.count], this.count));
         }
+
         this.setCategories(this.garments[this.count]);
       }
+
+      this.setListNum(this.garmentsEven, 0);
+      this.setListNum(this.garmentsOdd, 1);
 
       Promise.all(this.promises)
       .then(res => {
@@ -97,6 +101,14 @@ export class GarmentOverviewComponent implements OnInit {
       this.router.navigate(['/error']);
     });
   }
+
+  setListNum(garmentList: Garment[], startCount: number) {
+    for (let int in garmentList) {
+        garmentList[int].listNum = startCount;
+        startCount = startCount + 2;
+        console.log("startCount - " + startCount)
+    }
+ }
 
   setCategories(garment: Garment){
     if (!this.allSizes.includes(garment.size)) {
