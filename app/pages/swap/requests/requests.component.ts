@@ -26,17 +26,27 @@ export class RequestsComponent implements OnInit {
   requestsProcessing: ReceivedRequest[] = new Array;
   requestsDone: ReceivedRequest[] = new Array;
   previewSize: number = 60;
+  userGarmentIds: number[] = new Array;
 
   constructor(private route: ActivatedRoute, private router: Router, private swapService: SwapService,
     private userService: UserService, private imageService: ImageService,
     private dataService: DataService) { }
 
-
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.userId = +params['userid']; // (+) converts string 'id' to a number
        this.getSwapRequests();
+       this.getUserGarmentIds();
     });
+  }
+
+  getUserGarmentIds() {
+    this.userService.getUserGarmentIds(this.userId).subscribe(data => {
+      this.userGarmentIds = data;
+    }, errorResponse => {
+      console.log("ERROR in getUserGarmentIds");
+      console.log(errorResponse);
+      })
   }
 
   getSwapRequests() {
@@ -50,7 +60,8 @@ export class RequestsComponent implements OnInit {
   }
 
   getSwapRequestsByStatus(receivedRequest: ReceivedRequest) {
-     if (receivedRequest.status == 'NEW' && this.userId != receivedRequest.receivedFromId) {
+     if (receivedRequest.status == 'NEW' && this.userId != receivedRequest.receivedFromId
+        && this.userGarmentIds.indexOf(receivedRequest.receivedFromId) > -1) {
        this.requestsNew.push(receivedRequest);
      }
      else if (receivedRequest.status == 'NEW' && this.userId == receivedRequest.receivedFromId) {

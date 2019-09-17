@@ -28,7 +28,7 @@ var RequestReturnSwapComponent = /** @class */ (function () {
         this.swapRequest = this.dataService.getSwapRequest();
         this.getSelectedGarment(this.swapRequest.garmentId, 'garment');
         this.getSelectedGarment(this.swapRequest.garmentInReturnId, 'garmentInReturn');
-        this.currentUser = this.dataService.getMockUser();
+        this.currentUser = this.dataService.getUser();
     };
     RequestReturnSwapComponent.prototype.getSelectedGarment = function (id, type) {
         var _this = this;

@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
     currentUser: User = new User();
     limit: number = 4;
     garmentsUrl: string = 'all/';
-    swapRequestCount: number;
-    swapRequestNewCount: number;
+    swapRequestCount: number = 0;
+    swapRequestNewCount: number = 0;
 
     constructor(private dataService: DataService, private router: Router,
       private swapService: SwapService, private garmentService: GarmentService) {
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       private drawer: RadSideDrawer;
 
     ngOnInit() {
-      this.currentUser = this.dataService.getMockUser();
+      this.currentUser = this.dataService.getUser();
       this.getCountOpenRequests();
       this.getCountOpenNewRequests();
     }
@@ -43,9 +43,8 @@ export class HomeComponent implements OnInit {
     }
 
     getCountOpenRequests() {
-      this.swapService.countSwapRequests(1).subscribe(data => {
+      this.swapService.countSwapRequests(this.currentUser.id).subscribe(data => {
         this.swapRequestCount = data;
-        console.log('count: ' + data);
       }, error => {
         console.log('error in getting swap request count:' + error);
       })
@@ -74,6 +73,11 @@ export class HomeComponent implements OnInit {
 
     navigateToSwapHistory() {
       this.router.navigate(['/swap-requests/history/', this.currentUser.id])
+    }
+
+    logout() {
+      this.dataService.setUser(new User());
+      this.router.navigate(['login']);
     }
 
 }

@@ -7,6 +7,7 @@ import { GarmentService } from '../../../shared/services/garment.service';
 import { DataService } from '../../../shared/services/data.service';
 import { SwapService } from '../../../shared/services/swap.service';
 import { ImageService } from '../../../shared/services/image.service';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-request-swap",
@@ -27,6 +28,7 @@ export class RequestSwapComponent implements OnInit {
   swapRequest: SwapRequest = new SwapRequest();
   previewSize: number = 120;
   imageSrc: any;
+  userGarments: Garment[];
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -61,18 +63,25 @@ export class RequestSwapComponent implements OnInit {
   sendSwapRequest(swapRequest: SwapRequest){
       this.swapRequest = swapRequest;
       this.swapRequest.garmentId = this.garmentId;
-      this.currentUser = this.dataService.getMockUser();
+      this.currentUser = this.dataService.getUser();
       this.swapRequest.receivedFromId = this.currentUser.id;
       this.swapRequest.status = 'NEW';
-
-      console.log(this.swapRequest);
       this.swapService.sendSwapRequest(this.swapRequest).subscribe(data => {
-        console.log(data);
-        this.navigateToOpenRequests();
-
+        this.responseSuccess();
       }, error => {
         console.log(error);
       })
+  }
+
+  responseSuccess() {
+    dialogs.alert({
+        title: "Request send",
+        message: "Swap request has been send!",
+        okButtonText: "OK"
+    }).then(() => {
+         this.dataService.setSwapRequest(new SwapRequest())
+         this.navigateToOpenRequests();
+    });
   }
 
   navigateToOpenRequests() {

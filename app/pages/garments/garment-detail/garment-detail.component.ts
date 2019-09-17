@@ -31,7 +31,7 @@ export class GarmentDetailComponent implements OnInit {
 
     this.sub = this.route.params.subscribe(params => {
        this.garmentId = +params['garmentId']; // (+) converts string 'id' to a number
-       this.userId = this.dataService.getMockUserId();
+       this.userId = this.dataService.getUser().id;
      });
 
      this.garmentService.getGarment(this.garmentId).subscribe(data => {

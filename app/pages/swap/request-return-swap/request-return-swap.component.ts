@@ -31,7 +31,7 @@ export class RequestReturnSwapComponent implements OnInit {
     this.swapRequest = this.dataService.getSwapRequest();
     this.getSelectedGarment(this.swapRequest.garmentId, 'garment');
     this.getSelectedGarment(this.swapRequest.garmentInReturnId, 'garmentInReturn');
-    this.currentUser = this.dataService.getMockUser();
+    this.currentUser = this.dataService.getUser();
   }
 
   getSelectedGarment(id: number, type: string) {

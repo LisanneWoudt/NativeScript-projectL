@@ -19,7 +19,7 @@ export class AddGarmentComponent {
         message: "You have successfully added a garment to your collection!",
         okButtonText: "OK"
     }).then(() => {
-         this.router.navigate(['/home/']);
+         this.router.navigate(['/profile/']);
     });
   }
 

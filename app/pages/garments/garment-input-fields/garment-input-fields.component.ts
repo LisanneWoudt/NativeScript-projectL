@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import {Garment} from '../../../dto/garment';
+import {User} from '../../../dto/user';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {DataService} from '../../../shared/services/data.service';
 import {ImageService} from '../../../shared/services/image.service';
@@ -32,6 +33,7 @@ export class GarmentInputFieldsComponent implements OnInit {
  imageString: string;
  busy: boolean = true;
  processing: boolean = false;
+ currentUser: User;
 
  @ViewChild('dd') dropDown: ElementRef;
  @Output() showSuccessDialog = new EventEmitter();
@@ -117,7 +119,8 @@ export class GarmentInputFieldsComponent implements OnInit {
     if (!this.validateGarment(garment)) {
       return;
     };
-
+    this.currentUser = this.dataService.getUser();
+    this.garment.userId = this.currentUser.id;
     this.processing = true;
 
     this.garmentService.saveGarment(this.garment, this.urlString)

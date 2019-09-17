@@ -45,7 +45,7 @@ export class GarmentOverviewComponent implements OnInit {
     private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-   this.userId = 1;
+   this.userId = this.dataService.getUser().id;
    this.setUrlPart();
    this.getAllGarments();
   }
@@ -106,9 +106,9 @@ export class GarmentOverviewComponent implements OnInit {
     for (let int in garmentList) {
         garmentList[int].listNum = startCount;
         startCount = startCount + 2;
-        console.log("startCount - " + startCount)
     }
- }
+  }
+
 
   setCategories(garment: Garment){
     if (!this.allSizes.includes(garment.size)) {

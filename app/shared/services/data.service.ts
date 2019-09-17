@@ -14,18 +14,20 @@ export class DataService {
   }
 
   getUser() {
-    return this.user;
+    if (this.user != null) {
+      return this.user;
+    }
+    else {
+      return this.getMockUser();
+    }
+
   }
 
   getMockUser() {
     this.user = new User();
-    this.user.id = 1;
+    this.user.id =3;
 
     return this.user;
-  }
-
-  getMockUserId() {
-    return 1;
   }
 
   setUser(user: User) {

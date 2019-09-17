@@ -13,6 +13,7 @@
             <Label text="Open swap requests" class="sideLabel sideLightGrayLabel" (tap)="navigateToOpenSwapRequests()"></Label>
             <Label text="Swap history" class="sideLabel sideLightGrayLabel" (tap)="navigateToSwapHistory()"></Label>
             <Label text="Your profile" class="sideLabel sideLightGrayLabel" (tap)="navigateToUserProfile()"></Label>
+            <Label text="Logout" class="sideLabel sideLightGrayLabel" (tap)="logout()"></Label>
         </StackLayout>
     </StackLayout>
 
@@ -22,7 +23,7 @@
          (tap)="navigateToUserProfile()">
         </Button>
         <Button row="0" col="1" class="btn btn-primary btn-active inner"
-         text="Requests ({{swapRequestCount}} new)" (tap)="navigateToOpenSwapRequests()">
+         text="Requests ({{swapRequestCount}})" (tap)="navigateToOpenSwapRequests()">
         </Button>
         <Button row="0" col="2" class="btn btn-primary btn-active inner" text="History"
          (tap)="navigateToSwapHistory()">
