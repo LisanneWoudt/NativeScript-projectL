@@ -15,12 +15,14 @@ import { PickSwapReturnGarmentComponent } from "./pages/swap/pick-swap-return-ga
 import { RequestReturnSwapComponent } from "./pages/swap/request-return-swap/request-return-swap.component";
 import { OpenRequestsComponent } from "./pages/swap/open-requests/open-requests.component";
 import { HistoryComponent } from "./pages/swap/history/history.component";
+import { WelcomeComponent } from "./pages/home/welcome/welcome.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/login", pathMatch: "full" },
+    { path: "", redirectTo: "/welcome", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
+    { path: "welcome", component: WelcomeComponent },
     { path: "profile", component: UserProfileComponent },
     { path: "garments/add", component: AddGarmentComponent},
     { path: "garments/edit", component: EditGarmentComponent},

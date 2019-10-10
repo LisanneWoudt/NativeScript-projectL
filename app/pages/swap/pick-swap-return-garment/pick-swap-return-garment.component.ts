@@ -14,8 +14,8 @@ import { DataService } from '../../../shared/services/data.service';
 
 export class PickSwapReturnGarmentComponent implements OnInit {
 
-  @ViewChild('garmentOverview') child;
-  @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+  @ViewChild('garmentOverview', {static: false}) child;
+  @ViewChild(RadSideDrawerComponent, {static: false}) public drawerComponent: RadSideDrawerComponent;
 
   drawer: RadSideDrawer;
   garmentsUrl: string = 'all/';

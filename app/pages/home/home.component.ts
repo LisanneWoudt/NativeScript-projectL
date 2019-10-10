@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       private swapService: SwapService, private garmentService: GarmentService) {
     }
 
-    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    @ViewChild(RadSideDrawerComponent, {static: false}) public drawerComponent: RadSideDrawerComponent;
       private drawer: RadSideDrawer;
 
     ngOnInit() {
