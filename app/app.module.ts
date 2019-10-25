@@ -17,6 +17,8 @@ import { LoginComponent} from "./pages/login/login.component";
 import { UserProfileComponent } from "./pages/user/user-profile.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { WelcomeComponent } from  "./pages/home/welcome/welcome.component";
+import { InboxComponent } from "./pages/inbox/inbox.component";
+import { ChatComponent } from "./pages/inbox/chat/chat.component";
 //Garment components
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
@@ -38,6 +40,7 @@ import {GarmentService} from "./shared/services/garment.service";
 import {ImageService} from "./shared/services/image.service";
 import {SwapService} from "./shared/services/swap.service";
 import {UserService} from "./shared/services/user.service";
+import {ChatService} from "./shared/services/chat.service";
 //Pipes
 import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
 
@@ -61,7 +64,8 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
       GarmentService,
       ImageService,
       SwapService,
-      UserService
+      UserService,
+      ChatService
     ],
     declarations: [
         AppComponent,
@@ -69,6 +73,8 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
         HomeComponent,
         WelcomeComponent,
         LoginComponent,
+        InboxComponent,
+        ChatComponent,
         UserProfileComponent,
         AllGarmentsComponent,
         AddGarmentComponent,

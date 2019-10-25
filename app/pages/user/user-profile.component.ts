@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {User} from '../../dto/user';
 import {Router} from '@angular/router';
-import {LoginService} from '../../shared/services/login.service';
-import {DataService} from '../../shared/services/data.service';
-import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-user-profile",
@@ -15,8 +11,7 @@ export class UserProfileComponent implements OnInit {
 
   garmentsUrl: string = 'all/user/';
 
-  constructor(private router: Router, private loginService: LoginService,
-    private dataService: DataService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

@@ -1,0 +1,18 @@
+<ActionBar class="action-bar">
+  <Label class="action-bar-title" text="Inbox"></Label>
+</ActionBar>
+
+<StackLayout class="content">
+  <StackLayout class="page-section" orientation="vertical">
+
+    <ListView [items]="chats" (itemTap)="openMessage($event)" class="list-group">
+    <ng-template let-chat="item">
+        <StackLayout orientation="vertical" class="inbox-item list-group-item">
+          <Label class="list-group-item-heading" text="{{ sender }}"></Label>
+          <Label [class]="chat.lastMessage.new ? 'boldText underline list-group-item-text' : 'underline list-group-item-text'" [text]="chat.lastMessage.content"></Label>
+        </StackLayout>
+    </ng-template>
+    </ListView>
+
+  </StackLayout>
+</StackLayout>

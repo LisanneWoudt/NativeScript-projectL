@@ -16,14 +16,18 @@ import { RequestReturnSwapComponent } from "./pages/swap/request-return-swap/req
 import { OpenRequestsComponent } from "./pages/swap/open-requests/open-requests.component";
 import { HistoryComponent } from "./pages/swap/history/history.component";
 import { WelcomeComponent } from "./pages/home/welcome/welcome.component";
+import { InboxComponent } from "./pages/inbox/inbox.component";
+import { ChatComponent } from "./pages/inbox/chat/chat.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/welcome", pathMatch: "full" },
+    { path: "", redirectTo: "/inbox", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "welcome", component: WelcomeComponent },
     { path: "profile", component: UserProfileComponent },
+    { path: "inbox", component: InboxComponent },
+    { path: "inbox/chat", component: ChatComponent },
     { path: "garments/add", component: AddGarmentComponent},
     { path: "garments/edit", component: EditGarmentComponent},
     { path: "garments/all", component: AllGarmentsComponent},
