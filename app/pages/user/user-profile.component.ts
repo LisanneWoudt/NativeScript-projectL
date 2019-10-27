@@ -20,6 +20,10 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/garments/add']);
   }
 
+  navigateToInbox() {
+    this.router.navigate(['/inbox']);
+  }
+
   navigateToHome() {
     this.router.navigate(['/home']);
   }

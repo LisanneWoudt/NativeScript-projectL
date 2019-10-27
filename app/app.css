@@ -165,6 +165,7 @@ components that have the btn class name.
   margin-top: 20px;
   margin-right: 10px;
   margin-left: 10px;
+  border-radius: 25px;
 }
 
 .message-send {
@@ -194,4 +195,19 @@ components that have the btn class name.
 .message-date-answer {
   text-align: right;
   padding-right:10px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.page-title-small {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.margin-left-right {
+  margin-left: 10px;
+  margin-right: 10px;
 }

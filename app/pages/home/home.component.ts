@@ -59,6 +59,10 @@ export class HomeComponent implements OnInit {
       })
     }
 
+    navigateToInbox() {
+      this.router.navigate(['/inbox']);
+    }
+
     navigateToUserProfile() {
       this.router.navigate(['/profile']);
     }

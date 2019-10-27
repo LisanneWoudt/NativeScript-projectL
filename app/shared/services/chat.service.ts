@@ -23,6 +23,4 @@ export class ChatService {
       return this.http.post(environment.host + '/messages/add', message);
     }
 
-
-
 }

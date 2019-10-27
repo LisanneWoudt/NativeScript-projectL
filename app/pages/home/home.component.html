@@ -10,6 +10,7 @@
 
     <StackLayout tkDrawerContent class="sidedrawer-top">
         <StackLayout>
+            <Label text="Inbox" class="sideLabel sideLightGrayLabel" (tap)="navigateToInbox()"></Label>
             <Label text="Open swap requests" class="sideLabel sideLightGrayLabel" (tap)="navigateToOpenSwapRequests()"></Label>
             <Label text="Swap history" class="sideLabel sideLightGrayLabel" (tap)="navigateToSwapHistory()"></Label>
             <Label text="Your profile" class="sideLabel sideLightGrayLabel" (tap)="navigateToUserProfile()"></Label>
@@ -19,7 +20,7 @@
 
     <StackLayout tkMainContent>
       <GridLayout rows="auto,auto,auto,auto" columns="*, *, *">
-        <Button row="0" col="0" class="btn btn-primary btn-active inner" text="My garments"
+        <Button row="0" col="0" class="btn btn-primary btn-active inner" text="My profile"
          (tap)="navigateToUserProfile()">
         </Button>
         <Button row="0" col="1" class="btn btn-primary btn-active inner"
