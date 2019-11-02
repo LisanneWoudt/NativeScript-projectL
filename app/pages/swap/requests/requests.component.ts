@@ -191,6 +191,16 @@ export class RequestsComponent implements OnInit {
      });
   }
 
+  getUserAndCheckUserDetails(garmentId: number) {
+      this.userService.getUserByGarment(garmentId).subscribe(data => {
+        let userId = data.id;
+        this.checkUserDetails(userId);
+      }, error => {
+        console.log("Error in getting user by garmentId")
+      });
+   }
+
+
   sortDataByDate() {
      return this.swapRequests.sort((a, b) => {
      return <any>new Date(b.dateUpdated) - <any>new Date(a.dateUpdated);

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../../dto/user';
 import { SwapRequest } from '../../dto/swap-request';
 import { Garment } from '../../dto/garment';
-import { Chat } from '../../dto/chat';
 
 @Injectable()
 export class DataService {
@@ -10,8 +9,6 @@ export class DataService {
   user: User;
   swapRequest: SwapRequest;
   garment: Garment = new Garment();
-  chat: Chat = new Chat();
-  error: string;
 
   constructor() {
   }
@@ -23,6 +20,7 @@ export class DataService {
     else {
       return this.getMockUser();
     }
+
   }
 
   getMockUser() {
@@ -52,19 +50,4 @@ export class DataService {
     this.garment = garment;
   }
 
-  getChat() {
-    return this.chat;
-  }
-
-  setChat(chat: Chat) {
-    this.chat = chat;
-  }
-
-  setError(error: string) {
-    this.error = error;
-  }
-
-  getError() {
-    return this.error;
-  }
 }

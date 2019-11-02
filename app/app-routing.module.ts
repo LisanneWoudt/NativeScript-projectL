@@ -16,16 +16,12 @@ import { PickSwapReturnGarmentComponent } from "./pages/swap/pick-swap-return-ga
 import { RequestReturnSwapComponent } from "./pages/swap/request-return-swap/request-return-swap.component";
 import { OpenRequestsComponent } from "./pages/swap/open-requests/open-requests.component";
 import { HistoryComponent } from "./pages/swap/history/history.component";
-import { WelcomeComponent } from "./pages/home/welcome/welcome.component";
-import { InboxComponent } from "./pages/inbox/inbox.component";
-import { ChatComponent } from "./pages/inbox/chat/chat.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/inbox", pathMatch: "full" },
+    { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
-    { path: "welcome", component: WelcomeComponent },
     { path: "profile", component: UserProfileComponent },
     { path: "contact/:userid", component: ContactDetailsComponent },
     { path: "inbox", component: InboxComponent },

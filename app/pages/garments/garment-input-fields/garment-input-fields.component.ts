@@ -35,7 +35,7 @@ export class GarmentInputFieldsComponent implements OnInit {
  processing: boolean = false;
  currentUser: User;
 
- @ViewChild('dd', {static: false}) dropDown: ElementRef;
+ @ViewChild('dd') dropDown: ElementRef;
  @Output() showSuccessDialog = new EventEmitter();
  @Input('urlString') urlString: String;
 
