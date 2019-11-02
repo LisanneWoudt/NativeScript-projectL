@@ -118,7 +118,7 @@
           (tap)="checkUserDetails(request.receivedFromId)" text="Check user details">
         </Button>
         <Button *ngIf="userId == request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
-          (tap)="checkUserDetails(userId)" text="Check user details">
+         (tap)="getUserAndCheckUserDetails(request.garmentId)" text="Check user details">
         </Button>
 
       </StackLayout>

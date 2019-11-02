@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import {Router} from '@angular/router';
+import {DataService} from '../../shared/services/data.service';
 
 @Component({
     selector: "app-user-profile",
@@ -11,7 +12,7 @@ export class UserProfileComponent implements OnInit {
 
   garmentsUrl: string = 'all/user/';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,10 @@ export class UserProfileComponent implements OnInit {
 
   navigateToInbox() {
     this.router.navigate(['/inbox']);
+  }
+
+  navigateToContact() {
+    this.router.navigate(['/contact/', this.dataService.getUser().id]);
   }
 
   navigateToHome() {

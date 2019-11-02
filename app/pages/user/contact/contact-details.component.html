@@ -1,0 +1,17 @@
+<ActionBar class="action-bar">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
+    <Label class="action-bar-title" text="Contact"></Label>
+</ActionBar>
+
+<StackLayout class="page">
+    <Label class="input-field" text="Name:"></Label>
+    <TextView [(ngModel)]="user.name" [editable]="editState"></TextView>
+
+    <Label class="input-field" text="Email:"></Label>
+    <TextView [(ngModel)]="user.email" [editable]="editState"></TextView>
+
+
+    <Label text="&#xA;"></Label>
+    <Button *ngIf="editState" class="btn btn-primary btn-rounded-lg btn-active" text="Update details" (tap)="updateUser(user)"></Button>
+
+</StackLayout>

@@ -179,7 +179,16 @@ export class RequestsComponent implements OnInit {
   }
 
   checkUserDetails(userId: number) {
-    console.log(userId);
+    this.router.navigate(['/contact/', userId]);
+  }
+
+  getUserAndCheckUserDetails(garmentId: number) {
+     this.userService.getUserByGarment(garmentId).subscribe(data => {
+       let userId = data.id;
+       this.checkUserDetails(userId);
+     }, error => {
+       console.log("Error in getting user by garmentId")
+     });
   }
 
   sortDataByDate() {

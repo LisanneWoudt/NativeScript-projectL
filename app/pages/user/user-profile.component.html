@@ -1,12 +1,13 @@
 <ActionBar class="action-bar">
   <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateToHome()"></NavigationButton>
-  <Label class="action-bar-title" text="Your profile"></Label>
+  <Label class="action-bar-title" text="Profile"></Label>
 </ActionBar>
 
 <StackLayout orientation="vertical" class="page">
   <ScrollView>
     <StackLayout>
-      <GridLayout columns="*, *">
+      <GridLayout columns="*,*,*">
+         <Button col="1" class="btn btn-primary btn-lg btn-active" text="My details" (tap)="navigateToContact()"></Button>
         <Button col="0" class="btn btn-primary btn-lg btn-active" text="Inbox" (tap)="navigateToInbox()"></Button>
         <Button col="1" class="btn btn-outline btn-lg btn-active" text="Add Garment" (tap)="navigateToAddGarment()"></Button>
       </GridLayout>
