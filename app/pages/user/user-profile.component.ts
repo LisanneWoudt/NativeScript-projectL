@@ -25,7 +25,12 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['/garments/add']);
   }
 
+  navigateToContact() {
+    this.router.navigate(['/contact/', this.dataService.getUser().id]);
+  }
+
   navigateToHome() {
     this.router.navigate(['/home']);
   }
+
 }

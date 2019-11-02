@@ -6,6 +6,7 @@ import { ErrorComponent } from "./pages/error/error.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { UserProfileComponent } from "./pages/user/user-profile.component";
+import { ContactDetailsComponent } from "./pages/user/contact/contact-details.component";
 import { AddGarmentComponent } from "./pages/garments/add-garment/add-garment.component";
 import { EditGarmentComponent } from "./pages/garments/edit-garment/edit-garment.component";
 import { AllGarmentsComponent } from "./pages/garments/all-garments/all-garments.component";
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
     { path: "profile", component: UserProfileComponent },
+    { path: "contact/:userid", component: ContactDetailsComponent },
     { path: "garments/add", component: AddGarmentComponent},
     { path: "garments/edit", component: EditGarmentComponent},
     { path: "garments/all", component: AllGarmentsComponent},

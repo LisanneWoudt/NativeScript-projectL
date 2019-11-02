@@ -15,6 +15,7 @@ import { AppComponent } from "./app.component";
 import { ErrorComponent } from "./pages/error/error.component";
 import { LoginComponent} from "./pages/login/login.component";
 import { UserProfileComponent } from "./pages/user/user-profile.component";
+import { ContactDetailsComponent } from "./pages/user/contact/contact-details.component";
 import { HomeComponent } from "./pages/home/home.component";
 //Garment components
 import { AllGarmentsComponent} from "./pages/garments/all-garments/all-garments.component";
@@ -68,6 +69,7 @@ import {GarmentFilterPipe} from "./shared/pipes/garment-filter.pipe";
         HomeComponent,
         LoginComponent,
         UserProfileComponent,
+        ContactDetailsComponent,
         AllGarmentsComponent,
         AddGarmentComponent,
         EditGarmentComponent,

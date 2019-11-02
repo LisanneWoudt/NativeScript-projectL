@@ -24,7 +24,7 @@ export class AddGarmentComponent {
   }
 
   navigateBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/profile']);
   }
 
 }
