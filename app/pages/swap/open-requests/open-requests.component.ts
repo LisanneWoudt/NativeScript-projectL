@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 export class OpenRequestsComponent implements OnInit {
 
-  @ViewChild('appRequests') child;
+  @ViewChild('appRequests', {static: false}) child;
 
   showHistory: boolean = false;
 

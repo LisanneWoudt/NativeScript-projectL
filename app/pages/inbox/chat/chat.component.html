@@ -1,0 +1,25 @@
+<ActionBar class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="navigateBack()"></NavigationButton>
+  <Label class="action-bar-title" text="Chat with {{sender.name}}"></Label>
+</ActionBar>
+
+<ScrollView>
+  <StackLayout class="page">
+
+    <StackLayout *ngFor="let message of messages" orientation="vertical">
+      <Label *ngIf="message.senderId == userId" class="message message-send" [text]="message.content" textWrap="true"></Label>
+      <Label *ngIf="message.senderId == userId" class="message message-date" [text]="message.dateTimeString" textWrap="true"></Label>
+      <Label *ngIf="message.senderId != userId" class="message message-answer" [text]="message.content" textWrap="true"></Label>
+      <Label *ngIf="message.senderId != userId" class="message message-date message-date-answer" [text]="message.dateTimeString" textWrap="true"></Label>
+    </StackLayout>
+
+    <Label text="&#xA;"></Label><Label text="&#xA;"></Label>
+
+    <TextView class="input-field"  hint="Reply" [(ngModel)]="reply"></TextView>
+    <Label text="&#xA;"></Label>
+    <Button class="btn btn-primary btn-active inner" text="Send"
+      (tap)="sendReplyMessage()">
+    </Button>
+
+    </StackLayout>
+</ScrollView>

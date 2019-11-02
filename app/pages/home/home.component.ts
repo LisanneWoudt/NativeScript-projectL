@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       private swapService: SwapService, private garmentService: GarmentService) {
     }
 
-    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    @ViewChild(RadSideDrawerComponent, {static: false}) public drawerComponent: RadSideDrawerComponent;
       private drawer: RadSideDrawer;
 
     ngOnInit() {
@@ -57,6 +57,10 @@ export class HomeComponent implements OnInit {
       }, error => {
         console.log('error in getting swap request count:' + error);
       })
+    }
+
+    navigateToInbox() {
+      this.router.navigate(['/inbox']);
     }
 
     navigateToUserProfile() {
