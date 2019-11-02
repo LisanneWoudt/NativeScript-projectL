@@ -207,6 +207,14 @@ components that have the btn class name.
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.link-item {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
 .margin-left-right {
   margin-left: 10px;
   margin-right: 10px;
