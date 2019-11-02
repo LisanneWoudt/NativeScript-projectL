@@ -20,7 +20,7 @@ import { InboxComponent } from "./pages/inbox/inbox.component";
 import { ChatComponent } from "./pages/inbox/chat/chat.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/garment/1", pathMatch: "full" },
+    { path: "", redirectTo: "/inbox", pathMatch: "full" },
     { path: "error", component: ErrorComponent},
     { path: "home", component: HomeComponent },
     { path: "login", component: LoginComponent },
