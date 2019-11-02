@@ -12,8 +12,8 @@ import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 
 export class AllGarmentsComponent implements OnInit {
 
-  @ViewChild('garmentOverview', {static: false}) child;
-  @ViewChild(RadSideDrawerComponent, {static: false}) public drawerComponent: RadSideDrawerComponent;
+  @ViewChild('garmentOverview') child;
+  @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
   drawer: RadSideDrawer;
 
   garmentsUrl: string = 'all/';

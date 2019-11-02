@@ -1,6 +1,5 @@
 import { Garment } from './garment';
 import { SwapRequest } from './swap-request';
-import { Chat } from './chat';
 
 export class User {
   id: number;
@@ -9,5 +8,4 @@ export class User {
   password: string;
   garments: Garment[];
   swapRequests: SwapRequest[];
-  chats: Chat[];
 }

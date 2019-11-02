@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
+import {User} from '../../dto/user';
 import {Router} from '@angular/router';
+import {LoginService} from '../../shared/services/login.service';
+import {DataService} from '../../shared/services/data.service';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-user-profile",
@@ -11,7 +15,8 @@ export class UserProfileComponent implements OnInit {
 
   garmentsUrl: string = 'all/user/';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loginService: LoginService,
+    private dataService: DataService) { }
 
   ngOnInit() {
   }
@@ -19,12 +24,9 @@ export class UserProfileComponent implements OnInit {
   navigateToAddGarment() {
     this.router.navigate(['/garments/add']);
   }
-  
+
   navigateToContact() {
     this.router.navigate(['/contact/', this.dataService.getUser().id]);
-
-  navigateToInbox() {
-    this.router.navigate(['/inbox']);
   }
 
   navigateToHome() {

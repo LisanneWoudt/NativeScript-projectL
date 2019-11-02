@@ -1,5 +1,5 @@
 
-<StackLayout *ngIf="garments.length > 0" class="border page-border">
+<StackLayout class="border page-border">
 
   <StackLayout orientation="horizontal">
     <Label *ngIf="garmentFilter['size'] && garmentFilter['size'].length != allSizes.length"
@@ -53,7 +53,4 @@
     </StackLayout>
   </GridLayout>
 
-</StackLayout>
-<StackLayout *ngIf="garments.length == 0">
-  <Label class="page-title-small italic" text="No garments found"></Label>
 </StackLayout>
