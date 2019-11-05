@@ -29,16 +29,16 @@ const routes: Routes = [
     { path: "profile", component: UserProfileComponent },
     { path: "contact/:userid", component: ContactDetailsComponent },
     { path: "inbox", component: InboxComponent },
-    { path: "inbox/chat", component: ChatComponent },
+    { path: "inbox/chat/:returnlink", component: ChatComponent },
     { path: "garments/add", component: AddGarmentComponent},
     { path: "garments/edit", component: EditGarmentComponent},
     { path: "garments/all", component: AllGarmentsComponent},
+    { path: "garment/:garmentId", component: GarmentDetailComponent},
     { path: "swap-request/:id", component: RequestSwapComponent},
     { path: "swap-return-request", component: RequestReturnSwapComponent},
     { path: "swap-requests/open/:userid", component: OpenRequestsComponent},
     { path: "swap-requests/history/:userid", component: HistoryComponent},
-    { path: "swap-requests/return-garment/:userid", component: PickSwapReturnGarmentComponent},
-    { path: "garment/:garmentId", component: GarmentDetailComponent}
+    { path: "swap-requests/return-garment/:userid", component: PickSwapReturnGarmentComponent}
 ];
 
 @NgModule({

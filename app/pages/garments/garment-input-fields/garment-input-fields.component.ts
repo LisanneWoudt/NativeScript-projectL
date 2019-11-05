@@ -160,7 +160,6 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   checkFormFilled(garment: Garment) {
-    console.log(garment);
     if (!garment.name || !garment.brand || (!this.imageString &&
       !this.garment.image) || !garment.size) {
       return false;

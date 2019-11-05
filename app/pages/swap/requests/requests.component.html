@@ -115,10 +115,10 @@
 
 
         <Button *ngIf="userId != request.receivedFromId"  class="btn btn-primary btn-rounded-lg btn-active"
-          (tap)="checkUserDetails(request.receivedFromId)" text="Check user details">
+          (tap)="toChatWithOwner(request.receivedFromId)" text="Check user details">
         </Button>
         <Button *ngIf="userId == request.receivedFromId" class="btn btn-primary btn-rounded-lg btn-active"
-         (tap)="getUserAndCheckUserDetails(request.garmentId)" text="Check user details">
+         (tap)="getUserAndNavigateToChat(request.garmentId)" text="Check user details">
         </Button>
 
       </StackLayout>

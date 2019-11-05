@@ -23,4 +23,8 @@ export class ChatService {
       return this.http.post(environment.host + '/messages/add', message);
     }
 
+    getChatBetweenUsers(userId: number, garmentUserId: number): Observable<any> {
+      return this.http.get(environment.host + this.baseUrl + 'all/?userId=' + userId + "&garmentUserId=" + garmentUserId)
+    }
+
 }

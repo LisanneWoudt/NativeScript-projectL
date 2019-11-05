@@ -43,8 +43,6 @@ export class RequestReturnSwapComponent implements OnInit {
           this.garmentInReturn = data;
       }
 
-      console.log(this.swapRequest);
-
       this.imageService.downloadCompressedImage(id).then(
           res => {
             if (type == 'garment') {

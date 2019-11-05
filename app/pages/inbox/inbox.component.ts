@@ -25,6 +25,7 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.dataService.getUser().id;
+    this.userId = 2;
     this.getUserChats();
   }
 
@@ -42,7 +43,7 @@ export class InboxComponent implements OnInit {
     for (let int in chats) {
       this.setSenderName(chats[int]);
       let messageArrLength = chats[int].messages.length;
-      chats[0].lastMessage = chats[int].messages[messageArrLength - 1];
+      chats[int].lastMessage = chats[int].messages[messageArrLength - 1];
     }
     return chats;
   }
@@ -75,7 +76,7 @@ export class InboxComponent implements OnInit {
   }
 
   navigateToChat() {
-    this.router.navigate(['/inbox/chat']);
+    this.router.navigate(['/inbox/chat/inbox']);
   }
 
   navigateBack() {

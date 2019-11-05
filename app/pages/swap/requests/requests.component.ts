@@ -2,9 +2,11 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ReceivedRequest } from '../../../dto/received-request';
 import { SwapRequest } from '../../../dto/swap-request';
+import { Chat } from '../../../dto/chat';
 import { SwapService } from '../../../shared/services/swap.service';
 import { UserService } from '../../../shared/services/user.service';
 import { ImageService } from '../../../shared/services/image.service';
+import { ChatService } from '../../../shared/services/chat.service';
 import { DataService } from '../../../shared/services/data.service';
 import * as dialogs from "tns-core-modules/ui/dialogs";
 
@@ -30,7 +32,7 @@ export class RequestsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private swapService: SwapService,
     private userService: UserService, private imageService: ImageService,
-    private dataService: DataService) { }
+    private dataService: DataService, private chatService: ChatService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -147,7 +149,7 @@ export class RequestsComponent implements OnInit {
       });
 
     }, error => {
-      console.log("ERROR");
+      console.log(error);
       this.router.navigate(['/error']);
     });
   }
@@ -173,21 +175,17 @@ export class RequestsComponent implements OnInit {
     this.swapService.updateSwapRequestStatusBool(swapRequestId).subscribe(response => {
        // no action
     }, error => {
-        console.log("ERROR in updating swapRequestStatusBool");
+        console.log(error);
         this.router.navigate(['/error']);
       });
   }
 
-  checkUserDetails(userId: number) {
-    this.router.navigate(['/contact/', userId]);
-  }
-
-  getUserAndCheckUserDetails(garmentId: number) {
+  getUserAndNavigateToChat(garmentId: number) {
      this.userService.getUserByGarment(garmentId).subscribe(data => {
        let userId = data.id;
-       this.checkUserDetails(userId);
+       this.toChatWithOwner(userId);
      }, error => {
-       console.log("Error in getting user by garmentId")
+       console.log(error);
      });
   }
 
@@ -197,8 +195,21 @@ export class RequestsComponent implements OnInit {
    });
   }
 
+  toChatWithOwner(garmentUserId: number) {
+    this.chatService.getChatBetweenUsers(this.userId, garmentUserId).subscribe(data => {
+      let chat = new Chat();
+      chat = data;
+      this.dataService.setChat(chat);
+      this.router.navigate(['/inbox/chat/history']);
+    }, errorResponse => {
+      console.log(errorResponse);
+      this.router.navigate(['/error']);
+    });
+  }
+
   navigateToHome() {
     this.tabIndexChanged(null, true);
     this.router.navigate(['/home']);
   }
+
 }

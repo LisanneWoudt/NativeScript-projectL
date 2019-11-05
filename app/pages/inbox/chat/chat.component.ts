@@ -1,5 +1,5 @@
 import { Component, OnInit  } from "@angular/core";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Chat } from '../../../dto/chat';
 import { Message } from '../../../dto/message';
 import { User } from '../../../dto/user';
@@ -15,17 +15,23 @@ import { ChatService } from '../../../shared/services/chat.service';
 
 export class ChatComponent implements OnInit {
 
+   private sub: any;
    messages: Message[] = new Array;
    userId: number;
    chat: Chat;
    reply: string;
    senderId: number;
-   sender: User;
+   sender: User = new User();
+   returnlink: string;
 
-  constructor(private router: Router, private chatService: ChatService,
+  constructor(private router: Router, private route: ActivatedRoute, private chatService: ChatService,
     private dataService: DataService, private userService: UserService) {}
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.returnlink = params['returnlink'];
+    });
+
     this.userId = this.dataService.getUser().id;
     this.chat = this.dataService.getChat();
     this.getChatMessages();
@@ -76,7 +82,16 @@ export class ChatComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/inbox']);
+    if (this.returnlink == "history") {
+      this.router.navigate(['swap-requests/history/' + this.userId]);
+    }
+    else if (this.returnlink == "inbox") {
+      this.router.navigate(['/inbox']);
+    }
+    else {
+      this.router.navigate(['/garment/' + this.returnlink]);
+
+    }
   }
 
 }

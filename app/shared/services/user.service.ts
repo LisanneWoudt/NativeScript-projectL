@@ -14,7 +14,7 @@ export class UserService {
     }
 
     getUserByGarment(garmentId: number): Observable<any> {
-      return this.http.get(environment.host + "users/fromgarment/" + garmentId);
+      return this.http.get(environment.host + "garments/" + garmentId + '/user');
     }
 
     getUserGarmentIds(userId: number): Observable<any> {

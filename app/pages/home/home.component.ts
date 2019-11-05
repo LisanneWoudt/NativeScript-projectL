@@ -46,16 +46,15 @@ export class HomeComponent implements OnInit {
       this.swapService.countSwapRequests(this.currentUser.id).subscribe(data => {
         this.swapRequestCount = data;
       }, error => {
-        console.log('error in getting swap request count:' + error);
+        console.log(error);
       })
     }
 
     getCountOpenNewRequests() {
       this.swapService.countNewSwapRequests(1).subscribe(data => {
         this.swapRequestNewCount = data;
-        console.log(data)
       }, error => {
-        console.log('error in getting swap request count:' + error);
+        console.log(error);
       })
     }
 
