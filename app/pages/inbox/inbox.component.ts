@@ -25,7 +25,6 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.dataService.getUser().id;
-    this.userId = 2;
     this.getUserChats();
   }
 
