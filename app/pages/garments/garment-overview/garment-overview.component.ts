@@ -6,6 +6,7 @@ import {ImageService} from '../../../shared/services/image.service';
 import { DataService } from '../../../shared/services/data.service';
 import {Router} from '@angular/router';
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
+import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: "app-garment-overview",
@@ -52,10 +53,10 @@ export class GarmentOverviewComponent implements OnInit {
 
   setUrlPart() {
     if (this.limit > 0) {
-      this.userIdLimit = this.userId + "/" + this.limit;
+      this.userIdLimit = "?userId=" + this.userId + "&limit=" + this.limit;
     }
     else {
-      this.userIdLimit = this.userId.toString();
+      this.userIdLimit = "?userId=" + this.userId.toString();
     }
   }
 
@@ -186,6 +187,13 @@ export class GarmentOverviewComponent implements OnInit {
         }
       )
    }
+
+  showReservedInfo() {
+   dialogs.confirm({
+      message: "This item has been requested for a swap. It can still be selected for swap by other users.",
+      okButtonText: "OK",
+    });
+  }
 
    toGarmentDetail(garmentId: number) {
      if (this.swapRequest) {

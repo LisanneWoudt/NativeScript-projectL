@@ -17,12 +17,20 @@
     <StackLayout col="0" width="100%" >
         <CardView margin="2" elevation="10" radius="1">
             <GridLayout rows="*,*,*,*,*" columns="*" *ngFor="let item of ( garmentsEven | garmentAttributeFilter : garmentFilter )">
-                <StackLayout *ngIf="!isOdd(item.listNum)" >
-                <Image col="0" *ngIf="item.image == undefined" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
+                <StackLayout *ngIf="!isOdd(item.listNum)">
+                <GridLayout *ngIf="item.image == undefined" col="0" row="2" orientation="horizontal">
+                    <Image horizontalAlignment="center" col="0" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
                        (tap)="toGarmentDetail(item.id)"></Image>
-                <Image col="0" *ngIf="item.image != undefined" [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                       (tap)="toGarmentDetail(item.id)"></Image>
-                <Label col="0" class="gridItem boldText" text="{{ item.brand }}" textWrap="true" row="2" ></Label>
+                    <Image *ngIf="item.garmentInSwapProcess" class="item-reserved" horizontalAlignment="left" src="res://icon_reserved" [width]="22" [height]="22" stretch="aspectFit"
+                           (tap)="showReservedInfo()"></Image>
+                </GridLayout>
+                <GridLayout *ngIf="item.image != undefined" col="0" row="2" orientation="horizontal">
+                    <Image horizontalAlignment="center" [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
+                           (tap)="toGarmentDetail(item.id)"></Image>
+                    <Image *ngIf="item.garmentInSwapProcess" class="item-reserved" horizontalAlignment="left" src="res://icon_reserved" [width]="22" [height]="22" stretch="aspectFit"
+                           (tap)="showReservedInfo()"></Image>
+                </GridLayout>
+                <Label col="0" class="gridItem boldText" text="{{ item.brand }}" textwrap="true"></Label>
                 <Label col="0" *ngIf="item.size" class="gridItem" text="{{ item.name }} ({{ item.size }})"
                        textWrap="true" row="3"></Label>
                 <Label col="0" *ngIf="item.length_size" class="gridItem" text="{{ item.name }} ({{ item.length_size }})"
@@ -37,10 +45,18 @@
             <GridLayout rows="*,*,*,*,*" columns="*" *ngFor="let item of ( garmentsOdd | garmentAttributeFilter : garmentFilter )">
 
                 <StackLayout *ngIf="isOdd(item.listNum)">
-                <Image col="0" *ngIf="item.image == undefined" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                       (tap)="toGarmentDetail(item.id)"></Image>
-                <Image col="0" *ngIf="item.image != undefined" [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
-                       (tap)="toGarmentDetail(item.id)"></Image>
+                <GridLayout *ngIf="item.image == undefined" col="0" row="2" orientation="horizontal">
+                    <Image col="0" horizontalAlignment="center" src="res://image_not_available" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
+                           (tap)="toGarmentDetail(item.id)"></Image>
+                    <Image *ngIf="item.garmentInSwapProcess" class="item-reserved" horizontalAlignment="left" src="res://icon_reserved" [width]="22" [height]="22" stretch="aspectFit"
+                           (tap)="showReservedInfo()"></Image>
+                </GridLayout>
+                <GridLayout *ngIf="item.image != undefined"  col="0" row="2" orientation="horizontal">
+                    <Image  horizontalAlignment="center" [src]="item.image" [width]="previewSize" [height]="previewSize" stretch="aspectFit" row="0"
+                           (tap)="toGarmentDetail(item.id)"></Image>
+                    <Image *ngIf="item.garmentInSwapProcess" class="item-reserved" horizontalAlignment="left" src="res://icon_reserved" [width]="22" [height]="22" stretch="aspectFit"
+                           (tap)="showReservedInfo()"></Image>
+                </GridLayout>
                 <Label col="0" class="gridItem boldText" text="{{ item.brand }}" textWrap="true" row="2" ></Label>
                 <Label col="0" *ngIf="item.size" class="gridItem" text="{{ item.name }} ({{ item.size }})"
                        textWrap="true" row="3"></Label>

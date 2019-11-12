@@ -58,7 +58,6 @@ export class GarmentInputFieldsComponent implements OnInit {
           this.categories.push(this.categoryMap[cat]);
         }
 
-        this.setSelectedIndex();
       }, error => {
             console.log("error while getting garmentTypes:" + error);
       })
