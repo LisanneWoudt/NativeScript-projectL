@@ -63,7 +63,7 @@ export class RequestsComponent implements OnInit {
 
   getSwapRequestsByStatus(receivedRequest: ReceivedRequest) {
      if (receivedRequest.status == 'NEW' && this.userId != receivedRequest.receivedFromId
-        && this.userGarmentIds.indexOf(receivedRequest.receivedFromId) > -1) {
+        && this.userGarmentIds.indexOf(receivedRequest.garmentId) > -1) {
        this.requestsNew.push(receivedRequest);
      }
      else if (receivedRequest.status == 'NEW' && this.userId == receivedRequest.receivedFromId) {

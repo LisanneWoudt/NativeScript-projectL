@@ -67,7 +67,17 @@
             </GridLayout>
         </CardView>
     </StackLayout>
+
+
   </GridLayout>
+
+  <GridLayout *ngIf="prevPage && nextPage" rows="*" columns="*,*" >
+    <Button class="btn btn-primary btn-active" col="0" (tap)="getPreviousPage()" text="Previous page"></Button>
+    <Button class="btn btn-primary btn-active" col="1" (tap)="getNextPage()" text="Next page"></Button>
+  </GridLayout>
+
+  <Button *ngIf="prevPage && !nextPage" class="btn btn-primary btn-active" (tap)="getPreviousPage()" text="Previous page"></Button>
+  <Button *ngIf="!prevPage && nextPage" class="btn btn-primary btn-active" (tap)="getNextPage()" text="Next page"></Button>
 
 </StackLayout>
 <StackLayout *ngIf="garments.length == 0">

@@ -37,23 +37,30 @@ export class GarmentOverviewComponent implements OnInit {
   userId: number;
   garmentFilter: any = {};
   swapRequest: SwapRequest;
+  start: number = 0;
+  pageLimit: number = 6;
+  garmentTotalCount: number = 0;
+
+  nextPage: boolean = false;
+  prevPage: boolean = false;
 
   @Input('garmentsUrl') garmentsUrl: string;
-  @Input('limit') limit: number = 0;
+  @Input('limit') end: number = this.pageLimit;
   @Input('garmentId') swapGarmentId: number = 0;
 
   constructor(private garmentService: GarmentService, private imageService: ImageService,
     private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-   this.userId = this.dataService.getUser().id;
-   this.setUrlPart();
-   this.getAllGarments();
+    this.userId = this.dataService.getUser().id;
+    this.setUrlPart();
+    this.setNextPageBool();
+    this.getAllGarments();
   }
 
   setUrlPart() {
-    if (this.limit > 0) {
-      this.userIdLimit = "?userId=" + this.userId + "&limit=" + this.limit;
+    if (this.end > 0) {
+      this.userIdLimit = "?userId=" + this.userId + "&end=" + this.end;
     }
     else {
       this.userIdLimit = "?userId=" + this.userId.toString();
@@ -63,6 +70,19 @@ export class GarmentOverviewComponent implements OnInit {
   isOdd(listcount: number) {
     //return true;
     return listcount % 2;
+  }
+
+  setNextPageBool() {
+    this.garmentService.getAllGarments(this.garmentsUrl, "?userId=" + this.userId).subscribe(data => {
+      this.garmentTotalCount = data.length;
+
+      if (this.garmentTotalCount > this.end && this.end != 4) {
+        this.nextPage = true;
+      }
+     }), errorResponse => {
+          console.log(errorResponse)
+          this.router.navigate(['/error']);
+     };
   }
 
   getAllGarments() {
@@ -92,6 +112,7 @@ export class GarmentOverviewComponent implements OnInit {
 
       Promise.all(this.promises)
       .then(res => {
+        this.processing = false;
       }, error => {
         console.log('Error in getAllGarments:' + error);
         this.router.navigate(['/error']);
@@ -103,13 +124,38 @@ export class GarmentOverviewComponent implements OnInit {
     });
   }
 
+  getPreviousPage() {
+    this.start = +this.start - +this.pageLimit;
+    this.end = +this.end - +this.pageLimit;
+
+    if (this.start == 0) {
+      this.prevPage = false;
+    }
+    this.getGarmentsNextPage();
+  }
+
+  getNextPage() {
+    this.start = this.end;
+    this.end = +this.end + +this.pageLimit;
+    this.getGarmentsNextPage();
+    this.prevPage = true
+
+    if (this.end >= this.garmentTotalCount) {
+      this.nextPage = false;
+    }
+  }
+
+  getGarmentsNextPage() {
+    this.userIdLimit = "?userId=" + this.userId + "&start=" + this.start + "&end=" + this.end;
+    this.getAllGarments();
+  }
+
   setListNum(garmentList: Garment[], startCount: number) {
     for (let int in garmentList) {
         garmentList[int].listNum = startCount;
         startCount = startCount + 2;
     }
   }
-
 
   setCategories(garment: Garment){
     if (!this.allSizes.includes(garment.size)) {

@@ -24,9 +24,10 @@ export class GarmentInputFieldsComponent implements OnInit {
 
  garment: Garment = new Garment();
  longForm: boolean = false;
- selectedIndex: string = "1";
+ selectedIndex: number = 0;
+
+ categories: string[] = ["Shirt"];
  categoryMap: Map<string, string>;
- categories: string[] = new Array();
 
  imageSrc: any;
  previewSize: number = 300;
@@ -44,29 +45,15 @@ export class GarmentInputFieldsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categories = this.dataService.getGarmentCategories();
+    this.categoryMap = this.dataService.getCategoryMap();
     this.garment = this.dataService.getGarment();
-    if (this.garment.image) {
-      this.imageSrc = this.garment.image;
-    }
-    this.getGarmentTypes();
-  }
-
-  getGarmentTypes() {
-      this.garmentService.getGarmentTypes().subscribe(data => {
-        this.categoryMap = data;
-        for (let cat in this.categoryMap) {
-          this.categories.push(this.categoryMap[cat]);
-        }
-
-      }, error => {
-            console.log("error while getting garmentTypes:" + error);
-      })
+    this.setSelectedIndex();
   }
 
   setSelectedIndex() {
     if (this.garment && this.garment.garmentType) {
-      //TODO: works only after updating garment?
-      this.selectedIndex = this.categories.indexOf(this.garment.garmentType).toString();
+      this.selectedIndex = this.categories.indexOf(this.garment.garmentType);
     }
   }
 

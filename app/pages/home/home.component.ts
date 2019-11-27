@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
       this.currentUser = this.dataService.getUser();
       this.getCountOpenRequests();
       this.getCountOpenNewRequests();
+      this.dataService.setGarmentCategories();
     }
 
     ngAfterViewInit() {
