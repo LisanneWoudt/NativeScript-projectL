@@ -16,9 +16,9 @@
     </CardView>
 
     <Button *ngIf="!garmentSwapId && userId != garment.userId" class="btn btn-primary btn-rounded-lg btn-active" text="I want to swap!"
-        (tap)="toSwapRequest(garment.id)"></Button>
+      (tap)="toSwapRequest(garment.id)"></Button>
     <Label *ngIf="!garmentSwapId && userId != garment.userId" class="link-item" text="Contact owner"
-   (tap)="toSwapRequest(garment.id)"></Label>
+      (tap)="toChatWithOwner(garment.userId)"></Label>
     <Button *ngIf="garmentSwapId" class="btn btn-primary btn-rounded-lg btn-active" text="Select this item"
       (tap)="toSwapReturnRequest(garment.id)"></Button>
 

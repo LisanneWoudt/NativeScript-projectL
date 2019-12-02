@@ -24,14 +24,14 @@ export class SwapService {
     }
 
     updateSwapRequestStatusBool(swapRequestId: number): Observable<any> {
-      return this.http.get(environment.host + this.baseUrl + 'update-statusbool/' + swapRequestId);
+      return this.http.get(environment.host + this.baseUrl + 'update-status?requestId=' + swapRequestId);
     }
 
     countSwapRequests(userId: number): Observable<any> {
-      return this.http.get(environment.host + this.baseUrl + 'count/' + userId)
+      return this.http.get(environment.host + this.baseUrl + 'count?userId=' + userId)
     }
 
     countNewSwapRequests(userId: number): Observable<any> {
-      return this.http.get(environment.host + this.baseUrl + 'count/new/' + userId)
+      return this.http.get(environment.host + this.baseUrl + 'count/new?userId=' + userId)
     }
 }

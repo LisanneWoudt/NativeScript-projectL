@@ -12,8 +12,8 @@
     <ng-template let-chat="item">
         <StackLayout orientation="vertical" class="inbox-item list-group-item">
           <Label class="list-group-item-heading" text="Chat with {{ chat.senderName }}"></Label>
-          <Label [class]="chat.lastMessage.new ? 'boldText underline list-group-item-text' : 'underline list-group-item-text'" [text]="chat.lastMessage.content"></Label>
-          <Label class="list-group-item-text italic" text="{{ chat.lastMessage.dateTimeString }}"></Label>
+          <Label *ngIf="chat.lastMessage" [class]="chat.lastMessage.new ? 'boldText underline list-group-item-text' : 'underline list-group-item-text'" [text]="chat.lastMessage.content"></Label>
+          <Label *ngIf="chat.lastMessage" class="list-group-item-text italic" text="{{ chat.lastMessage.dateTimeString }}"></Label>
         </StackLayout>
     </ng-template>
     </ListView>

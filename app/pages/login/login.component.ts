@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       if (data != null) {
         this.showAlert("YAY", "Account created!");
         this.dataService.setUser(data);
-        this.navigateToHome();
+        this.navigateToWelcome();
       }
       else {
        this.showAlert("Oh no..", "Account could not be created");
@@ -98,4 +98,9 @@ export class LoginComponent implements OnInit {
   navigateToHome() {
     this.router.navigate(['/home']);
   }
+
+  navigateToWelcome() {
+    this.router.navigate(['/welcome']);
+  }
+
 }

@@ -12,7 +12,7 @@ export class ChatService {
     constructor(private http: HttpClient) {}
 
     getUserChats(userId: number): Observable<any> {
-      return this.http.get(environment.host + this.baseUrl + 'user/' + userId);
+      return this.http.get(environment.host + this.baseUrl + 'all?userId=' + userId);
     }
 
     getMessagesByChatId(chatId: number): Observable<any> {
@@ -21,6 +21,10 @@ export class ChatService {
 
     addMessage(message: Message): Observable<any> {
       return this.http.post(environment.host + '/messages/add', message);
+    }
+
+    getChatBetweenUsers(userId: number, garmentUserId: number): Observable<any> {
+      return this.http.get(environment.host + this.baseUrl + 'between-users/?userId=' + userId + "&garmentUserId=" + garmentUserId)
     }
 
 }

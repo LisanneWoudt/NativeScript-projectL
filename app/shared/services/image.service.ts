@@ -35,10 +35,10 @@ export class ImageService {
   }
 
   downloadImage(garmentId: number) {
-    return httpModule.getImage(environment.host + this.baseUrl + "download/" + garmentId);
+    return httpModule.getImage(environment.host + this.baseUrl + "download?image=" + garmentId);
   }
 
   downloadCompressedImage(garmentId: number) {
-    return httpModule.getImage(environment.host + this.baseUrl + "download/compressed/" + garmentId)
+    return httpModule.getImage(environment.host + this.baseUrl + "download/compressed?image=" + garmentId)
   }
 }

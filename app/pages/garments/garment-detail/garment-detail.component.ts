@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Garment} from '../../../dto/garment';
 import {SwapRequest} from '../../../dto/swap-request';
+import {Chat} from '../../../dto/chat';
 import {Router, ActivatedRoute} from '@angular/router';
 import {GarmentService} from '../../../shared/services/garment.service';
 import {ImageService} from '../../../shared/services/image.service';
 import {DataService} from '../../../shared/services/data.service';
+import {ChatService} from '../../../shared/services/chat.service';
 import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({
@@ -25,7 +27,7 @@ export class GarmentDetailComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute,
     private garmentService: GarmentService, private imageService: ImageService,
-    private dataService: DataService) { }
+    private dataService: DataService, private chatService: ChatService) { }
 
   ngOnInit() {
 
@@ -89,6 +91,19 @@ export class GarmentDetailComponent implements OnInit {
     this.dataService.setGarment(garment);
     this.router.navigate(['garments/edit'])
   }
+
+  toChatWithOwner(garmentUserId: number) {
+    this.chatService.getChatBetweenUsers(this.userId, garmentUserId).subscribe(data => {
+      let chat = new Chat();
+      chat = data;
+      this.dataService.setChat(chat);
+      this.router.navigate(['/inbox/chat/' + this.garmentId]);
+    }, errorResponse => {
+      console.log(errorResponse);
+      this.router.navigate(['/error']);
+    });
+  }
+
   navigateBack() {
     if (!this.garmentSwapId && this.userId != this.garment.userId) {
       this.router.navigate(['/garments/all']);

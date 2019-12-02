@@ -52,7 +52,6 @@ components that have the btn class name.
   font-size: 20px;
 }
 
-
 .dropdown {
   font-size: 20px;
 }
@@ -67,6 +66,10 @@ components that have the btn class name.
 .gridItem {
   text-align: center;
   font-size: 14px;
+}
+
+.item-reserved {
+  margin-left: 8px;
 }
 
 :disabled {
@@ -217,4 +220,8 @@ components that have the btn class name.
   font-size: 14px;
   margin-top: 8px;
   font-style: italic;
+}
+
+.item-in-process{
+  opacity: 0.5;
 }

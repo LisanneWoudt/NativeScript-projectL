@@ -15,7 +15,7 @@
 
     <Label text="&#xA;"></Label><Label text="&#xA;"></Label>
 
-    <TextView class="input-field"  hint="Reply" [(ngModel)]="reply"></TextView>
+    <TextView class="input-field"  hint="{{ messages.length == 0 ? 'Send message' : 'Reply' }}" [(ngModel)]="reply"></TextView>
     <Label text="&#xA;"></Label>
     <Button class="btn btn-primary btn-active inner" text="Send"
       (tap)="sendReplyMessage()">

@@ -10,4 +10,5 @@ export class Garment {
   garmentType: string;
   image: any;
   listNum: number;
+  garmentInSwapProcess: boolean;
 }
